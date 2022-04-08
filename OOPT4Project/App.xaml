@@ -1,7 +1,7 @@
-﻿<Application x:Class="OOPTermProject.App"
+﻿<Application x:Class="OOPT4Project.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:OOPTermProject"
+             xmlns:local="clr-namespace:OOPT4Project"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

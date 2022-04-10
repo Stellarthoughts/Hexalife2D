@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPT4Project.Simulation
+namespace OOPT4Project.Simulation.Creature.Behavior
 {
-    public class SimulationController
+    internal class SearchBehavior : IBehavior
     {
     }
 }

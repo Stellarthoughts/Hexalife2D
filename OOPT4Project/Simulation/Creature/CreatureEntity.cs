@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOPT4Project.Simulation.Creature.Behavior;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,16 @@ namespace OOPT4Project.Simulation.Creature
 {
     public class CreatureEntity
     {
-        public Gene gene { get; private set; }
+        public Gene Gene { get; private set; }
+        public Stats Stats { get; private set; }
+
+        public IBehavior CurrentBehavior { get; private set; }
 
         public CreatureEntity(Gene gene)
         {
-            this.gene = gene;
+            this.Gene = gene;
+            Stats = gene.CreateStats();
+            CurrentBehavior = new SearchBehavior();
         }
 
 

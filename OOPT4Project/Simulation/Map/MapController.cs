@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace OOPT4Project.Simulation.Map
 {
-    public class Map
+    public class MapController
     {
         public List<Tile> Tile { get; private set; } = new List<Tile>();
 
-        public Map()
+        public MapController()
         {
             Regenerate();
         }

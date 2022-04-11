@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPT4Project.Simulation.Map
+namespace OOPT4Project.Simulation
 {
-    public class MapClimate : ISimulated
+    public interface ISimulated
     {
+        void SimulateStep();
     }
 }

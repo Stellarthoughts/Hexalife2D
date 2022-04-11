@@ -26,7 +26,7 @@ namespace OOPT4Project.Simulation.Creature
 
         public static Gene CreateChild(Gene father, Gene mother)
         {
-            bool male = SimulationParams.Generator.NextDouble() > SimulationParams.ChanceToBeMale;
+            bool male = SimulationController.Generator.NextDouble() > SimulationController.CreatureChanceToBeMale;
             return new Gene(male);
         }
 

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace OOPT4Project.Simulation.Creature.Behavior
 {
-    internal class SearchBehavior : IBehavior
+    public class SearchBehavior : IBehavior
     {
+        public SearchBehavior(CreatureEntity crt)
+        {
+
+        }
     }
 }

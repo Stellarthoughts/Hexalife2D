@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPT4Project.Simulation.Creature.Behavior
+namespace OOPT4Project.Simulation.Map
 {
-    public class BehaviorMaster
+    public enum TileType
     {
+        Flat,
+        Obstructed
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPT4Project.Simulation.Map
 {
-    public class TileClimate
+    public class TileClimate : ISimulated
     {
     }
 }

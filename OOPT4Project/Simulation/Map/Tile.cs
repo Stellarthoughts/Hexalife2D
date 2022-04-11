@@ -1,8 +1,6 @@
-﻿using System;
+﻿using OOPT4Project.Simulation.Creature;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOPT4Project.Simulation.Map
 {
@@ -10,7 +8,7 @@ namespace OOPT4Project.Simulation.Map
     {
         public Coordinates Coordinates { get; private set; }
         public TileClimate TileClimate { get; private set; }
-
+        public List<CreatureEntity> Creatures { get; private set; } = new List<CreatureEntity>();
         public TileType Type { get; private set; }
 
         private double foorResource;
@@ -20,6 +18,11 @@ namespace OOPT4Project.Simulation.Map
         {
             Coordinates = coor;
             Type = type;
+        }
+
+        public void SimulateStep()
+        {
+            throw new NotImplementedException();
         }
     }
 }

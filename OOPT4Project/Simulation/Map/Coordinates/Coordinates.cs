@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOPT4Project.Simulation.Map
 {
@@ -24,6 +20,13 @@ namespace OOPT4Project.Simulation.Map
             this.q = q;
             this.r = r;
             this.s = s;
+        }
+
+        public Coordinates(int q, int r, bool obstructed = false)
+        {
+            this.q = q;
+            this.r = r;
+            this.s = -(q + r);
         }
 
         public static Coordinates Cube(int q, int r, int s) => new Coordinates(q, r, s);

@@ -13,6 +13,7 @@ namespace OOPT4Project.Simulation.Map
         }
         public void CreateMap()
         {
+
         }
 
         public void SimulateStep()

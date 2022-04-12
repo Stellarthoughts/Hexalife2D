@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPT4Project", "OOPT4Project\OOPT4Project.csproj", "{08EB4640-580B-490B-BE89-10D3B4594B38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOPT4Project", "OOPT4Project\OOPT4Project.csproj", "{08EB4640-580B-490B-BE89-10D3B4594B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOPT4Project.Tests", "OOPT4Project.Tests\OOPT4Project.Tests.csproj", "{A04C1F81-CDAD-4AD2-9C5B-111125A3A18C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{08EB4640-580B-490B-BE89-10D3B4594B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08EB4640-580B-490B-BE89-10D3B4594B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08EB4640-580B-490B-BE89-10D3B4594B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04C1F81-CDAD-4AD2-9C5B-111125A3A18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04C1F81-CDAD-4AD2-9C5B-111125A3A18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04C1F81-CDAD-4AD2-9C5B-111125A3A18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04C1F81-CDAD-4AD2-9C5B-111125A3A18C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,16 +8,16 @@ namespace OOPT4Project.Simulation.Creature
 
 		public double[] Genom { get; private set; }
 
-		public Gene(bool isMale)
+		public Gene(double[] genom, bool isMale)
 		{
-			Genom = new double[0];
+			Genom = genom;
 			IsMale = isMale;
 		}
 
 		public static Gene CreateChild(Gene father, Gene mother)
 		{
 			bool male = SimulationModel.Generator.NextDouble() > SimulationModel.CreatureChanceToBeMale;
-			return new Gene(male);
+			return new Gene(father.Genom, male);
 		}
 
 		public static Gene RandomGene()

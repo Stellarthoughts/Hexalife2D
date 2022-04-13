@@ -9,8 +9,8 @@ namespace OOPT4Project.Simulation.Map
 		public int s { get; private set; }
 
 		private static Coordinates[] directions = new Coordinates[6] {
-				Cube(1, 0, -1), Cube(1, 0, -1), Cube(1, 0, -1),
-				Cube(1, 0, -1), Cube(1, 0, -1), Cube(1, 0, -1)
+				Cube(1, 0, -1), Cube(1, -1, 0), Cube(0, -1, +1),
+				Cube(-1, 0, 1), Cube(-1, 1, 0), Cube(0, 1, -1)
 		};
 
 		private bool _obstructed = false;
@@ -41,6 +41,18 @@ namespace OOPT4Project.Simulation.Map
 		{
 			Coordinates vec = Subtract(a, b);
 			return (Math.Abs(vec.q) + Math.Abs(vec.r) + Math.Abs(vec.s)) / 2;
+		}
+
+		public override bool Equals(object? obj)
+		{
+			if (obj == null || !(obj is Coordinates))
+				return false;
+			else
+			{
+				Coordinates coor = (Coordinates)obj;
+				return coor.q == q && coor.r == r;
+			}
+				
 		}
 	}
 }

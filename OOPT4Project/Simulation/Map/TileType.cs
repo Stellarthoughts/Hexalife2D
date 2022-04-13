@@ -1,8 +1,8 @@
 ﻿namespace OOPT4Project.Simulation.Map
 {
-    public enum TileType
-    {
-        Flat,
-        Obstructed
-    }
+	public enum TileType
+	{
+		Flat,
+		Obstructed
+	}
 }

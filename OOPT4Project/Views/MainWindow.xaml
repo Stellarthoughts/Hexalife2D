@@ -1,13 +1,26 @@
-﻿<Window x:Class="OOPT4Project.MainWindow"
+﻿<Window x:Class="OOPT4Project.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:OOPT4Project"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="900" Width="1600" Background="#FF44AEB5">
     <Grid>
-        <skia:SKElement PaintSurface="SKElement_PaintSurface" Name="SkElement1"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.6180*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"/>
+        <Grid Grid.Column="2"/>
+        <skia:SKElement Grid.Column="1" PaintSurface="SKElement_PaintSurface" x:Name="SkElement1"/>
+        <Rectangle Grid.Column="0" Margin="0,0,0,0" Fill="#FF0C91A4" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto"/>
+        <Rectangle Grid.Column="2" Margin="0,0,0,0" Fill="#FF0C91A4" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto"/>
     </Grid>
 </Window>

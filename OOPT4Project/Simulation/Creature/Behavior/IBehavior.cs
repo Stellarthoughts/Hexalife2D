@@ -1,6 +1,6 @@
 ﻿namespace OOPT4Project.Simulation.Creature.Behavior
 {
-    public interface IBehavior
-    {
-    }
+	public interface IBehavior
+	{
+	}
 }

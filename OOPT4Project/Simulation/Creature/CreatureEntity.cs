@@ -4,26 +4,26 @@ using System;
 
 namespace OOPT4Project.Simulation.Creature
 {
-    public class CreatureEntity : ISimulated
-    {
-        public Gene Gene { get; private set; }
-        public Stats Stats { get; private set; }
+	public class CreatureEntity : ISimulated
+	{
+		public Gene Gene { get; private set; }
+		public Stats Stats { get; private set; }
 
-        public IBehavior CurrentBehavior { get; private set; }
+		public IBehavior CurrentBehavior { get; private set; }
 
-        public Tile CurrentTile { get; set; }
+		public Tile CurrentTile { get; set; }
 
-        public CreatureEntity(Gene gene, Tile tile)
-        {
-            Gene = gene;
-            CurrentTile = tile;
-            Stats = gene.CreateStats();
-            CurrentBehavior = new SearchBehavior(this);
-        }
+		public CreatureEntity(Gene gene, Tile tile)
+		{
+			Gene = gene;
+			CurrentTile = tile;
+			Stats = gene.CreateStats();
+			CurrentBehavior = new SearchBehavior(this);
+		}
 
-        public void SimulateStep()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public void SimulateStep()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

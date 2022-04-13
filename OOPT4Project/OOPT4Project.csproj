@@ -17,8 +17,4 @@
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

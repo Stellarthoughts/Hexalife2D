@@ -4,25 +4,25 @@ using System.Collections.Generic;
 
 namespace OOPT4Project.Simulation.Map
 {
-    public class Tile : ISimulated
-    {
-        public Coordinates Coordinates { get; private set; }
-        public TileClimate TileClimate { get; private set; }
-        public List<CreatureEntity> Creatures { get; private set; } = new List<CreatureEntity>();
-        public TileType Type { get; private set; }
+	public class Tile : ISimulated
+	{
+		public Coordinates Coordinates { get; private set; }
+		public TileClimate? TileClimate { get; private set; }
+		public List<CreatureEntity> Creatures { get; private set; } = new List<CreatureEntity>();
+		public TileType Type { get; private set; }
 
-        private double foorResource;
-        private double waterResource;
+		private double _foorResource;
+		private double _waterResource;
 
-        public Tile(Coordinates coor, TileType type)
-        {
-            Coordinates = coor;
-            Type = type;
-        }
+		public Tile(Coordinates coor, TileType type)
+		{
+			Coordinates = coor;
+			Type = type;
+		}
 
-        public void SimulateStep()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public void SimulateStep()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

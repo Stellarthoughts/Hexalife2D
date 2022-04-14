@@ -9,7 +9,7 @@ namespace OOPT4Project.Simulation.Creature
 		public Gene Gene { get; private set; }
 		public Stats Stats { get; private set; }
 
-		public IBehavior CurrentBehavior { get; private set; }
+		public IBehavior? CurrentBehavior { get; private set; }
 
 		public Tile CurrentTile { get; set; }
 
@@ -18,19 +18,24 @@ namespace OOPT4Project.Simulation.Creature
 			Gene = gene;
 			CurrentTile = tile;
 			Stats = gene.CreateStats();
-			CurrentBehavior = new SearchBehavior(this);
 		}
 
 		public void SimulateStep()
 		{
 			if(CurrentBehavior == null)
-				SelectBehavior();
+			{
+				CurrentBehavior = SelectBehavior();
+			}
 			else
-				CurrentBehavior.DoBehavior();
+			{
+				var done = CurrentBehavior.DoBehavior();
+				if (done)
+					CurrentBehavior = null;
+			}	
 		}
-		public void SelectBehavior()
+		public IBehavior SelectBehavior()
 		{
-
+			return new SearchBehavior(this);
 		}
 	}
 }

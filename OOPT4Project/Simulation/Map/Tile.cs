@@ -8,7 +8,7 @@ namespace OOPT4Project.Simulation.Map
 	{
 		public Coordinates Coordinates { get; private set; }
 		public TileClimate TileClimate { get; private set; }
-		public List<CreatureEntity> Creatures { get; private set; } = new List<CreatureEntity>();
+		public List<CreatureEntity> CreatureList { get; private set; } = new List<CreatureEntity>();
 		public TileType Type { get; private set; }
 
 		private double _foorResource;

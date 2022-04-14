@@ -2,5 +2,9 @@
 {
 	public class ScavBehavior : IBehavior
 	{
+		public bool DoBehavior()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

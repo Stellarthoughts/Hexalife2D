@@ -11,7 +11,7 @@ namespace OOPT4Project.Simulation
 		public MapController MapController { get; private set; }
 
 		// Simulation params
-		public static int RandomSeed { get; set; } = 201;
+		public static int RandomSeed { get; set; } = 2;
 		public static double CreatureChanceToBeMale { get; set; } = 0.5;
 
 		// Simaltion service entities

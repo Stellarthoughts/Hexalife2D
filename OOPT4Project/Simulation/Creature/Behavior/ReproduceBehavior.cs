@@ -2,5 +2,9 @@
 {
 	public class ReproduceBehavior : IBehavior
 	{
+		public bool DoBehavior()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

@@ -12,15 +12,15 @@ namespace OOPT4Project.Simulation.Map
 	}
 	public class MapController : ISimulated
 	{
-		public List<Tile> Tiles { get; private set; } = new List<Tile>();
-		public MapClimate Climate { get; private set; }
+		public List<Tile> TileList { get; private set; } = new List<Tile>();
+		public MapClimate MapClimate { get; private set; }
 
 		private SimulationModel _model;
 
 		public MapController(SimulationModel model)
 		{ 
 			_model = model;
-			Climate = new MapClimate(this);
+			MapClimate = new MapClimate(this);
 			//CreateMap(new MapSettings() { qLeft = -3, qRight = 3, rLeft = -5, rRight = 5});
 			CreateMapRandom(50);
 		}
@@ -31,23 +31,23 @@ namespace OOPT4Project.Simulation.Map
 			{	
 				for(int j = set.rLeft; j <= set.rRight; j++)
 				{
-					Tiles.Add(new Tile(new Coordinates(i, j), TileType.Flat));
+					TileList.Add(new Tile(new Coordinates(i, j), TileType.Flat));
 				}
 			}
 		}
 
 		public void CreateMapRandom(int resource)
 		{
-			Tiles.Add(new Tile(new Coordinates(0,0), TileType.Flat));
+			TileList.Add(new Tile(new Coordinates(0,0), TileType.Flat));
 			Random rnd = SimulationModel.Generator;
 			resource -= 1;
 			while(resource > 0)
 			{
-				Tile rndTile = Tiles[rnd.Next(Tiles.Count)];
+				Tile rndTile = TileList[rnd.Next(TileList.Count)];
 				Coordinates crd = Coordinates.Add(rndTile.Coordinates, Coordinates.GetDirection(rnd.Next(6)));
-				if (Tiles.FindIndex(x => x.Coordinates.Equals(crd)) > 0)
+				if (TileList.FindIndex(x => x.Coordinates.Equals(crd)) > 0)
 					continue;
-				Tiles.Add(new Tile(crd, TileType.Flat));
+				TileList.Add(new Tile(crd, TileType.Flat));
 				resource--;
 			}
 			return;
@@ -55,11 +55,10 @@ namespace OOPT4Project.Simulation.Map
 
 		public void SimulateStep()
 		{
-			Climate.SimulateStep();
-			foreach (Tile tile in Tiles) tile.SimulateStep();
+			MapClimate.SimulateStep();
+			foreach (Tile tile in TileList) tile.SimulateStep();
 		}
-
-		internal Tile GetRandomTile()
+		public Tile GetRandomTile()
 		{
 			throw new NotImplementedException();
 		}

@@ -34,16 +34,6 @@ namespace OOPT4Project.Views
 			canvas.FillRectangle(0, 0, width, height);
 
 			_simulationDrawer.Draw(canvas, width, height);
-
-			/*canvas.StrokeColor = Colors.White.WithAlpha(.5f);
-			canvas.StrokeSize = 2;
-			for (int i = 0; i < 100; i++)
-			{
-				float x = Random.Shared.Next((int)SkElement1.ActualWidth);
-				float y = Random.Shared.Next((int)SkElement1.ActualHeight);
-				float r = Random.Shared.Next(5, 50);
-				canvas.DrawCircle(x, y, r);
-			}*/
 		}
 	}
 }

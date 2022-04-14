@@ -23,7 +23,14 @@ namespace OOPT4Project.Simulation.Creature
 
 		public void SimulateStep()
 		{
-			throw new NotImplementedException();
+			if(CurrentBehavior == null)
+				SelectBehavior();
+			else
+				CurrentBehavior.DoBehavior();
+		}
+		public void SelectBehavior()
+		{
+
 		}
 	}
 }

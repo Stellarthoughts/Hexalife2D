@@ -18,7 +18,7 @@ namespace OOPT4Project.Render
 
 		public void Draw(ICanvas canvas, double width, double height)
 		{
-			var tiles = _simulationModel.MapController.Tiles;
+			var tiles = _simulationModel.MapController.TileList;
 			foreach(Tile tile in tiles)
 			{
 				PathF path = DrawTile.PathTile(new Point(width/2, height/2), tile.Coordinates, _tileSize);

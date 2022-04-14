@@ -6,5 +6,10 @@
 		{
 
 		}
+
+		public bool DoBehavior()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

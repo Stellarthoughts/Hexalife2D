@@ -8,7 +8,7 @@ namespace OOPT4Project.Simulation.Map
 		public int r { get; private set; }
 		public int s { get; private set; }
 
-		private static Coordinates[] directions = new Coordinates[6] {
+		private static Coordinates[] _directions = new Coordinates[6] {
 				Cube(1, 0, -1), Cube(1, -1, 0), Cube(0, -1, +1),
 				Cube(-1, 0, 1), Cube(-1, 1, 0), Cube(0, 1, -1)
 		};
@@ -34,7 +34,7 @@ namespace OOPT4Project.Simulation.Map
 		public static Coordinates Add(Coordinates a, Coordinates b)
 			=> new Coordinates(a.q + b.q, a.r + b.r, a.s + b.s);
 		public static Coordinates Subtract(Coordinates a, Coordinates b) => new Coordinates(a.q - b.q, a.r - b.r, a.s - b.s);
-		public static Coordinates GetDirection(int i) => directions[i];
+		public static Coordinates GetDirection(int i) => _directions[i];
 		public static Coordinates GetNeighboor(Coordinates coor, int dir) => Add(coor, GetDirection(dir));
 
 		public static int GetDistance(Coordinates a, Coordinates b)

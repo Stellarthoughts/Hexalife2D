@@ -24,11 +24,5 @@ namespace OOPT4Project.Simulation.Creature
 		{
 			throw new NotImplementedException();
 		}
-
-		public Stats CreateStats()
-		{
-			Stats stats = new Stats();
-			return stats;
-		}
 	}
 }

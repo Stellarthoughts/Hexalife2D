@@ -21,11 +21,6 @@ namespace OOPT4Project.Simulation.Map
 			Type = type;
 		}
 
-		public List<Tile> GetNeighboorList()
-		{
-			return new List<Tile>();
-		}
-
 		public void SimulateStep()
 		{
 			throw new NotImplementedException();

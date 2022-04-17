@@ -1,15 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using OOPT4Project.Extension;
 
 namespace OOPT4Project.Simulation.Map
 {
-	public struct MapSettings
-	{
-		public int qLeft;
-		public int qRight;
-		public int rLeft;
-		public int rRight;
-	}
 	public class MapController : ISimulated
 	{
 		public List<Tile> TileList { get; private set; } = new List<Tile>();
@@ -21,33 +16,59 @@ namespace OOPT4Project.Simulation.Map
 		{ 
 			_model = model;
 			MapClimate = new MapClimate(this);
-			//CreateMap(new MapSettings() { qLeft = -3, qRight = 3, rLeft = -5, rRight = 5});
-			CreateMapRandom(50);
+
+			Dictionary<TileType, double> probs = new()
+			{
+				{ TileType.Grass, 1 },
+				{ TileType.Lake, 0.2 },
+				{ TileType.Hills, 0.2 },
+				{ TileType.Desert, 0.2 },
+				{ TileType.Badland, 0.3 },
+				{ TileType.Marsh, 0.3 },
+				{ TileType.Ocean, 0 }
+			};
+
+			CreateMapRandom(100, probs);
 		}
 
-		public void CreateMap(MapSettings set)
+		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs)
 		{
-			for(int i = set.qLeft; i <= set.qRight; i++)
-			{	
-				for(int j = set.rLeft; j <= set.rRight; j++)
-				{
-					TileList.Add(new Tile(new Coordinates(i, j), TileType.Flat));
-				}
-			}
-		}
+			TileList.Clear();
 
-		public void CreateMapRandom(int resource)
-		{
-			TileList.Add(new Tile(new Coordinates(0,0), TileType.Flat));
 			Random rnd = SimulationModel.Generator;
 			resource -= 1;
-			while(resource > 0)
+
+			var currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
+			var initTile = new Tile(new Coordinates(0, 0), currentType);
+
+			TileList.Add(initTile);
+
+			int giveUp = 0;
+			while (resource > 0)
 			{
-				Tile rndTile = TileList[rnd.Next(TileList.Count)];
-				Coordinates crd = Coordinates.Add(rndTile.Coordinates, Coordinates.GetDirection(rnd.Next(6)));
-				if (TileList.FindIndex(x => x.Coordinates.Equals(crd)) > 0)
+				Tile rndTile;
+				if (GetTiles(currentType).Count == 0 || giveUp > 10)
+				{
+					rndTile = GetRandomTile();
+				}
+				else
+					rndTile = GetRandomTile(currentType);
+
+				var emptyNeighboors = GetEmptyNeighboors(rndTile);
+
+				if (emptyNeighboors.Count == 0)
+				{
+					giveUp++;
 					continue;
-				TileList.Add(new Tile(crd, TileType.Flat));
+				}
+				else
+					giveUp = 0;
+
+				Coordinates crd = emptyNeighboors.PickRandom();
+
+				TileList.Add(new Tile(crd, currentType));
+				
+				currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
 				resource--;
 			}
 			return;
@@ -58,9 +79,42 @@ namespace OOPT4Project.Simulation.Map
 			MapClimate.SimulateStep();
 			foreach (Tile tile in TileList) tile.SimulateStep();
 		}
+
 		public Tile GetRandomTile()
 		{
-			throw new NotImplementedException();
+			if (TileList.Count == 0)
+				throw new Exception();
+			return TileList[SimulationModel.Generator.Next(TileList.Count)];
+		}
+
+		public List<Tile> GetTiles(TileType type)
+		{
+			return TileList.Where((x) => x.Type == type).ToList();
+		}
+
+		public Tile GetRandomTile(TileType type)
+		{
+			if (TileList.Count == 0)
+				throw new Exception();
+			return GetTiles(type).PickRandom();
+		}
+
+		public List<Tile> GetNeighboors(Tile tile)
+		{
+			if (TileList.IndexOf(tile) == -1)
+				throw new Exception();
+			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
+			return TileList.Where((x) => neighboors.Contains(x.Coordinates)).ToList();
+		}
+
+		public List<Coordinates> GetEmptyNeighboors(Tile tile)
+		{
+			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
+			var neighboorTiles = GetNeighboors(tile);
+			var neighboorCoordinates = neighboorTiles.Select((x) => x.Coordinates).ToList();
+			var empty = neighboors.Except(neighboorCoordinates).ToList();
+
+			return empty;
 		}
 	}
 }

@@ -21,9 +21,21 @@ namespace OOPT4Project.Render
 			var tiles = _simulationModel.MapController.TileList;
 			foreach(Tile tile in tiles)
 			{
-				PathF path = DrawTile.PathTile(new Point(width/2, height/2), tile.Coordinates, _tileSize);
-				canvas.FillColor = Color.FromArgb("51C65C");
-				canvas.StrokeColor = Color.FromArgb("000000");
+				PathF path = TileDrawer.PathTile(new Point(width/2, height/2), tile.Coordinates, _tileSize);
+				Color? color;
+
+				try
+				{
+					TileColors.TileTypeToColor.TryGetValue(tile.Type, out color);
+				}
+				catch(ArgumentNullException ex) 
+				{ 
+					Console.WriteLine(ex.Message);
+					color = Colors.Black; 
+				}
+
+				canvas.FillColor = color;
+				canvas.StrokeColor = Colors.Black;
 				canvas.StrokeSize = 1;
 				canvas.FillPath(path);
 				canvas.DrawPath(path);

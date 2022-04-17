@@ -1,8 +1,28 @@
-﻿namespace OOPT4Project.Simulation.Map
+﻿using System.Collections.Generic;
+
+namespace OOPT4Project.Simulation.Map
 {
 	public enum TileType
 	{
-		Flat,
-		Obstructed
+		Grass,
+		Lake,
+		Hills,
+		Marsh,
+		Desert,
+		Badland,
+		Ocean
+	}
+
+	public static class TileTypeLogic
+	{
+		public static readonly List<TileType> Types = new List<TileType>() {
+			TileType.Grass,
+			TileType.Lake,
+			TileType.Hills,
+			TileType.Marsh,
+			TileType.Desert,
+			TileType.Badland,
+			TileType.Ocean
+		};
 	}
 }

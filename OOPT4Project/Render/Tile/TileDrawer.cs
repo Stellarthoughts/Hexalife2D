@@ -4,7 +4,7 @@ using System;
 
 namespace OOPT4Project.Render
 {
-	public static class DrawTile
+	public static class TileDrawer
 	{
 		public static PathF PathTile(Point center_global, Coordinates coor, double size)
 		{

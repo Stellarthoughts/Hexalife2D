@@ -71,6 +71,10 @@ namespace OOPT4Project.Simulation.Map
 				currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
 				resource--;
 			}
+
+			List<Coordinates> borders = GetEmptyBorders();
+			borders.ForEach((x) => TileList.Add(new Tile(x, TileType.Ocean)));
+
 			return;
 		}
 
@@ -115,6 +119,28 @@ namespace OOPT4Project.Simulation.Map
 			var empty = neighboors.Except(neighboorCoordinates).ToList();
 
 			return empty;
+		}
+
+		public List<Coordinates> GetEmptyBorders()
+		{
+			List<Coordinates> allValid = TileList.Select((x) => x.Coordinates).ToList();
+			List<Coordinates> withEmptyNeightboors = 
+				TileList.Where((x) => Coordinates.GetNeighboors(x.Coordinates).Count != 0).Select((x) => x.Coordinates).ToList();
+
+			HashSet<Coordinates> emptyBorders = new();
+
+			foreach(Coordinates coor in withEmptyNeightboors)
+			{
+				foreach(Coordinates empty in Coordinates.GetNeighboors(coor))
+				{
+					if(!allValid.Contains(empty))
+					{
+						emptyBorders.Add(empty);
+					}
+				}
+			}
+
+			return emptyBorders.ToList();
 		}
 	}
 }

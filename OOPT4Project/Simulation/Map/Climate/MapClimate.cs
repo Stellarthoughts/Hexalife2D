@@ -3,16 +3,21 @@ using System.Collections.Generic;
 
 namespace OOPT4Project.Simulation.Map
 {
+	public class WeatherChangeArgs
+	{
+
+	}
+
 	public class MapClimate : ISimulated
 	{
 		private MapController _controller;
-		private List<TileClimate> _tileClimateList = new();
-		// TODO: Event climate change
+
+		public delegate void WeatherChangeDelegate(object sender, WeatherChangeArgs e);
+		public event WeatherChangeDelegate? WeatherChange;
 
 		public MapClimate(MapController controller)
 		{
 			_controller = controller;
-			_controller.TileList.ForEach(x => _tileClimateList.Add(x.TileClimate));
 		}
 		public void SimulateStep()
 		{

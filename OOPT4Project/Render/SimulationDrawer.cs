@@ -9,7 +9,7 @@ namespace OOPT4Project.Render
 	{
 		private SimulationModel _simulationModel;
 
-		private double _tileSize = 2;
+		private double _tileSize = 20;
 
 		public SimulationDrawer(SimulationModel simulationModel)
 		{
@@ -36,7 +36,7 @@ namespace OOPT4Project.Render
 
 				canvas.FillColor = color;
 				canvas.StrokeColor = Colors.Black;
-				canvas.StrokeSize = 0.2f;
+				canvas.StrokeSize = 1f;
 				canvas.FillPath(path);
 				canvas.DrawPath(path);
 			}

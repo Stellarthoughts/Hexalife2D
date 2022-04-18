@@ -28,7 +28,7 @@ namespace OOPT4Project.Simulation.Map
 				{ TileType.Ocean, 0 }
 			};
 
-			CreateMapRandom(100, probs);
+			CreateMapRandom(50, probs);
 		}
 
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs)
@@ -47,14 +47,14 @@ namespace OOPT4Project.Simulation.Map
 			while (resource > 0)
 			{
 				Tile rndTile;
-				if (GetTiles(currentType).Count == 0 || giveUp > 10)
+				if (GetTiles(TileList, currentType).Count == 0 || giveUp > 10)
 				{
-					rndTile = GetRandomTile();
+					rndTile = GetRandomTile(GetBorderTiles(TileList));
 				}
 				else
-					rndTile = GetRandomTile(currentType);
+					rndTile = GetRandomTile(GetBorderTiles(TileList), currentType);
 
-				var emptyNeighboors = GetEmptyNeighboors(rndTile);
+				var emptyNeighboors = GetEmptyNeighboors(TileList, rndTile);
 
 				if (emptyNeighboors.Count == 0)
 				{
@@ -64,7 +64,7 @@ namespace OOPT4Project.Simulation.Map
 				else
 					giveUp = 0;
 
-				Coordinates crd = emptyNeighboors.PickRandom();
+				Coordinates crd = emptyNeighboors.PickRandom(rnd);
 
 				TileList.Add(new Tile(crd, currentType));
 				
@@ -72,7 +72,7 @@ namespace OOPT4Project.Simulation.Map
 				resource--;
 			}
 
-			List<Coordinates> borders = GetEmptyBorders();
+			List<Coordinates> borders = GetEmptyBorders(TileList);
 			borders.ForEach((x) => TileList.Add(new Tile(x, TileType.Ocean)));
 
 			return;
@@ -84,48 +84,53 @@ namespace OOPT4Project.Simulation.Map
 			foreach (Tile tile in TileList) tile.SimulateStep();
 		}
 
-		public Tile GetRandomTile()
+		public static Tile GetRandomTile(List<Tile> tiles)
 		{
-			if (TileList.Count == 0)
+			if (tiles.Count == 0)
 				throw new Exception();
-			return TileList[SimulationModel.Generator.Next(TileList.Count)];
+			return tiles[SimulationModel.Generator.Next(tiles.Count)];
 		}
 
-		public List<Tile> GetTiles(TileType type)
+		public static Tile GetRandomTile(List<Tile> tiles, TileType type)
 		{
-			return TileList.Where((x) => x.Type == type).ToList();
-		}
-
-		public Tile GetRandomTile(TileType type)
-		{
-			if (TileList.Count == 0)
+			if (tiles.Count == 0)
 				throw new Exception();
-			return GetTiles(type).PickRandom();
+			return GetTiles(tiles, type).PickRandom(SimulationModel.Generator);
 		}
 
-		public List<Tile> GetNeighboors(Tile tile)
+		public static List<Tile> GetBorderTiles(List<Tile> tiles)
 		{
-			if (TileList.IndexOf(tile) == -1)
+			return tiles.Where((x) => Coordinates.GetNeighboors(x.Coordinates).Count != 0).ToList();
+		}
+
+		public static List<Tile> GetTiles(List<Tile> tiles, TileType type)
+		{
+			return tiles.Where((x) => x.Type == type).ToList();
+		}
+
+		public static List<Tile> GetNeighboorTiles(List<Tile> tiles, Tile tile)
+		{
+			if (tiles.IndexOf(tile) == -1)
 				throw new Exception();
 			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
-			return TileList.Where((x) => neighboors.Contains(x.Coordinates)).ToList();
+			return tiles.Where((x) => neighboors.Contains(x.Coordinates)).ToList();
 		}
 
-		public List<Coordinates> GetEmptyNeighboors(Tile tile)
+		public static List<Coordinates> GetEmptyNeighboors(List<Tile> tiles, Tile tile)
 		{
 			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
-			var neighboorTiles = GetNeighboors(tile);
+			var neighboorTiles = GetNeighboorTiles(tiles, tile);
 			var neighboorCoordinates = neighboorTiles.Select((x) => x.Coordinates).ToList();
 			var empty = neighboors.Except(neighboorCoordinates).ToList();
 
 			return empty;
 		}
 
-		public List<Coordinates> GetEmptyBorders()
+		public static List<Coordinates> GetEmptyBorders(List<Tile> tiles)
 		{
-			List<Coordinates> allValid = TileList.Select((x) => x.Coordinates).ToList();
-			List<Coordinates> withEmptyNeightboors = 
-				TileList.Where((x) => Coordinates.GetNeighboors(x.Coordinates).Count != 0).Select((x) => x.Coordinates).ToList();
+			List<Coordinates> allValid = tiles.Select((x) => x.Coordinates).ToList();
+			List<Coordinates> withEmptyNeightboors =
+				GetBorderTiles(tiles).Select((x) => x.Coordinates).ToList();
 
 			HashSet<Coordinates> emptyBorders = new();
 

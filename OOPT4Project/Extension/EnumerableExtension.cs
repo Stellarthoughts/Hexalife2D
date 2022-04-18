@@ -30,7 +30,7 @@ namespace OOPT4Project.Extension
 
 		public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> source, int count, Random rnd)
 		{
-			return source.Shuffle().Take(count);
+			return source.Shuffle(rnd).Take(count);
 		}
 
 		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rnd)
@@ -49,7 +49,7 @@ namespace OOPT4Project.Extension
 			return list;
 		}
 
-		public static T? RandomElementByWeight<T>(this IEnumerable<T> sequence, Dictionary<T, double> weightSelector, Random rnd)
+		public static T? RandomElementByWeight<T>(this IEnumerable<T> sequence, Dictionary<T?, double> weightSelector , Random rnd)
 		{
 			var values = weightSelector.Values.ToList();
 			double totalWeight = values.Sum(x => x);

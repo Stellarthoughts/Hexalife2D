@@ -1,22 +1,28 @@
 using Moq;
 using NUnit.Framework;
 using OOPT4Project.Simulation;
+using OOPT4Project.Simulation.Map;
 
 namespace OOPT4Project.Tests
 {
 	public class MapControllerTests
 	{
-		public Mock<SimulationModel>? SimulationModel;
+		private Mock<SimulationModel>? simulationModel;
+		private MapController mapController;
+
 		[SetUp]
 		public void Setup()
 		{
-			SimulationModel = new Mock<SimulationModel>();
+			simulationModel = new Mock<SimulationModel>();
+			mapController = new(simulationModel.Object);
 		}
 
 		[Test]
-		public void Test1()
+		public void Test_MapController_CreatesMap()
 		{
-			Assert.Pass();
+			int resource = 100;
+			mapController.CreateMapRandom(resource, TileTypeLogic.ProbWeightsDefault, 0.1);
+			Assert.That(mapController.TileList.Count > resource);
 		}
 	}
 }

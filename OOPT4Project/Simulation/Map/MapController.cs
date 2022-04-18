@@ -28,10 +28,10 @@ namespace OOPT4Project.Simulation.Map
 				{ TileType.Ocean, 0 }
 			};
 
-			CreateMapRandom(200, probs);
+			CreateMapRandom(200, probs, 0.1);
 		}
 
-		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs)
+		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
 		{
 			TileList.Clear();
 
@@ -46,7 +46,7 @@ namespace OOPT4Project.Simulation.Map
 			while (resource > 0)
 			{
 				Tile rndTile;
-				if (GetTiles(GetBorderTiles(TileList), currentType).Count == 0)
+				if (GetTiles(GetBorderTiles(TileList), currentType).Count == 0 || rnd.NextDouble() < suddenSwitch)
 				{
 					rndTile = GetRandomTile(GetBorderTiles(TileList));
 				}

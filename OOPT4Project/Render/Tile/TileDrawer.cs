@@ -34,6 +34,12 @@ namespace OOPT4Project.Render
 			double y = size * (Math.Sqrt(3) /2 * coor.q + Math.Sqrt(3)* coor.r);
 			return new Point(x, y);
 		}
+		public static Point HexToPixel(double q, double r, double size)
+		{
+			double x = size * (3.0 / 2 * q);
+			double y = size * (Math.Sqrt(3) / 2 * q + Math.Sqrt(3) * r);
+			return new Point(x, y);
+		}
 
 		public static Coordinates PixelToHex(Point point, double size)
 		{

@@ -2,6 +2,8 @@
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OOPT4Project.Render
 {
@@ -19,9 +21,11 @@ namespace OOPT4Project.Render
 		public void Draw(ICanvas canvas, double width, double height)
 		{
 			var tiles = _simulationModel.MapController.TileList;
-			foreach(Tile tile in tiles)
+			var offset = AvgHexCoordinates(tiles, _tileSize);
+
+			foreach (Tile tile in tiles)
 			{
-				PathF path = TileDrawer.PathTile(new Point(width/2, height/2), tile.Coordinates, _tileSize);
+				PathF path = TileDrawer.PathTile(new Point(width/2 - offset.X, height/2 - offset.Y), tile.Coordinates, _tileSize);
 				Color? color;
 
 				try
@@ -40,6 +44,20 @@ namespace OOPT4Project.Render
 				canvas.FillPath(path);
 				canvas.DrawPath(path);
 			}
+		}
+
+		public static Point AvgHexCoordinates(List<Tile> tiles, double tileSize)
+		{
+			double avgQ = 0;
+			double avgR = 0;
+			tiles.Select(x => x.Coordinates).ToList().ForEach(x => {
+				avgQ += x.q;
+				avgR += x.r;
+			});
+			avgQ /= tiles.Count;
+			avgR /= tiles.Count;
+
+			return TileDrawer.HexToPixel(avgQ,avgR,tileSize);
 		}
 	}
 }

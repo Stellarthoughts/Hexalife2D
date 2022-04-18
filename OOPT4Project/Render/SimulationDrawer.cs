@@ -9,7 +9,7 @@ namespace OOPT4Project.Render
 	{
 		private SimulationModel _simulationModel;
 
-		private double _tileSize = 20;
+		private double _tileSize = 15;
 
 		public SimulationDrawer(SimulationModel simulationModel)
 		{

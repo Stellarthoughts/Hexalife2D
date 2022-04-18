@@ -16,7 +16,7 @@ namespace OOPT4Project.Simulation
 
 		// Simaltion service entities
 
-		public static Random Generator { get; set; } = new Random();
+		public static Random Generator { get; set; } = new Random(RandomSeed);
 
 		// Genome defaults
 		public static double MetabolismSpeed { get; set; } = 1;

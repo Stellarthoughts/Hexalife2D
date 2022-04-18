@@ -16,19 +16,6 @@ namespace OOPT4Project.Simulation.Map
 		{ 
 			_model = model;
 			MapClimate = new MapClimate(this);
-
-			Dictionary<TileType, double> probs = new()
-			{
-				{ TileType.Grass, 1 },
-				{ TileType.Lake, 0.2 },
-				{ TileType.Hills, 0.2 },
-				{ TileType.Desert, 0.2 },
-				{ TileType.Badland, 0.3 },
-				{ TileType.Marsh, 0.3 },
-				{ TileType.Ocean, 0 }
-			};
-
-			CreateMapRandom(200, probs, 0.1);
 		}
 
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)

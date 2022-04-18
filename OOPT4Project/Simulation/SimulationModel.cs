@@ -25,6 +25,7 @@ namespace OOPT4Project.Simulation
 		{
 			CreatureList = new List<CreatureEntity>();
 			MapController = new MapController(this);
+			MapController.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
 		}
 
 		public void PopulateSimulation(int count)

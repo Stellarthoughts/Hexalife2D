@@ -6,26 +6,26 @@ namespace OOPT4Project.Render
 {
 	public static class TileDrawer
 	{
-		public static PathF PathTile(Point center_global, Coordinates coor, double size)
+		public static PathF PathTile(Point centerGlobal, Coordinates coor, double size)
 		{
 			PathF path = new PathF();
 			Point hexToPixel = HexToPixel(coor, size);
-			Point tileCenter = new Point(hexToPixel.X + center_global.X,hexToPixel.Y + center_global.Y);
+			Point centerTile = new Point(hexToPixel.X + centerGlobal.X,hexToPixel.Y + centerGlobal.Y);
 
-			path.MoveTo(AnglePoint(tileCenter, size,0));
+			path.MoveTo(AnglePoint(centerTile, size, 0));
 			for(int i = 1; i <= 6; i++)
 			{
-				path.LineTo(AnglePoint(tileCenter, size, i));
+				path.LineTo(AnglePoint(centerTile, size, i));
 			}
 			return path;
 		}
 
-		public static Point AnglePoint(Point center_tile, double size, int i)
+		public static Point AnglePoint(Point centerTile, double size, int i)
 		{
 			double angle_deg = 60 * i;
 			double angle_rad = Math.PI / 180 * angle_deg;
-			return new Point(center_tile.X + size * Math.Cos(angle_rad),
-							 center_tile.Y + size * Math.Sin(angle_rad));
+			return new Point(centerTile.X + size * Math.Cos(angle_rad),
+							 centerTile.Y + size * Math.Sin(angle_rad));
 		}
 
 		public static Point HexToPixel(Coordinates coor, double size)

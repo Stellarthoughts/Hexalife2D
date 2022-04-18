@@ -34,6 +34,8 @@ namespace OOPT4Project.Views
 			canvas.FillRectangle(0, 0, width, height);
 
 			_simulationDrawer.Draw(canvas, width, height);
+
+			canvas.DrawCircle(width / 2, height / 2, 3);
 		}
 	}
 }

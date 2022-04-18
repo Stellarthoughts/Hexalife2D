@@ -10,11 +10,11 @@
         mc:Ignorable="d"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="900" Width="1600" Background="#FF44AEB5">
+        Title="{Binding Title}" Height="600" Width="1000" Background="#FF44AEB5">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.6180*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0"/>

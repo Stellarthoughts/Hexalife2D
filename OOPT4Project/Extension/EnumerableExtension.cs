@@ -30,7 +30,7 @@ namespace OOPT4Project.Extension
 
 		public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> source, int count, Random rnd)
 		{
-			return source.Shuffle(rnd).Take(count);
+			return source.Shuffle().Take(count);
 		}
 
 		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rnd)

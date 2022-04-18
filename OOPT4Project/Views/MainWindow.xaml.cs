@@ -19,6 +19,8 @@ namespace OOPT4Project.Views
 		public MainWindow()
 		{
 			InitializeComponent();
+			UpdateLayout();
+			SkElement1.IgnorePixelScaling = true;
 			_simulationModel = new SimulationModel();
 			_simulationDrawer = new SimulationDrawer(_simulationModel);
 			//_simulationModel.SimulateStep();

@@ -2,8 +2,6 @@
 using Microsoft.Maui.Graphics.Skia;
 using OOPT4Project.Render;
 using OOPT4Project.Simulation;
-using System;
-using System.Windows;
 using Colors = Microsoft.Maui.Graphics.Colors;
 
 namespace OOPT4Project.Views
@@ -11,7 +9,7 @@ namespace OOPT4Project.Views
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : System.Windows.Window
 	{
 		SimulationModel _simulationModel;
 		SimulationDrawer _simulationDrawer;
@@ -20,7 +18,6 @@ namespace OOPT4Project.Views
 		{
 			InitializeComponent();
 			UpdateLayout();
-			SkElement1.IgnorePixelScaling = true;
 			_simulationModel = new SimulationModel();
 			_simulationDrawer = new SimulationDrawer(_simulationModel);
 			//_simulationModel.SimulateStep();
@@ -38,6 +35,9 @@ namespace OOPT4Project.Views
 			_simulationDrawer.Draw(canvas, width, height);
 
 			canvas.DrawCircle(width / 2, height / 2, 3);
+
+			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(0,0),     new Point(0,height), 30);
+			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(width,0), new Point(width,height), 30);
 		}
 	}
 }

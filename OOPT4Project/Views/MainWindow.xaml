@@ -10,16 +10,16 @@
         mc:Ignorable="d"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="600" Width="1000" Background="#FF44AEB5">
+        Title="{Binding Title}" Height="900" Width="1600" Background="#FF44AEB5">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.6801*"/>
+            <ColumnDefinition Width="1.7*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0"/>
         <Grid Grid.Column="2"/>
-        <skia:SKElement Grid.Column="1" PaintSurface="SKElement_PaintSurface" x:Name="SkElement1"/>
+        <skia:SKElement Grid.Column="1" PaintSurface="SKElement_PaintSurface" x:Name="SkElement1" Margin="-1,0,-1,0"/>
         <Rectangle Grid.Column="0" Margin="0,0,0,0" Fill="#FF0C91A4" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto"/>
         <Rectangle Grid.Column="2" Margin="0,0,0,0" Fill="#FF0C91A4" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto"/>
     </Grid>

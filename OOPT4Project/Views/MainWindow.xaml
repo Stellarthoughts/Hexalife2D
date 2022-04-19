@@ -31,8 +31,8 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="551*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition/>
+                <RowDefinition Height="5"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Label Style="{StaticResource LabelHexalifeBig}" Content="Hexalife" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontWeight="Normal" FontStyle="Normal"/>

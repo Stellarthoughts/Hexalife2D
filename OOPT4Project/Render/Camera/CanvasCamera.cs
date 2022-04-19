@@ -7,7 +7,21 @@ using System.Threading.Tasks;
 
 namespace OOPT4Project.Render.Camera
 {
+	public struct CameraSettings
+	{
+		public double HorizontalBorder;
+		public double VerticalBorder;
+		public double MinScale;
+		public double MaxScale;
 
+		public CameraSettings(double horizontalBorder, double verticalBorder, double minScale, double maxScale)
+		{
+			HorizontalBorder = horizontalBorder;
+			VerticalBorder = verticalBorder;
+			MinScale = minScale;
+			MaxScale = maxScale;
+		}
+	}
 	public class CanvasCamera
 	{
 		private double _centerX = 0;
@@ -22,9 +36,18 @@ namespace OOPT4Project.Render.Camera
 		private double _scale = 1;
 		private double _scaleTarget = 1;
 
-		public CanvasCamera()
-		{
+		private double _horizontalBorder;
+		private double _verticalBorder;
 
+		private double _minScale;
+		private double _maxScale;
+
+		public CanvasCamera(CameraSettings set)
+		{
+			_horizontalBorder = set.HorizontalBorder;
+			_verticalBorder = set.VerticalBorder;
+			_minScale = set.MinScale;
+			_maxScale = set.MaxScale;
 		}
 
 		public void Update()
@@ -42,26 +65,23 @@ namespace OOPT4Project.Render.Camera
 
 		public void SetTargetPosition(double x, double y)
 		{
-			_targetX = x;
-			_targetY = y;
+			_targetX = Math.Clamp(x,-_horizontalBorder,_horizontalBorder);
+			_targetY = Math.Clamp(y,-_horizontalBorder,_horizontalBorder);
 		}
 
 		public void SetTargetScale(double z)
 		{
-			_scaleTarget = z;
-			if (_scaleTarget < 0) _scaleTarget = 0;
+			_scaleTarget = Math.Clamp(z, _minScale, _maxScale);
 		}
 
 		public void OffsetTargetPosition(double x, double y)
 		{
-			_targetX += x;
-			_targetY += y;
+			SetTargetPosition(_targetX + x, _targetY + y);
 		}
 
 		public void OffsetTargetScale(double z)
 		{
-			_scaleTarget += z;
-			if (_scaleTarget < 0) _scaleTarget = 0;
+			SetTargetScale(_scaleTarget + z);
 		}
 
 		public void Adjust(ref PathF adj)

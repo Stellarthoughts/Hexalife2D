@@ -28,7 +28,7 @@ namespace OOPT4Project.Views
 			UpdateLayout();
 			_simulationModel = new SimulationModel();
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
-			_camera = new();
+			_camera = new(new CameraSettings(500,500,1,6));
 			
 			_view = SkElement1;
 			//_simulationModel.SimulateStep();
@@ -54,7 +54,7 @@ namespace OOPT4Project.Views
 
 		private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
 		{
-			double delta = e.Delta / 520.0;
+			double delta = e.Delta / 1000.0;
 			_camera.OffsetTargetScale(delta);
 			_camera.Update();
 			_view.InvalidateVisual();

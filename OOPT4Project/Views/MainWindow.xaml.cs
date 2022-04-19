@@ -65,13 +65,13 @@ namespace OOPT4Project.Views
 			double x = 0;
 			double y = 0;
 
-			if(e.Key == Key.A)
+			if(Keyboard.IsKeyDown(Key.A))
 				x = -1;
-			else if (e.Key == Key.D)
+			else if (Keyboard.IsKeyDown(Key.D))
 				x = 1;
-			if (e.Key == Key.W)
+			if (Keyboard.IsKeyDown(Key.W))
 				y = -1;
-			else if (e.Key == Key.S)
+			else if (Keyboard.IsKeyDown(Key.S))
 				y = 1;	
 
 			_camera.OffsetTargetPosition(x * 5, y * 5);

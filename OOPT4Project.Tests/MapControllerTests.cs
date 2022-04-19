@@ -8,7 +8,7 @@ namespace OOPT4Project.Tests
 	public class MapControllerTests
 	{
 		private Mock<SimulationModel>? simulationModel;
-		private MapController mapController;
+		private MapController mapController = null!;
 
 		[SetUp]
 		public void Setup()

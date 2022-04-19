@@ -21,4 +21,13 @@
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\InriaSerif-Bold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\InriaSerif-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

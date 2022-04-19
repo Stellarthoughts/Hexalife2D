@@ -11,15 +11,17 @@ namespace OOPT4Project.Views
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		SimulationModel _simulationModel;
-		SimulationDrawer _simulationDrawer;
+		private SimulationModel _simulationModel;
+		private SimulationDrawer _simulationDrawer;
+
+		private double _tileSize = 15;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			UpdateLayout();
 			_simulationModel = new SimulationModel();
-			_simulationDrawer = new SimulationDrawer(_simulationModel);
+			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			//_simulationModel.SimulateStep();
 		}
 
@@ -36,8 +38,8 @@ namespace OOPT4Project.Views
 
 			canvas.DrawCircle(width / 2, height / 2, 3);
 
-			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(0,0),     new Point(0,height), 30);
-			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(width,0), new Point(width,height), 30);
+			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(0,0),     new Point(0,height), 40);
+			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(width,0), new Point(width,height), 40);
 		}
 	}
 }

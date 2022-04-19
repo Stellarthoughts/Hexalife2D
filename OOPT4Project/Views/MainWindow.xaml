@@ -1,26 +1,73 @@
 ﻿<Window x:Class="OOPT4Project.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
-        xmlns:local="clr-namespace:OOPT4Project"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        mc:Ignorable="d"
-        xmlns:prism="http://prismlibrary.com/"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="900" Width="1600" Background="#FF44AEB5">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
+		xmlns:local="clr-namespace:OOPT4Project"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+		xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+		mc:Ignorable="d"
+		xmlns:prism="http://prismlibrary.com/"
+		prism:ViewModelLocator.AutoWireViewModel="True"
+		Title="{Binding Title}" Height="900" Width="1600" Background="#FF44AEB5" 
+        TextOptions.TextRenderingMode="ClearType">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.7*"/>
+            <ColumnDefinition Width="1.8*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0"/>
-        <Grid Grid.Column="2"/>
         <skia:SKElement Grid.Column="1" PaintSurface="SKElement_PaintSurface" x:Name="SkElement1" Margin="-1,0,-1,0"/>
-        <Rectangle Grid.Column="0" Margin="0,0,0,0" Fill="#FF0C91A4" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto"/>
-        <Rectangle Grid.Column="2" Margin="0,0,0,0" Fill="#FF0C91A4" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto"/>
+        <Grid Background="#FF0C91A4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="551*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Label Style="{StaticResource LabelHexalifeBig}" Content="Hexalife" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontWeight="Normal" FontStyle="Normal"/>
+            <Label Style="{StaticResource LabelHexalifeSmall}" Content="Simulation control" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"/>
+            <Label Style="{StaticResource LabelHexalifeSmall}" Content="Simulation settings" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4"/>
+            <Rectangle Style="{StaticResource SeparatorThick}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Column="1"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Column="1" Grid.Row="1"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Row="3" Grid.Column="1"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Column="1" Grid.Row="4"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Column="1" Grid.Row="6"/>
+        </Grid>
+        <Grid Grid.Column="2" Background="#FF0C91A4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="69"/>
+                <RowDefinition/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Label Style="{StaticResource LabelHexalifeBig}" Content="Inspector" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Height="84" Width="280" Margin="81,0,0,0" />
+            <Label Style="{StaticResource LabelHexalifeSmall}" Content="Target" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Height="46" Width="100" Margin="261,0,0,0" />
+            <Label Style="{StaticResource LabelHexalifeSmall}" Content="Notifications" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Height="47" Width="189" Margin="172,0,0,0"/>
+            <Rectangle Width="300" VerticalAlignment="Bottom" Style="{StaticResource SeparatorThick}" Margin="0,0,0,0" HorizontalAlignment="Right" Grid.Column="1" Height="10"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Row="1" Grid.Column="1" Height="4"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,54,0,0" VerticalAlignment="Top" Width="300" Grid.Row="4" Grid.Column="1" Height="4"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Row="3" Grid.Column="1" Height="4" Margin="61,0,0,0"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="300" Grid.Row="6" Grid.Column="1" Height="4" Margin="0,0,0,0"/>
+        </Grid>
     </Grid>
 </Window>

@@ -11,32 +11,48 @@ namespace OOPT4Project.Render
 	{
 		private SimulationModel _simulationModel;
 
-		private double _tileSize = 15;
+		private double _tileSize;
 
-		public SimulationDrawer(SimulationModel simulationModel)
+		private Point _offset;
+		private List<Tile> _tiles;
+		private Dictionary<Tile, Color> _tileColors;
+
+		public SimulationDrawer(SimulationModel simulationModel, double tileSize)
 		{
 			_simulationModel = simulationModel;
+			_tileSize = tileSize;
+			_tiles = _simulationModel.MapController.TileList;
+
+			_tileColors = AssignColors(_tiles);
+			_offset = AvgHexCoordinates(_tiles, _tileSize);
 		}
 
-		public void Draw(ICanvas canvas, double width, double height)
+		public static Dictionary<Tile, Color> AssignColors(List<Tile> tiles)
 		{
-			var tiles = _simulationModel.MapController.TileList;
-			var offset = AvgHexCoordinates(tiles, _tileSize);
-
+			Dictionary<Tile, Color> dictionary = new();
 			foreach (Tile tile in tiles)
 			{
-				PathF path = TileDrawer.PathTile(new Point(width/2 - offset.X, height/2 - offset.Y), tile.Coordinates, _tileSize);
 				Color? color;
-
 				try
 				{
 					TileColors.TileTypeToColor.TryGetValue(tile.Type, out color);
 				}
-				catch(ArgumentNullException ex) 
-				{ 
+				catch (ArgumentNullException ex)
+				{
 					Console.WriteLine(ex.Message);
-					color = Colors.Black; 
+					color = Colors.Black;
 				}
+				dictionary.Add(tile, color!);
+			}
+			return dictionary;
+		}
+
+		public void Draw(ICanvas canvas, double width, double height)
+		{
+			foreach (Tile tile in _tiles)
+			{
+				PathF path = TileDrawer.PathTile(new Point(width/2 - _offset.X, height/2 - _offset.Y), tile.Coordinates, _tileSize);
+				_tileColors.TryGetValue(tile, out Color? color);
 
 				canvas.FillColor = color;
 				canvas.StrokeColor = Colors.Black;

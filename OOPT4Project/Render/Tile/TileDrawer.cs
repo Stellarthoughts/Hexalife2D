@@ -13,10 +13,11 @@ namespace OOPT4Project.Render
 			Point centerTile = new Point(hexToPixel.X + centerGlobal.X,hexToPixel.Y + centerGlobal.Y);
 
 			path.MoveTo(AnglePoint(centerTile, size, 0));
-			for(int i = 1; i <= 6; i++)
+			for(int i = 1; i <= 5; i++)
 			{
 				path.LineTo(AnglePoint(centerTile, size, i));
 			}
+			path.Close();
 			return path;
 		}
 

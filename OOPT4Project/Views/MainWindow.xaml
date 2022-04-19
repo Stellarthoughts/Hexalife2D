@@ -11,7 +11,7 @@
 		xmlns:prism="http://prismlibrary.com/"
 		prism:ViewModelLocator.AutoWireViewModel="True"
 		Title="{Binding Title}" Height="900" Width="1600" Background="#FF44AEB5" 
-        TextOptions.TextRenderingMode="ClearType">
+        TextOptions.TextRenderingMode="ClearType" MouseWheel="Window_MouseWheel" KeyDown="Window_KeyDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

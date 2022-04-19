@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Graphics;
+using OOPT4Project.Render.Camera;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
 using System;
@@ -47,11 +48,12 @@ namespace OOPT4Project.Render
 			return dictionary;
 		}
 
-		public void Draw(ICanvas canvas, double width, double height)
+		public void Draw(ICanvas canvas, CanvasCamera camera, Point point)
 		{
 			foreach (Tile tile in _tiles)
 			{
-				PathF path = TileDrawer.PathTile(new Point(width/2 - _offset.X, height/2 - _offset.Y), tile.Coordinates, _tileSize);
+				PathF path = TileDrawer.PathTile(new Point(point.X - _offset.X, point.Y - _offset.Y), tile.Coordinates, _tileSize);
+				camera.Adjust(ref path);
 				_tileColors.TryGetValue(tile, out Color? color);
 
 				canvas.FillColor = color;

@@ -6,7 +6,6 @@ using OOPT4Project.Simulation;
 using SkiaSharp.Views.WPF;
 using System;
 using System.Windows.Input;
-using Colors = Microsoft.Maui.Graphics.Colors;
 
 namespace OOPT4Project.Views
 {
@@ -31,6 +30,7 @@ namespace OOPT4Project.Views
 			_camera = new(new CameraSettings(500,500,1,6));
 			
 			_view = SkElement1;
+			_view.IgnorePixelScaling = true;
 			//_simulationModel.SimulateStep();
 		}
 

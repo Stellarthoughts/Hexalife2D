@@ -18,6 +18,7 @@ namespace OOPT4Project.Simulation.Map
 			MapClimate = new MapClimate(this);
 		}
 
+		// TODO: OPTIMIZE by storing a curated list of border tiles
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
 		{
 			TileList.Clear();

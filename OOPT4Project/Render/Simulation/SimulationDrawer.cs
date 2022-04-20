@@ -48,6 +48,7 @@ namespace OOPT4Project.Render
 			return dictionary;
 		}
 
+		// TODO: OPTIMIZE by storing single template of PathF, then move it and resize;
 		public void Draw(ICanvas canvas, CanvasCamera camera, Point point)
 		{
 			foreach (Tile tile in _tiles)

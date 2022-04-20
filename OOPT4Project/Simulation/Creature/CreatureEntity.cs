@@ -21,16 +21,8 @@ namespace OOPT4Project.Simulation.Creature
 
 		public void SimulateStep()
 		{
-			if(CurrentBehavior == null)
-			{
-				CurrentBehavior = SelectBehavior();
-			}
-			else
-			{
-				var done = CurrentBehavior.DoBehavior();
-				if (done)
-					CurrentBehavior = null;
-			}	
+			CurrentBehavior ??= SelectBehavior();
+			CurrentBehavior = CurrentBehavior.DoBehavior() ? null : CurrentBehavior;
 		}
 		public IBehavior SelectBehavior()
 		{

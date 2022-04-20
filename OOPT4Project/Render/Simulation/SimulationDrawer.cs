@@ -33,10 +33,10 @@ namespace OOPT4Project.Render
 			Dictionary<Tile, Color> dictionary = new();
 			foreach (Tile tile in tiles)
 			{
-				Color? color;
+				Color color;
 				try
 				{
-					TileColors.TileTypeToColor.TryGetValue(tile.Type, out color);
+					TileColors.TileTypeToColor.TryGetValue(tile.Type, out color!);
 				}
 				catch (ArgumentNullException ex)
 				{
@@ -55,7 +55,7 @@ namespace OOPT4Project.Render
 			{
 				PathF path = TileDrawer.PathTile(new Point(point.X - _offset.X, point.Y - _offset.Y), tile.Coordinates, _tileSize);
 				camera.Adjust(ref path);
-				_tileColors.TryGetValue(tile, out Color? color);
+				_tileColors.TryGetValue(tile, out Color color);
 
 				canvas.FillColor = color;
 				canvas.StrokeColor = Colors.Black;

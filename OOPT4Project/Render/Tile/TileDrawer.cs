@@ -21,6 +21,15 @@ namespace OOPT4Project.Render
 			return path;
 		}
 
+		public static PathF PathTile(PathF path, Coordinates coor, double size)
+		{
+			Point hexToPixel = HexToPixel(coor, size);
+			PathF res = new PathF(path);
+			res.Equals(path);
+			res.Move((float)hexToPixel.X, (float)hexToPixel.Y);
+			return res;
+		}
+
 		public static Point AnglePoint(Point centerTile, double size, int i)
 		{
 			double angle_deg = 60 * i;

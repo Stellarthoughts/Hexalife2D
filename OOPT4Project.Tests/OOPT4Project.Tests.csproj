@@ -21,4 +21,8 @@
     <ProjectReference Include="..\OOPT4Project\OOPT4Project.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extension\" />
+  </ItemGroup>
+
 </Project>

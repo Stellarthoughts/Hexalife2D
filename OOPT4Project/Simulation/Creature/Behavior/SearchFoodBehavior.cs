@@ -1,10 +1,10 @@
 ﻿namespace OOPT4Project.Simulation.Creature.Behavior
 {
-	public class HuntBehavior : IBehavior
+	public class SearchFoodBehavior : IBehavior
 	{
 		private CreatureEntity _creatureEntity;
 
-		public HuntBehavior(CreatureEntity creatureEntity)
+		public SearchFoodBehavior(CreatureEntity creatureEntity)
 		{
 			_creatureEntity = creatureEntity;
 		}

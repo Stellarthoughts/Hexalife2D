@@ -65,7 +65,7 @@ namespace OOPT4Project.Simulation.Map
 			}
 
 			List<Coordinates> borders = GetEmptyBorders(TileList);
-			borders.ForEach((x) => TileList.Add(new Tile(x, TileType.Ocean)));
+			borders.ForEach(x => TileList.Add(new Tile(x, TileType.Ocean)));
 
 			return;
 		}
@@ -92,14 +92,14 @@ namespace OOPT4Project.Simulation.Map
 
 		public static List<Tile> GetBorderTiles(List<Tile> tiles)
 		{
-			return tiles.Where((x) => 
+			return tiles.Where(x => 
 			Coordinates.GetNeighboors(x.Coordinates)
-					   .Except(tiles.Select((x) => x.Coordinates)).ToList().Count != 0).ToList();
+					   .Except(tiles.Select(x => x.Coordinates)).ToList().Count != 0).ToList();
 		}
 
 		public static List<Tile> GetTiles(List<Tile> tiles, TileType type)
 		{
-			return tiles.Where((x) => x.Type == type).ToList();
+			return tiles.Where(x => x.Type == type).ToList();
 		}
 
 		public static List<Tile> GetNeighboorTiles(List<Tile> tiles, Tile tile)
@@ -107,14 +107,14 @@ namespace OOPT4Project.Simulation.Map
 			if (tiles.IndexOf(tile) == -1)
 				throw new Exception();
 			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
-			return tiles.Where((x) => neighboors.Contains(x.Coordinates)).ToList();
+			return tiles.Where(x => neighboors.Contains(x.Coordinates)).ToList();
 		}
 
 		public static List<Coordinates> GetEmptyNeighboors(List<Tile> tiles, Tile tile)
 		{
 			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
 			var neighboorTiles = GetNeighboorTiles(tiles, tile);
-			var neighboorCoordinates = neighboorTiles.Select((x) => x.Coordinates).ToList();
+			var neighboorCoordinates = neighboorTiles.Select(x => x.Coordinates).ToList();
 			var empty = neighboors.Except(neighboorCoordinates).ToList();
 
 			return empty;
@@ -122,9 +122,9 @@ namespace OOPT4Project.Simulation.Map
 
 		public static List<Coordinates> GetEmptyBorders(List<Tile> tiles)
 		{
-			List<Coordinates> allValid = tiles.Select((x) => x.Coordinates).ToList();
+			List<Coordinates> allValid = tiles.Select(x => x.Coordinates).ToList();
 			List<Coordinates> withEmptyNeightboors =
-				GetBorderTiles(tiles).Select((x) => x.Coordinates).ToList();
+				GetBorderTiles(tiles).Select(x => x.Coordinates).ToList();
 
 			HashSet<Coordinates> emptyBorders = new();
 

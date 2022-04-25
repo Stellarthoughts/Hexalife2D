@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPT4Project.Render.Creature
 {
-	internal class CreatureDrawer
+	public static class CreatureDrawer
 	{
 	}
 }

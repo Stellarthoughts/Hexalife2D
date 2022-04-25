@@ -53,7 +53,7 @@ namespace OOPT4Project.Simulation
 
 		public void SimulateStep()
 		{
-			throw new NotImplementedException();
+			MapController.SimulateStep();
 		}
 	}
 }

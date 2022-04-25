@@ -73,8 +73,8 @@ namespace OOPT4Project.Simulation.Creature
 
 		public CreatureStats GetStats()
 		{
-			double size		= Genom[(int) GeneType.Size]; // 1/3
-			double metabs	= Genom[(int) GeneType.MetabolismSpeed]; // 2/3
+			double size		= Genom[(int) GeneType.Size];
+			double metabs	= Genom[(int) GeneType.MetabolismSpeed]; 
 			double aware	= Genom[(int) GeneType.Awareness];
 			double reprate	= Genom[(int) GeneType.ReproduceRate];
 			double carniv	= Genom[(int) GeneType.Carnivorousness];
@@ -82,11 +82,12 @@ namespace OOPT4Project.Simulation.Creature
 			return new CreatureStats()
 			{
 				Size = size,
-				Health = (size + metabs) * 100,
+				HealthMax = (size * 2.0 / 3 + metabs * 1.0 / 3) * 100,
+				HealingRate = metabs * 30,
 				Carnivorousness = carniv,
-				HungerRate = metabs * 10,
-				ThirstRate = metabs * 10,
-				Stealth = size * 2.0/3 + aware * 1.0/3,
+				HungerRate = (metabs * 4.0/5 + aware * 1.0/5) * 10,
+				ThirstRate = (metabs * 4.0/5 + aware * 1.0/5) * 10,
+				Stealth = (1-size) + aware,
 				Strength = size * 1.0/3 + metabs * 2.0/3,
 				Awareness = aware,
 				ReproduceRate = reprate,

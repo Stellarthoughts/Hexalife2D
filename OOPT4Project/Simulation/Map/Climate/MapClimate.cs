@@ -21,7 +21,7 @@ namespace OOPT4Project.Simulation.Map
 		}
 		public void SimulateStep()
 		{
-			throw new NotImplementedException();
+			
 		}
 	}
 }

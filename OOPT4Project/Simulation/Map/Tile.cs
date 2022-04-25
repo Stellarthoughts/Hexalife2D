@@ -35,7 +35,8 @@ namespace OOPT4Project.Simulation.Map
 
 		public void SimulateStep()
 		{
-			throw new NotImplementedException();
+			foreach (CreatureEntity creature in CreatureList)
+				creature.SimulateStep();
 		}
 	}
 }

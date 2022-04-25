@@ -5,15 +5,18 @@ namespace OOPT4Project.Simulation.Creature
 {
 	public struct CreatureStats
 	{
-		public double Health { get; set; }
+		public double HealthMax { get; set; }
 		public double HungerRate { get; set; }
 		public double ThirstRate { get; set; }
+		public double HungerMax { get; set; }
+		public double HungerMin { get; set; }
 		public double Strength { get; set; }
 		public double ReproduceRate { get; set; }
 		public double Carnivorousness { get; set; }
 		public double Stealth { get; set; }
 		public double Awareness { get; set; }
 		public double Size { get; set; }
+		public double HealingRate { get; set; }
 	}
 
 	public class CreatureEntity : ISimulated
@@ -25,9 +28,14 @@ namespace OOPT4Project.Simulation.Creature
 		private SimulationModel _model;
 		public CreatureStats Stats { get; private set; }
 
-		private double _hunger = 100;
-		private double _thirst = 100;
-		private double _reproduceNeed = 0;
+		private static double HungerMax = 100;
+		private static double ThirstMax = 100;
+		private static double ReproduceNeedMax = 100;
+
+		private double _health;
+		private double _hunger = HungerMax;
+		private double _thirst = ThirstMax;
+		private double _reproduceNeed = ReproduceNeedMax;
 
 		public CreatureEntity(SimulationModel model, Gene gene, Tile tile)
 		{
@@ -35,17 +43,52 @@ namespace OOPT4Project.Simulation.Creature
 			CurrentTile = tile;
 			_model = model;
 
+			_health = Stats.HealthMax;
+
 			Stats = gene.GetStats();
 		}
 
 		public void SimulateStep()
 		{
+			_thirst -= Stats.ThirstRate;
+			_hunger -= Stats.HungerRate;
+			_reproduceNeed -= Stats.ReproduceRate;
+
+			if(_thirst == 0)
+			{
+				_health -= 15;
+			}
+			if(_hunger == 0)
+			{
+				_health -= 10;
+			}
+			if(_reproduceNeed == 0)
+			{
+				_health -= 5;
+			}
+
 			CurrentBehavior ??= SelectBehavior();
 			CurrentBehavior = CurrentBehavior.DoBehavior() ? null : CurrentBehavior;
 		}
 		public IBehavior SelectBehavior()
 		{
-			return new SearchBehavior(this);
+			if(_thirst <= ThirstMax / 3)
+			{
+				return new SearchWaterBehavior(this);
+			}
+			if(_hunger <= HungerMax / 4)
+			{
+				if (SimulationModel.Generator.NextDouble() < Stats.Carnivorousness)
+					return new HuntBehavior(this);
+				else
+					return new SearchFoodBehavior(this);
+			}
+			if(_reproduceNeed <= ReproduceNeedMax / 5)
+			{
+				return new ReproduceBehavior(this);
+			}
+
+			return new IdleBehavior(this);
 		}
 	}
 }

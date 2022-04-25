@@ -29,7 +29,8 @@ namespace OOPT4Project.Views
 
 			_simulationModel = new SimulationModel();
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
-			_simulationModel.PopulateSimulation(1000);
+			_simulationModel.PopulateSimulation(100);
+			_simulationModel.SimulateStep();
 
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			_camera = new(new CameraSettings(500,500,1,6));

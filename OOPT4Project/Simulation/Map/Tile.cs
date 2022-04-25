@@ -10,23 +10,27 @@ namespace OOPT4Project.Simulation.Map
 		public TileClimate TileClimate { get; private set; }
 		public List<CreatureEntity> CreatureList { get; private set; } = new List<CreatureEntity>();
 		public TileType Type { get; private set; }
+		public bool CanWalkTo { get; private set; }
 
 		private double _foodResource;
 		private double _waterResource;
 
-		private double _foodReplenish;
-		private double _waterReplenish;
+		private TileTypeResources _resources;
 
 		public Tile(Coordinates coor, TileType type)
 		{
 			TileClimate = new TileClimate();
+
 			Coordinates = coor;
 			Type = type;
+
 			TileTypeLogic.Resources.TryGetValue(type, out TileTypeResources resources);
+			TileTypeLogic.CanWalkTo.TryGetValue(type, out bool walk);
+			CanWalkTo = walk;
+
+			_resources = resources;
 			_foodResource = resources.InitialFood;
 			_waterResource = resources.InitialWater;
-			_foodReplenish = resources.ReplenishRateFood;
-			_waterReplenish = resources.ReplenishRateWater;
 		}
 
 		public void SimulateStep()

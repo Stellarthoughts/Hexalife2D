@@ -62,5 +62,10 @@ namespace OOPT4Project.Render
 			return new Coordinates(0, 0);
 		}
 
+		public static double InscribedCircleRadius(double tileSize)
+		{
+			return tileSize * Math.Sqrt(3) / 2;
+		}
+
 	}
 }

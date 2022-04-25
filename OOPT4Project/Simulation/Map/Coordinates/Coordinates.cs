@@ -14,17 +14,14 @@ namespace OOPT4Project.Simulation.Map
 				Cube(-1, 0, 1), Cube(-1, 1, 0), Cube(0, 1, -1)
 		};
 
-		private bool _obstructed = false;
-
-		public Coordinates(int q, int r, int s, bool obstructed = false)
+		public Coordinates(int q, int r, int s)
 		{
 			this.q = q;
 			this.r = r;
 			this.s = s;
-			_obstructed = obstructed;
 		}
 
-		public Coordinates(int q, int r, bool obstructed = false)
+		public Coordinates(int q, int r)
 		{
 			this.q = q;
 			this.r = r;

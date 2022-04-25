@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using OOPT4Project.Extension;
+using OOPT4Project.Simulation.Creature;
 
 namespace OOPT4Project.Simulation.Map
 {
@@ -70,6 +71,27 @@ namespace OOPT4Project.Simulation.Map
 			return;
 		}
 
+		internal bool RegisterCreature(CreatureEntity ent, Tile currentTile)
+		{
+			if(TileList.Contains(currentTile))
+			{
+				currentTile.CreatureList.Add(ent);
+				return true;
+			}
+			return false;
+		}
+
+		public bool TransferCreature(CreatureEntity ent, Tile currentTile, Tile tile)
+		{
+			var neighboors = GetNeighboorTiles(TileList, currentTile);
+			if (tile.CanWalkTo == false || !neighboors.Contains(tile))
+				return false;
+
+			currentTile.CreatureList.Remove(ent);
+			tile.CreatureList.Add(ent);
+			return true;
+		}
+
 		public void SimulateStep()
 		{
 			MapClimate.SimulateStep();
@@ -80,14 +102,17 @@ namespace OOPT4Project.Simulation.Map
 		{
 			if (tiles.Count == 0)
 				throw new Exception();
-			return tiles[SimulationModel.Generator.Next(tiles.Count)];
+			return tiles.PickRandom(SimulationModel.Generator);
 		}
 
-		public static Tile GetRandomTile(List<Tile> tiles, TileType type)
+		public static Tile GetRandomTile(List<Tile> tiles, TileType type, bool except = false)
 		{
 			if (tiles.Count == 0)
 				throw new Exception();
-			return GetTiles(tiles, type).PickRandom(SimulationModel.Generator);
+			if (!except)
+				return GetTiles(tiles, type).PickRandom(SimulationModel.Generator);
+			else
+				return GetTiles(tiles, type, true).PickRandom(SimulationModel.Generator);
 		}
 
 		public static List<Tile> GetBorderTiles(List<Tile> tiles)
@@ -97,9 +122,12 @@ namespace OOPT4Project.Simulation.Map
 					   .Except(tiles.Select(x => x.Coordinates)).ToList().Count != 0).ToList();
 		}
 
-		public static List<Tile> GetTiles(List<Tile> tiles, TileType type)
+		public static List<Tile> GetTiles(List<Tile> tiles, TileType type, bool except = false)
 		{
-			return tiles.Where(x => x.Type == type).ToList();
+			if(!except) 
+				return tiles.Where(x => x.Type == type).ToList();
+			else
+				return tiles.Where(x => x.Type != type).ToList();
 		}
 
 		public static List<Tile> GetNeighboorTiles(List<Tile> tiles, Tile tile)

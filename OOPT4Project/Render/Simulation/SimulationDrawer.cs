@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Graphics;
 using OOPT4Project.Render.Camera;
 using OOPT4Project.Simulation;
+using OOPT4Project.Simulation.Creature;
 using OOPT4Project.Simulation.Map;
 using System;
 using System.Collections.Generic;
@@ -41,11 +42,11 @@ namespace OOPT4Project.Render
 		}
 
 		// TODO: OPTIMIZE by storing single template of PathF, then move it and resize;
-		public void Draw(ICanvas canvas, CanvasCamera camera, Point point)
+		public void Draw(ICanvas canvas, CanvasCamera camera)
 		{
 			foreach (Tile tile in _tiles)
 			{
-				PathF path = TileDrawer.PathTile(new Point(point.X - _offset.X, point.Y - _offset.Y), tile.Coordinates, _tileSize);
+				PathF path = TileDrawer.PathTile(new Point(-_offset.X, -_offset.Y), tile.Coordinates, _tileSize);
 				camera.Adjust(ref path);
 				_tileColors.TryGetValue(tile, out Color? color);
 
@@ -54,6 +55,36 @@ namespace OOPT4Project.Render
 				canvas.StrokeSize = 1f;
 				canvas.FillPath(path);
 				canvas.DrawPath(path);
+
+				var creatureList = tile.CreatureList;
+
+				foreach (CreatureEntity crt in creatureList)
+				{
+					canvas.FillColor = Colors.Red;
+					canvas.StrokeColor = Colors.Black;
+					canvas.StrokeSize = 0.5f;
+
+					Point tilePoint = TileDrawer.HexToPixel(crt.CurrentTile.Coordinates, _tileSize);
+					tilePoint = tilePoint.Offset(-_offset.X, -_offset.Y);
+
+					double position = creatureList.IndexOf(crt);
+					double count = creatureList.Count;
+					double circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5;
+
+					if(count != 1)
+						tilePoint = tilePoint.Offset(Math.Cos(Math.PI * 2 * position/count) * circle, Math.Sin(Math.PI * 2 * position / count) * circle);
+
+					Size size = new(_tileSize / count / 2);
+					tilePoint -= size / 2;
+
+					camera.Adjust(ref tilePoint);
+					camera.Adjust(ref size);
+
+					Rect rect = new Rect(tilePoint, size);
+
+					canvas.DrawRectangle(rect);
+					canvas.FillRectangle(rect);
+				}
 			}
 		}
 

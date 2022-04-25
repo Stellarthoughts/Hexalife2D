@@ -64,6 +64,7 @@ namespace OOPT4Project.Render
 					canvas.StrokeColor = Colors.Black;
 					canvas.StrokeSize = 0.5f;
 
+					// Pos calculation
 					Point tilePoint = TileDrawer.HexToPixel(crt.CurrentTile.Coordinates, _tileSize);
 					tilePoint = tilePoint.Offset(-_offset.X, -_offset.Y);
 
@@ -77,6 +78,7 @@ namespace OOPT4Project.Render
 					Size size = new(_tileSize / count / 2);
 					tilePoint -= size / 2;
 
+					// Adjusting
 					camera.Adjust(ref tilePoint);
 					camera.Adjust(ref size);
 

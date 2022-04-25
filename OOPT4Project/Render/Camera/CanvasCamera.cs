@@ -63,7 +63,7 @@ namespace OOPT4Project.Render.Camera
 		public void SetTargetPosition(double x, double y)
 		{
 			_targetX = Math.Clamp(x,-_horizontalBorder,_horizontalBorder);
-			_targetY = Math.Clamp(y,-_horizontalBorder,_horizontalBorder);
+			_targetY = Math.Clamp(y,-_verticalBorder, _verticalBorder);
 		}
 
 		public void SetTargetScale(double z)

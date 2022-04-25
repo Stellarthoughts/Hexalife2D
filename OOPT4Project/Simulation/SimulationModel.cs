@@ -7,32 +7,48 @@ namespace OOPT4Project.Simulation
 {
 	public class SimulationModel : ISimulated
 	{
-		public List<CreatureEntity> CreatureList { get; private set; }
 		public MapController MapController { get; private set; }
 
 		// Simulation params
 		public static int RandomSeed { get; set; } = 19;
 		public static double CreatureChanceToBeMale { get; set; } = 0.5;
+		public static double MutationChance { get; set; } = 0.04;
+		public static double MutationRange { get; set; } = 0.02;
 
 		// Simaltion service entities
 
 		public static Random Generator { get; set; } = new Random(RandomSeed);
 
-		// Genome defaults
-		public static double MetabolismSpeed { get; set; } = 1;
-
 		public SimulationModel()
 		{
-			CreatureList = new List<CreatureEntity>();
 			MapController = new MapController(this);
-			MapController.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
+		}
+
+		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
+		{
+			MapController.CreateMapRandom(resource, probs, suddenSwitch);
 		}
 
 		public void PopulateSimulation(int count)
 		{
-			CreatureList.Clear();
 			for (int i = 0; i < count; i++)
-				CreatureList.Add(new CreatureEntity(Gene.RandomGene(), MapController.GetRandomTile(MapController.TileList)));
+			{
+				CreatureEntity ent = new CreatureEntity(this, Gene.RandomGene(),
+					MapController.GetRandomTile(MapController.TileList, TileType.Ocean, true));
+				
+				if (!MapController.RegisterCreature(ent, ent.CurrentTile))
+					throw new Exception("Creature registration failed!");
+			}
+		}
+
+		public List<Tile> NeighboorTiles(CreatureEntity ent)
+		{
+			return MapController.GetNeighboorTiles(MapController.TileList, ent.CurrentTile);
+		}
+
+		public bool MoveTo(CreatureEntity ent, Tile tile)
+		{
+			return MapController.TransferCreature(ent, ent.CurrentTile, tile);
 		}
 
 		public void SimulateStep()

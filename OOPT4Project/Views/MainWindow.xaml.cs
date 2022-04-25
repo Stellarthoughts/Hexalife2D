@@ -3,6 +3,7 @@ using Microsoft.Maui.Graphics.Skia;
 using OOPT4Project.Render;
 using OOPT4Project.Render.Camera;
 using OOPT4Project.Simulation;
+using OOPT4Project.Simulation.Map;
 using SkiaSharp.Views.WPF;
 using System;
 using System.Windows.Input;
@@ -25,7 +26,11 @@ namespace OOPT4Project.Views
 		{
 			InitializeComponent();
 			UpdateLayout();
+
 			_simulationModel = new SimulationModel();
+			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
+			_simulationModel.PopulateSimulation(1000);
+
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			_camera = new(new CameraSettings(500,500,1,6));
 			
@@ -45,7 +50,7 @@ namespace OOPT4Project.Views
 			canvas.FillColor = Color.FromArgb("44AEB5");
 			canvas.FillRectangle(0, 0, width, height);
 
-			_simulationDrawer.Draw(canvas, _camera, new Point(0,0));
+			_simulationDrawer.Draw(canvas, _camera);
 
 			canvas.DrawCircle(width / 2, height / 2, 3);
 			BorderDrawer.DrawHexagonalBorder(canvas, Color.FromArgb("0C91A4"), new Point(0,0),     new Point(0,height), 40);

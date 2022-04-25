@@ -90,6 +90,19 @@ namespace OOPT4Project.Render.Camera
 			adj.Move((float) (_offsetX - _centerX * _scale), (float) (_offsetY - _centerY * _scale));
 		}
 
+		public void Adjust(ref Point tilePoint)
+		{
+			double x = tilePoint.X;
+			double y = tilePoint.Y;
+			tilePoint = new Point(x * _scale,y * _scale);
+			tilePoint = tilePoint.Offset(_offsetX - _centerX * _scale, _offsetY - _centerY * _scale);
+		}
+
+		public void Adjust(ref Size size)
+		{
+			size = new Size(size.Width * _scale, size.Height * _scale);
+		}
+
 		public static Point GetAverageCoordinate(PathF path)
 		{
 			double avgX = 0;

@@ -8,7 +8,7 @@ namespace OOPT4Project.Simulation.Map
 {
 	public class MapController : ISimulated
 	{
-		public List<Tile> TileList { get; private set; } = new List<Tile>();
+		public List<Tile> TileList { get; private set; } = new();
 		public MapClimate MapClimate { get; private set; }
 
 		private SimulationModel _model;

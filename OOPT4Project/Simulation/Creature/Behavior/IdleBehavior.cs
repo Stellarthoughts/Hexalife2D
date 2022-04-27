@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOPT4Project.Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 	{
 		private CreatureEntity _creatureEntity;
 
+		private static double MoveRandomTileChance = 0.4;
+
 		public IdleBehavior(CreatureEntity creatureEntity)
 		{
 			_creatureEntity = creatureEntity;
@@ -17,7 +20,13 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 
 		public bool DoBehavior()
 		{
-			throw new NotImplementedException();
+			if(SimulationModel.Generator.NextDouble() < MoveRandomTileChance)
+			{
+				var tiles = _creatureEntity.NeighboorTiles();
+				var tile = tiles.PickRandom(SimulationModel.Generator);
+				_creatureEntity.MoveTo(tile);
+			}
+			return true;
 		}
 	}
 }

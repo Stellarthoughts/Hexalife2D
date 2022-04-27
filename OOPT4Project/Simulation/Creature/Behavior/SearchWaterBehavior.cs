@@ -17,7 +17,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 
 		public bool DoBehavior()
 		{
-			throw new NotImplementedException();
+			return true;
 		}
 	}
 }

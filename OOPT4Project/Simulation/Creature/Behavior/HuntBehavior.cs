@@ -11,7 +11,7 @@
 
 		public bool DoBehavior()
 		{
-			throw new System.NotImplementedException();
+			return true;
 		}
 	}
 }

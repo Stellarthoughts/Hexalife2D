@@ -1,5 +1,7 @@
 ﻿using OOPT4Project.Simulation.Creature.Behavior;
 using OOPT4Project.Simulation.Map;
+using System;
+using System.Collections.Generic;
 
 namespace OOPT4Project.Simulation.Creature
 {
@@ -31,11 +33,13 @@ namespace OOPT4Project.Simulation.Creature
 		private static double HungerMax = 100;
 		private static double ThirstMax = 100;
 		private static double ReproduceNeedMax = 100;
+		private static int AttentionSpan = 4;
 
 		private double _health;
 		private double _hunger = HungerMax;
 		private double _thirst = ThirstMax;
 		private double _reproduceNeed = ReproduceNeedMax;
+		private int _stepsCurrentTask = 0;
 
 		public CreatureEntity(SimulationModel model, Gene gene, Tile tile)
 		{
@@ -46,6 +50,19 @@ namespace OOPT4Project.Simulation.Creature
 			_health = Stats.HealthMax;
 
 			Stats = gene.GetStats();
+		}
+
+		public List<Tile> NeighboorTiles()
+		{
+			return _model.NeighboorTiles(this);
+		}
+
+		public bool MoveTo(Tile tile)
+		{
+			bool moved = _model.MoveTo(this, tile);
+			if (moved)
+				CurrentTile = tile;
+			return moved;
 		}
 
 		public void SimulateStep()
@@ -67,12 +84,31 @@ namespace OOPT4Project.Simulation.Creature
 				_health -= 5;
 			}
 
+			if (_health <= 0)
+			{
+				Die();
+				//return;
+			}
+
 			CurrentBehavior ??= SelectBehavior();
 			CurrentBehavior = CurrentBehavior.DoBehavior() ? null : CurrentBehavior;
+
+			_stepsCurrentTask++;
+			if (_stepsCurrentTask > AttentionSpan)
+			{
+				CurrentBehavior = null;
+				_stepsCurrentTask = 0;
+			}
 		}
+
+		private void Die()
+		{
+			
+		}
+
 		public IBehavior SelectBehavior()
 		{
-			if(_thirst <= ThirstMax / 3)
+			/*if(_thirst <= ThirstMax / 3)
 			{
 				return new SearchWaterBehavior(this);
 			}
@@ -86,7 +122,7 @@ namespace OOPT4Project.Simulation.Creature
 			if(_reproduceNeed <= ReproduceNeedMax / 5)
 			{
 				return new ReproduceBehavior(this);
-			}
+			}*/
 
 			return new IdleBehavior(this);
 		}

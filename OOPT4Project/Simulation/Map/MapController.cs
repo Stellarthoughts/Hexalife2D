@@ -87,15 +87,23 @@ namespace OOPT4Project.Simulation.Map
 			if (tile.CanWalkTo == false || !neighboors.Contains(tile))
 				return false;
 
-			currentTile.CreatureList.Remove(ent);
-			tile.CreatureList.Add(ent);
+			currentTile.UnregisterCreature(ent);
+			tile.RegisterCreature(ent);
 			return true;
 		}
 
 		public void SimulateStep()
 		{
 			MapClimate.SimulateStep();
-			foreach (Tile tile in TileList) tile.SimulateStep();
+
+			foreach (Tile tile in TileList)
+			{
+				tile.SimulateStep();
+			}
+			foreach (Tile tile in TileList)
+			{
+				tile.EndStep();
+			}
 		}
 
 		public static Tile GetRandomTile(List<Tile> tiles)

@@ -43,7 +43,9 @@ namespace OOPT4Project.Simulation
 
 		public List<Tile> NeighboorTiles(CreatureEntity ent)
 		{
-			return MapController.GetNeighboorTiles(MapController.TileList, ent.CurrentTile);
+			return MapController.GetTiles(
+				MapController.GetNeighboorTiles(MapController.TileList, ent.CurrentTile), 
+				TileType.Ocean, true);
 		}
 
 		public bool MoveTo(CreatureEntity ent, Tile tile)

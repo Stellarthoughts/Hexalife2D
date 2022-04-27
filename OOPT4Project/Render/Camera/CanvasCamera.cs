@@ -6,10 +6,10 @@ namespace OOPT4Project.Render.Camera
 {
 	public struct CameraSettings
 	{
-		public double HorizontalBorder;
-		public double VerticalBorder;
-		public double MinScale;
-		public double MaxScale;
+		public double HorizontalBorder { get; private set; }
+		public double VerticalBorder { get; private set; }
+		public double MinScale { get; private set; }
+		public double MaxScale { get; private set; }
 
 		public CameraSettings(double horizontalBorder, double verticalBorder, double minScale, double maxScale)
 		{

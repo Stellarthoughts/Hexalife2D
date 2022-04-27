@@ -48,10 +48,42 @@ namespace OOPT4Project.Simulation.Map
 
 		public void SimulateStep()
 		{
+			_foodResource += _resources.ReplenishRateFood;
+			_waterResource += _resources.ReplenishRateWater;
+
 			foreach (CreatureEntity creature in CreatureList)
 				creature.SimulateStep();		
 		}
-
+		public double GetFoodCount() => _foodResource;
+		public double GetWaterCount() => _waterResource;
+		public double EatAmount(double amount)
+		{
+			if(amount >= _foodResource)
+			{
+				double actual = _foodResource;
+				_foodResource = 0;
+				return actual;
+			}
+			else
+			{
+				_foodResource -= amount;
+				return amount;
+			}
+		}
+		public double DrinkAmount(double amount)
+		{
+			if (amount >= _waterResource)
+			{
+				double actual = _waterResource;
+				_waterResource = 0;
+				return actual;
+			}
+			else
+			{
+				_waterResource -= amount;
+				return amount;
+			}
+		}
 		public void EndStep()
 		{
 			if(_toRegister.Count > 0)

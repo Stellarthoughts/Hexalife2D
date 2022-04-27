@@ -7,6 +7,7 @@ using OOPT4Project.Simulation.Map;
 using SkiaSharp.Views.WPF;
 using System;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace OOPT4Project.Views
 {
@@ -20,7 +21,12 @@ namespace OOPT4Project.Views
 		private CanvasCamera _camera;
 		private SKElement _view;
 
+		private readonly DispatcherTimer _simulationTimer = new();
+
 		private double _tileSize = 15;
+
+		private double _timerInterval = 300;
+		private double _timerIncrement = 2;
 
 		public MainWindow()
 		{
@@ -29,20 +35,32 @@ namespace OOPT4Project.Views
 
 			_simulationModel = new SimulationModel();
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
-			_simulationModel.PopulateSimulation(100);
-			_simulationModel.SimulateStep();
+			_simulationModel.PopulateSimulation(20);
 
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			_camera = new(new CameraSettings(500,500,1,6));
 			
 			_view = SkElement1;
 			_view.IgnorePixelScaling = true;
-			//_simulationModel.SimulateStep();
+
+			_simulationTimer.Interval = System.TimeSpan.FromMilliseconds(_timerInterval);
+			_simulationTimer.Tick += SimulationTimer_Tick;
+		}
+
+		private void SimulationTimer_Tick(object? sender, EventArgs e)
+		{
+			_simulationModel.SimulateStep();
+			_view.InvalidateVisual();
+		}
+
+		private void UpdateTimer()
+		{
+			_simulationTimer.Interval = System.TimeSpan.FromMilliseconds(_timerInterval);
 		}
 
 		private void SKElement_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
 		{
-			ICanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };
+			SkiaCanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };
 			float width = (float)_view.ActualWidth;
 			float height = (float)_view.ActualHeight;
 
@@ -82,6 +100,32 @@ namespace OOPT4Project.Views
 
 			_camera.OffsetTargetPosition(x * 5, y * 5);
 			_camera.Update();
+			_view.InvalidateVisual();
+		}
+
+		private void SpeedUpButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			_timerInterval /= _timerIncrement;
+			UpdateTimer();
+		}
+
+		private void PlayButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			if (_simulationTimer.IsEnabled)
+				_simulationTimer.Stop();
+			else
+				_simulationTimer.Start();
+		}
+
+		private void SpeedDownButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			_timerInterval *= _timerIncrement;
+			UpdateTimer();
+		}
+
+		private void StepButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			_simulationModel.SimulateStep();
 			_view.InvalidateVisual();
 		}
 	}

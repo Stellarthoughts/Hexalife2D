@@ -44,6 +44,10 @@
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Row="3" Grid.Column="1"/>
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Column="1" Grid.Row="4"/>
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Column="1" Grid.Row="6"/>
+            <Button x:Name="PlayButton" Grid.Column="1" Content="Start/Stop" HorizontalAlignment="Left" Margin="84,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="PlayButton_Click"/>
+            <Button x:Name="SpeedDownButton" Grid.Column="1" Content="Down" HorizontalAlignment="Left" Margin="37,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="SpeedDownButton_Click"/>
+            <Button x:Name="SpeedUpButton" Grid.Column="1" Content="Up" HorizontalAlignment="Left" Margin="159,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="SpeedUpButton_Click"/>
+            <Button x:Name="StepButton" Grid.Column="1" Content="Step" HorizontalAlignment="Left" Margin="193,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="StepButton_Click"/>
         </Grid>
         <Grid Grid.Column="2" Background="#FF0C91A4">
             <Grid.ColumnDefinitions>

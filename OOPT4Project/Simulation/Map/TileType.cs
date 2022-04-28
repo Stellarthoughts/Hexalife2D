@@ -66,13 +66,13 @@ namespace OOPT4Project.Simulation.Map
 
 		public static readonly Dictionary<TileType, TileTypeResources> Resources = new()
 		{
-			{ TileType.Grass,	new TileTypeResources(50, 50, 2, 2) },
-			{ TileType.Lake,    new TileTypeResources(50, 50, 2, 2) },
-			{ TileType.Hills,   new TileTypeResources(50, 50, 2, 2) },
-			{ TileType.Desert,  new TileTypeResources(50, 50, 2, 2) },
-			{ TileType.Badland, new TileTypeResources(50, 50, 2, 2) },
-			{ TileType.Marsh,   new TileTypeResources(50, 50, 2, 2) },
-			{ TileType.Ocean,   new TileTypeResources(50, 50, 2, 2) }
+			{ TileType.Grass,	new TileTypeResources(50, 30, 5, 3) },
+			{ TileType.Lake,    new TileTypeResources(10, 50, 1, 5) },
+			{ TileType.Hills,   new TileTypeResources(10, 20, 1, 2) },
+			{ TileType.Desert,  new TileTypeResources(10, 10, 1, 1) },
+			{ TileType.Badland, new TileTypeResources(15, 15, 1.5, 1.5) },
+			{ TileType.Marsh,   new TileTypeResources(20, 10, 2, 1) },
+			{ TileType.Ocean,   new TileTypeResources(0, 0, 0, 0) }
 		};
 	}
 }

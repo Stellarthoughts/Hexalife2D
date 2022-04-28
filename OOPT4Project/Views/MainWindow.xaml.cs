@@ -6,6 +6,7 @@ using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
 using SkiaSharp.Views.WPF;
 using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -27,6 +28,7 @@ namespace OOPT4Project.Views
 
 		private double _timerInterval = 300;
 		private double _timerIncrement = 2;
+		private int _seedValue;
 
 		public MainWindow()
 		{
@@ -55,7 +57,7 @@ namespace OOPT4Project.Views
 
 		private void UpdateTimer()
 		{
-			_simulationTimer.Interval = System.TimeSpan.FromMilliseconds(_timerInterval);
+			_simulationTimer.Interval = TimeSpan.FromMilliseconds(_timerInterval);
 		}
 
 		private void SKElement_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
@@ -128,5 +130,25 @@ namespace OOPT4Project.Views
 			_simulationModel.SimulateStep();
 			_view.InvalidateVisual();
 		}
+
+		private void SeedTB_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			_seedValue = Convert.ToInt32((sender as TextBox)!.Text);
+		}
+
+		private void PopSimButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			_simulationModel.PopulateSimulation(20);
+		}
+
+		private void NewMapButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			SimulationModel.RandomSeed = _seedValue;
+			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
+			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
+		}
+
+		
+			
 	}
 }

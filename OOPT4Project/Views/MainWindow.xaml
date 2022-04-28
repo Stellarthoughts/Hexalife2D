@@ -48,6 +48,9 @@
             <Button x:Name="SpeedDownButton" Grid.Column="1" Content="Down" HorizontalAlignment="Left" Margin="37,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="SpeedDownButton_Click"/>
             <Button x:Name="SpeedUpButton" Grid.Column="1" Content="Up" HorizontalAlignment="Left" Margin="159,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="SpeedUpButton_Click"/>
             <Button x:Name="StepButton" Grid.Column="1" Content="Step" HorizontalAlignment="Left" Margin="193,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="StepButton_Click"/>
+            <Button x:Name="NewMapButton" Grid.Column="1" Content="New Map" HorizontalAlignment="Left" Margin="37,25,0,0" Grid.Row="5" VerticalAlignment="Top" Click="NewMapButton_Click"/>
+            <Button x:Name="PopSimButton" Grid.Column="1" Content="Populate Simulation" HorizontalAlignment="Left" Margin="110,25,0,0" Grid.Row="5" VerticalAlignment="Top" Click="PopSimButton_Click"/>
+            <TextBox x:Name="SeedTB" Grid.Column="1" HorizontalAlignment="Left" Margin="37,62,0,0" Grid.Row="5" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" TextChanged="SeedTB_TextChanged"/>
         </Grid>
         <Grid Grid.Column="2" Background="#FF0C91A4">
             <Grid.ColumnDefinitions>

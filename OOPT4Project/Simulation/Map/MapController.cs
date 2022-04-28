@@ -71,11 +71,31 @@ namespace OOPT4Project.Simulation.Map
 			return;
 		}
 
-		internal bool RegisterCreature(CreatureEntity ent, Tile currentTile)
+		public bool RegisterCreatureImmidiately(CreatureEntity creature)
 		{
-			if(TileList.Contains(currentTile))
+			if(TileList.Contains(creature.CurrentTile))
 			{
-				currentTile.CreatureList.Add(ent);
+				creature.CurrentTile.CreatureList.Add(creature);
+				return true;
+			}
+			return false;
+		}
+
+		public bool RegisterCreature(CreatureEntity creature)
+		{
+			if (TileList.Contains(creature.CurrentTile))
+			{
+				creature.CurrentTile.RegisterCreature(creature);
+				return true;
+			}
+			return false;
+		}
+
+		public bool UnregisterCreature(CreatureEntity creature)
+		{
+			if(TileList.Contains(creature.CurrentTile))
+			{
+				creature.CurrentTile.UnregisterCreature(creature);
 				return true;
 			}
 			return false;

@@ -10,8 +10,6 @@ namespace OOPT4Project.Simulation.Creature
 		public double HealthMax { get; set; }
 		public double HungerRate { get; set; }
 		public double ThirstRate { get; set; }
-		public double HungerMax { get; set; }
-		public double HungerMin { get; set; }
 		public double Strength { get; set; }
 		public double ReproduceRate { get; set; }
 		public double Carnivorousness { get; set; }
@@ -47,9 +45,9 @@ namespace OOPT4Project.Simulation.Creature
 			CurrentTile = tile;
 			_model = model;
 
-			_health = Stats.HealthMax;
-
 			Stats = gene.GetStats();
+
+			_health = Stats.HealthMax;
 		}
 
 		public List<Tile> NeighboorTiles()
@@ -67,9 +65,9 @@ namespace OOPT4Project.Simulation.Creature
 
 		public void SimulateStep()
 		{
-			_thirst -= Stats.ThirstRate;
-			_hunger -= Stats.HungerRate;
-			_reproduceNeed -= Stats.ReproduceRate;
+			_thirst = Math.Clamp(_thirst - Stats.ThirstRate, 0, HungerMax);
+			_hunger = Math.Clamp(_thirst - Stats.HungerRate, 0, ThirstMax);
+			_reproduceNeed = Math.Clamp(_reproduceNeed - Stats.ReproduceRate, 0, ReproduceNeedMax);
 
 			if(_thirst == 0)
 			{
@@ -87,7 +85,6 @@ namespace OOPT4Project.Simulation.Creature
 			if (_health <= 0)
 			{
 				Die();
-				//return;
 			}
 
 			CurrentBehavior ??= SelectBehavior();
@@ -101,28 +98,48 @@ namespace OOPT4Project.Simulation.Creature
 			}
 		}
 
+		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
+		public bool HungerSatisfied() => _hunger > HungerMax / 4;
+		public bool ReproduceSatisfied() => _reproduceNeed > ReproduceNeedMax / 5;
+		public void SatisfyThirst(double amount) => _thirst = Math.Clamp(_thirst + amount, 0, ThirstMax);
+		public void SatisfyHunger(double amount) => _hunger = Math.Clamp(_hunger + amount, 0, HungerMax);
+		public void SatisfyReproduce(double amount) => _reproduceNeed = Math.Clamp(_reproduceNeed + amount, 0, ReproduceNeedMax);
+		public double ThirstValue() => ThirstMax - _thirst;
+		public double HungerValue() => HungerMax - _hunger;
+		public double ReproduceValue() => ReproduceNeedMax - _reproduceNeed;
+
 		private void Die()
 		{
-			
+			bool died = _model.NotifyDeath(this);
+			if (!died)
+				throw new Exception("Tried to die, but didn't");
+		}
+
+		public void GiveBirth(CreatureEntity pair)
+		{
+			CreatureEntity baby = new(_model, Gene.CreateChild(pair.Gene, this.Gene), CurrentTile);
+			bool givenBirth = _model.NotifyBorn(baby);
+			if (!givenBirth)
+				throw new Exception("Tried to give birth, but didn't");
 		}
 
 		public IBehavior SelectBehavior()
 		{
-			/*if(_thirst <= ThirstMax / 3)
+			if(!ThirstSatisfied())
 			{
 				return new SearchWaterBehavior(this);
 			}
-			if(_hunger <= HungerMax / 4)
+			if(!HungerSatisfied())
 			{
 				if (SimulationModel.Generator.NextDouble() < Stats.Carnivorousness)
 					return new HuntBehavior(this);
 				else
 					return new SearchFoodBehavior(this);
 			}
-			if(_reproduceNeed <= ReproduceNeedMax / 5)
+			if(!ReproduceSatisfied())
 			{
 				return new ReproduceBehavior(this);
-			}*/
+			}
 
 			return new IdleBehavior(this);
 		}

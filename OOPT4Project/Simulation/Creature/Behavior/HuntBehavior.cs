@@ -1,6 +1,6 @@
 ﻿namespace OOPT4Project.Simulation.Creature.Behavior
 {
-	public class HuntBehavior : IBehavior
+	public class HuntBehavior : AbstractBehavior
 	{
 		private CreatureEntity _creatureEntity;
 
@@ -9,7 +9,7 @@
 			_creatureEntity = creatureEntity;
 		}
 
-		public bool DoBehavior()
+		public override bool DoBehavior()
 		{
 			return true;
 		}

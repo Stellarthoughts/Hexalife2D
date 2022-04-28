@@ -10,18 +10,31 @@ namespace OOPT4Project.Simulation
 		public MapController MapController { get; private set; }
 
 		// Simulation params
-		public static int RandomSeed { get; set; } = 19;
+
+		private static int _randomSeed = 1;
+		public static int RandomSeed {
+			get {
+				return _randomSeed;
+			}
+			set
+			{
+				_randomSeed = value;
+				Generator = new Random(_randomSeed);
+			}
+		}
+
 		public static double CreatureChanceToBeMale { get; set; } = 0.5;
 		public static double MutationChance { get; set; } = 0.04;
 		public static double MutationRange { get; set; } = 0.02;
 
 		// Simaltion service entities
 
-		public static Random Generator { get; set; } = new Random(RandomSeed);
+		public static Random Generator { get; set; } = null!;
 
 		public SimulationModel()
 		{
 			MapController = new MapController(this);
+			Generator = new Random(RandomSeed);
 		}
 
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
@@ -36,26 +49,36 @@ namespace OOPT4Project.Simulation
 				CreatureEntity ent = new CreatureEntity(this, Gene.RandomGene(),
 					MapController.GetRandomTile(MapController.TileList, TileType.Ocean, true));
 				
-				if (!MapController.RegisterCreature(ent, ent.CurrentTile))
+				if (!MapController.RegisterCreatureImmidiately(ent))
 					throw new Exception("Creature registration failed!");
 			}
 		}
 
-		public List<Tile> NeighboorTiles(CreatureEntity ent)
+		public List<Tile> NeighboorTiles(CreatureEntity creature)
 		{
 			return MapController.GetTiles(
-				MapController.GetNeighboorTiles(MapController.TileList, ent.CurrentTile), 
+				MapController.GetNeighboorTiles(MapController.TileList, creature.CurrentTile), 
 				TileType.Ocean, true);
 		}
 
-		public bool MoveTo(CreatureEntity ent, Tile tile)
+		public bool MoveTo(CreatureEntity creature, Tile tile)
 		{
-			return MapController.TransferCreature(ent, ent.CurrentTile, tile);
+			return MapController.TransferCreature(creature, creature.CurrentTile, tile);
 		}
 
 		public void SimulateStep()
 		{
 			MapController.SimulateStep();
+		}
+
+		public bool NotifyDeath(CreatureEntity creature)
+		{
+			return MapController.UnregisterCreature(creature);
+		}
+
+		public bool NotifyBorn(CreatureEntity creature)
+		{
+			return MapController.RegisterCreature(creature);
 		}
 	}
 }

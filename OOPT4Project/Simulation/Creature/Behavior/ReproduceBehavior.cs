@@ -6,7 +6,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 {
 	public class ReproduceBehavior : AbstractBehavior
 	{
-		private CreatureEntity _creature;
+		private readonly CreatureEntity _creature;
 
 		public ReproduceBehavior(CreatureEntity creatureEntity)
 		{
@@ -31,16 +31,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 			}
 			else
 			{
-				var neighboors = _creature.NeighboorTiles();
-				var neighboorMaxCreatures = neighboors.MaxBy(x => x.CreatureList.Count);
-				if (neighboorMaxCreatures != null)
-				{
-					_creature.MoveTo(neighboorMaxCreatures);
-				}
-				else
-				{
-					MoveRandom(_creature, 1);
-				}
+				MoveToNeighboorMaxBy(_creature, x => x.CreatureList.Count);
 			}
 
 			if (_creature.ReproduceSatisfied())

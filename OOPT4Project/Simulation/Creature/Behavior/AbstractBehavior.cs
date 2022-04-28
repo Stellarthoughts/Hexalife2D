@@ -1,4 +1,5 @@
 ﻿using OOPT4Project.Extension;
+using OOPT4Project.Simulation.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 	{
 		public abstract bool DoBehavior();
 
-		protected static double MoveRandomTileChance = 0.4;
-		protected void MoveRandom(CreatureEntity creature)
+		protected static readonly double MoveRandomTileChance = 0.4;
+		protected static void MoveRandom(CreatureEntity creature)
 		{
 			if (SimulationModel.Generator.NextDouble() < MoveRandomTileChance)
 			{
@@ -21,13 +22,26 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 				creature.MoveTo(tile);
 			}
 		}
-		protected void MoveRandom(CreatureEntity creature, double chance)
+		protected static void MoveRandom(CreatureEntity creature, double chance)
 		{
 			if (SimulationModel.Generator.NextDouble() < chance)
 			{
 				var tiles = creature.NeighboorTiles();
 				var tile = tiles.PickRandom(SimulationModel.Generator);
 				creature.MoveTo(tile);
+			}
+		}
+		protected static void MoveToNeighboorMaxBy(CreatureEntity creature, Func<Tile, object> p)
+		{
+			var neighboors = creature.NeighboorTiles();
+			var neighboorMaxFood = neighboors.MaxBy(p);
+			if (neighboorMaxFood != null)
+			{
+				creature.MoveTo(neighboorMaxFood);
+			}
+			else
+			{
+				MoveRandom(creature, 1);
 			}
 		}
 	}

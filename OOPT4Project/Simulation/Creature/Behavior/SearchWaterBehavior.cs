@@ -9,38 +9,29 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 {
 	public class SearchWaterBehavior : AbstractBehavior
 	{
-		private CreatureEntity _creatureEntity;
+		private readonly CreatureEntity _creature;
 
 		public SearchWaterBehavior(CreatureEntity creatureEntity)
 		{
-			_creatureEntity = creatureEntity;
+			_creature = creatureEntity;
 		}
 
 		public override bool DoBehavior()
 		{
-			double thisrt = _creatureEntity.ThirstValue();
-			Tile tile = _creatureEntity.CurrentTile;
+			double thisrt = _creature.ThirstValue();
+			Tile tile = _creature.CurrentTile;
 
 			if (tile.GetWaterCount() > 0)
 			{
 				double amount = tile.EatAmount(thisrt);
-				_creatureEntity.SatisfyThirst(amount);
+				_creature.SatisfyThirst(amount);
 			}
 			else
 			{
-				var neighboors = _creatureEntity.NeighboorTiles();
-				var neighboorMaxWater = neighboors.MaxBy(x => x.GetWaterCount());
-				if (neighboorMaxWater != null)
-				{
-					_creatureEntity.MoveTo(neighboorMaxWater);
-				}
-				else
-				{
-					MoveRandom(_creatureEntity, 1);
-				}
+				MoveToNeighboorMaxBy(_creature, x => x.GetWaterCount());
 			}
 
-			if (_creatureEntity.ThirstSatisfied())
+			if (_creature.ThirstSatisfied())
 				return true;
 			else
 				return false;

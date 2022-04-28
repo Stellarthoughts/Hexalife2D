@@ -85,13 +85,13 @@ namespace OOPT4Project.Simulation.Creature
 				HealthMax = (size * 2.0 / 3 + metabs * 1.0 / 3) * 100,
 				HealingRate = metabs * 10,
 				Carnivorousness = carniv,
-				HungerRate = (metabs * 3.0 + aware * 2.0) / 5 * 10,
-				ThirstRate = (metabs * 3.0 + aware * 2.0) / 5 * 10,
+				HungerRate = (metabs * 2.5 + aware * 2.5) / 5 * 10,
+				ThirstRate = (metabs * 2.5 + aware * 2.5) / 5 * 10,
 				Stealth = (1 - size + aware) / 2,
 				Strength = (size * 1.0 + metabs * 9.0) / 10 * 10,
 				Awareness = aware,
 				ReproduceRate = reprate,
-				Age = (1 - metabs + size)/2 * 200,
+				Age = (1 - metabs + size) / 2 * 200,
 			};
 		}
 	}

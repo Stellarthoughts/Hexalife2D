@@ -1,5 +1,4 @@
 ﻿using OOPT4Project.Simulation.Creature;
-using System;
 using System.Collections.Generic;
 
 namespace OOPT4Project.Simulation.Map
@@ -52,13 +51,13 @@ namespace OOPT4Project.Simulation.Map
 			_waterResource += _resources.ReplenishRateWater;
 
 			foreach (CreatureEntity creature in CreatureList)
-				creature.SimulateStep();		
+				creature.SimulateStep();
 		}
 		public double GetFoodCount() => _foodResource;
 		public double GetWaterCount() => _waterResource;
 		public double EatAmount(double amount)
 		{
-			if(amount >= _foodResource)
+			if (amount >= _foodResource)
 			{
 				double actual = _foodResource;
 				_foodResource = 0;
@@ -86,17 +85,17 @@ namespace OOPT4Project.Simulation.Map
 		}
 		public void EndStep()
 		{
-			if(_toRegister.Count > 0)
+			if (_toRegister.Count > 0)
 			{
 				CreatureList.AddRange(_toRegister);
 				_toRegister.Clear();
 			}
-			if(_toUnregister.Count > 0)
+			if (_toUnregister.Count > 0)
 			{
 				_toUnregister.ForEach(x => CreatureList.Remove(x));
 				_toUnregister.Clear();
 			}
-			
+
 		}
 	}
 }

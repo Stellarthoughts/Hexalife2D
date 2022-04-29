@@ -73,7 +73,7 @@ namespace OOPT4Project.Render
 					else
 						preyCount++;
 					canvas.FillColor = hunter ? Colors.Red : Colors.Green;
-					
+
 					canvas.StrokeColor = Colors.Black;
 					canvas.StrokeSize = 0.7f;
 
@@ -85,8 +85,8 @@ namespace OOPT4Project.Render
 					double count = creatureList.Count;
 					double circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5;
 
-					if(count != 1)
-						tilePoint = tilePoint.Offset(Math.Cos(Math.PI * 2 * position/count) * circle, Math.Sin(Math.PI * 2 * position / count) * circle);
+					if (count != 1)
+						tilePoint = tilePoint.Offset(Math.Cos(Math.PI * 2 * position / count) * circle, Math.Sin(Math.PI * 2 * position / count) * circle);
 
 					Size size = new(_tileSize / count / 2);
 					tilePoint -= size / 2;
@@ -109,14 +109,15 @@ namespace OOPT4Project.Render
 		{
 			double avgQ = 0;
 			double avgR = 0;
-			tiles.Select(x => x.Coordinates).ToList().ForEach(x => {
+			tiles.Select(x => x.Coordinates).ToList().ForEach(x =>
+			{
 				avgQ += x.q;
 				avgR += x.r;
 			});
 			avgQ /= tiles.Count;
 			avgR /= tiles.Count;
 
-			return TileDrawer.HexToPixel(avgQ,avgR,tileSize);
+			return TileDrawer.HexToPixel(avgQ, avgR, tileSize);
 		}
 	}
 }

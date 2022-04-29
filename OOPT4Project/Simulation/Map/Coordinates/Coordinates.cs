@@ -37,7 +37,7 @@ namespace OOPT4Project.Simulation.Map
 		public static List<Coordinates> GetNeighboors(Coordinates coor)
 		{
 			List<Coordinates> neighbooring = new();
-			for(int i = 0; i < _directions.Length; i++)
+			for (int i = 0; i < _directions.Length; i++)
 			{
 				neighbooring.Add(GetNeighboor(coor, i));
 			}
@@ -59,7 +59,7 @@ namespace OOPT4Project.Simulation.Map
 				Coordinates coor = (Coordinates)obj;
 				return coor.q == q && coor.r == r;
 			}
-				
+
 		}
 		public override int GetHashCode()
 		{

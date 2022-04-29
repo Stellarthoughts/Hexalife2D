@@ -1,10 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Graphics.Skia;
-using System;
-using System.Windows;
-using Colors = Microsoft.Maui.Graphics.Colors;
+﻿using Prism.Mvvm;
 
 namespace OOPT4Project.ViewModels
 {

@@ -12,9 +12,9 @@ namespace OOPT4Project.Simulation.Creature
 		public Tile CurrentTile { get; set; }
 		public CreatureStats Stats { get; private set; }
 
-		private static double HungerMax = 1;
-		private static double ThirstMax = 1;
-		private static double ReproduceNeedMax = 1;
+		private static readonly double HungerMax = 1;
+		private static readonly double ThirstMax = 1;
+		private static readonly double ReproduceNeedMax = 1;
 		private static int BehaviorAttentionSpan = 2;
 		private static double HealthDamageThirst = 0.15;
 		private static double HealthDamageHunger = 0.10;
@@ -28,6 +28,15 @@ namespace OOPT4Project.Simulation.Creature
 		private double _reproduceNeed = ReproduceNeedMax;
 		private int _stepsCurrentTask = 0;
 		private int _age = 0;
+		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
+		public bool HungerSatisfied() => _hunger > HungerMax / 4;
+		public bool ReproduceSatisfied() => _reproduceNeed > ReproduceNeedMax / 5;
+		public void SatisfyThirst(double amount) => _thirst = Math.Clamp(_thirst + amount, 0, ThirstMax);
+		public void SatisfyHunger(double amount) => _hunger = Math.Clamp(_hunger + amount, 0, HungerMax);
+		public void SatisfyReproduce(double amount) => _reproduceNeed = Math.Clamp(_reproduceNeed + amount, 0, ReproduceNeedMax);
+		public double ThirstValue() => ThirstMax - _thirst;
+		public double HungerValue() => HungerMax - _hunger;
+		public double ReproduceValue() => ReproduceNeedMax - _reproduceNeed;
 
 		public CreatureEntity(SimulationModel model, Gene gene, Tile tile)
 		{
@@ -39,16 +48,6 @@ namespace OOPT4Project.Simulation.Creature
 
 			_health = Stats.HealthMax;
 		}
-
-		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
-		public bool HungerSatisfied() => _hunger > HungerMax / 4;
-		public bool ReproduceSatisfied() => _reproduceNeed > ReproduceNeedMax / 5;
-		public void SatisfyThirst(double amount) => _thirst = Math.Clamp(_thirst + amount, 0, ThirstMax);
-		public void SatisfyHunger(double amount) => _hunger = Math.Clamp(_hunger + amount, 0, HungerMax);
-		public void SatisfyReproduce(double amount) => _reproduceNeed = Math.Clamp(_reproduceNeed + amount, 0, ReproduceNeedMax);
-		public double ThirstValue() => ThirstMax - _thirst;
-		public double HungerValue() => HungerMax - _hunger;
-		public double ReproduceValue() => ReproduceNeedMax - _reproduceNeed;
 		public bool DealDamage(double amount)
 		{
 			_health = Math.Clamp(_health - amount, 0, Stats.HealthMax);
@@ -77,17 +76,17 @@ namespace OOPT4Project.Simulation.Creature
 			_reproduceNeed = Math.Clamp(_reproduceNeed - Stats.ReproduceRate, 0, ReproduceNeedMax);
 
 			bool healthLost = false;
-			if(_thirst == 0)
+			if (_thirst == 0)
 			{
 				_health -= HealthDamageThirst;
 				healthLost = true;
 			}
-			if(_hunger == 0)
+			if (_hunger == 0)
 			{
 				_health -= HealthDamageHunger;
 				healthLost = true;
 			}
-			if(_reproduceNeed == 0)
+			if (_reproduceNeed == 0)
 			{
 				_health -= HealthDamageReproduce;
 				healthLost = true;
@@ -97,7 +96,7 @@ namespace OOPT4Project.Simulation.Creature
 			{
 				Die();
 			}
-			else if(!healthLost)
+			else if (!healthLost)
 			{
 				_health = Math.Clamp(_health + Stats.HealingRate, 0, Stats.HealthMax);
 			}
@@ -116,18 +115,18 @@ namespace OOPT4Project.Simulation.Creature
 
 		public IBehavior SelectBehavior()
 		{
-			if(!ThirstSatisfied())
+			if (!ThirstSatisfied())
 			{
 				return new SearchWaterBehavior(this);
 			}
-			if(!HungerSatisfied())
+			if (!HungerSatisfied())
 			{
 				if (SimulationModel.Generator.NextDouble() < Stats.Carnivorousness)
 					return new HuntBehavior(this);
 				else
 					return new SearchFoodBehavior(this);
 			}
-			if(!ReproduceSatisfied())
+			if (!ReproduceSatisfied())
 			{
 				return new ReproduceBehavior(this);
 			}
@@ -151,4 +150,3 @@ namespace OOPT4Project.Simulation.Creature
 		}
 	}
 }
- 

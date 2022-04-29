@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using OOPT4Project.Extension;
+﻿using OOPT4Project.Extension;
 using OOPT4Project.Simulation.Creature;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OOPT4Project.Simulation.Map
 {
@@ -14,7 +14,7 @@ namespace OOPT4Project.Simulation.Map
 		private SimulationModel _model;
 
 		public MapController(SimulationModel model)
-		{ 
+		{
 			_model = model;
 			MapClimate = new MapClimate(this);
 		}
@@ -42,13 +42,13 @@ namespace OOPT4Project.Simulation.Map
 				else
 				{
 					List<Tile> typedBorders = GetTiles(GetBorderTiles(TileList), currentType);
-					if(typedBorders.Count == 0)
+					if (typedBorders.Count == 0)
 					{
 						rndTile = GetRandomTile(GetBorderTiles(TileList));
 					}
-					else 
+					else
 						rndTile = GetRandomTile(GetBorderTiles(typedBorders));
-				}	
+				}
 
 				var emptyNeighboors = GetEmptyNeighboors(TileList, rndTile);
 
@@ -60,7 +60,7 @@ namespace OOPT4Project.Simulation.Map
 				Coordinates crd = emptyNeighboors.PickRandom(rnd);
 
 				TileList.Add(new Tile(crd, currentType));
-				
+
 				currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
 				resource--;
 			}
@@ -73,7 +73,7 @@ namespace OOPT4Project.Simulation.Map
 
 		public bool RegisterCreatureImmidiately(CreatureEntity creature)
 		{
-			if(TileList.Contains(creature.CurrentTile))
+			if (TileList.Contains(creature.CurrentTile))
 			{
 				creature.CurrentTile.CreatureList.Add(creature);
 				return true;
@@ -93,7 +93,7 @@ namespace OOPT4Project.Simulation.Map
 
 		public bool UnregisterCreature(CreatureEntity creature)
 		{
-			if(TileList.Contains(creature.CurrentTile))
+			if (TileList.Contains(creature.CurrentTile))
 			{
 				creature.CurrentTile.UnregisterCreature(creature);
 				return true;
@@ -145,14 +145,14 @@ namespace OOPT4Project.Simulation.Map
 
 		public static List<Tile> GetBorderTiles(List<Tile> tiles)
 		{
-			return tiles.Where(x => 
+			return tiles.Where(x =>
 			Coordinates.GetNeighboors(x.Coordinates)
 					   .Except(tiles.Select(x => x.Coordinates)).ToList().Count != 0).ToList();
 		}
 
 		public static List<Tile> GetTiles(List<Tile> tiles, TileType type, bool except = false)
 		{
-			if(!except) 
+			if (!except)
 				return tiles.Where(x => x.Type == type).ToList();
 			else
 				return tiles.Where(x => x.Type != type).ToList();
@@ -184,11 +184,11 @@ namespace OOPT4Project.Simulation.Map
 
 			HashSet<Coordinates> emptyBorders = new();
 
-			foreach(Coordinates coor in withEmptyNeightboors)
+			foreach (Coordinates coor in withEmptyNeightboors)
 			{
-				foreach(Coordinates empty in Coordinates.GetNeighboors(coor))
+				foreach (Coordinates empty in Coordinates.GetNeighboors(coor))
 				{
-					if(!allValid.Contains(empty))
+					if (!allValid.Contains(empty))
 					{
 						emptyBorders.Add(empty);
 					}

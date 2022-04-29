@@ -14,7 +14,7 @@ namespace OOPT4Project.Render
 			canvas.StrokeColor = color;
 			canvas.StrokeSize = 1;
 
-			double sizeIncrement = size * Math.Sqrt(3) * 3/4;
+			double sizeIncrement = size * Math.Sqrt(3) * 3 / 4;
 
 			for (double i = y; i <= bottom.Y + sizeIncrement; i += sizeIncrement)
 			{

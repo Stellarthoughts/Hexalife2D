@@ -1,5 +1,4 @@
 ﻿using OOPT4Project.Simulation.Map;
-using System.Linq;
 
 namespace OOPT4Project.Simulation.Creature.Behavior
 {
@@ -17,7 +16,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 			double hunger = _creature.HungerValue();
 			Tile tile = _creature.CurrentTile;
 
-			if(tile.GetFoodCount() > 0)
+			if (tile.GetFoodCount() > 0)
 			{
 				double amount = tile.EatAmount(hunger);
 				_creature.SatisfyHunger(amount);

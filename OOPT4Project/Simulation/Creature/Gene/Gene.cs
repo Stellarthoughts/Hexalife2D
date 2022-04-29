@@ -1,6 +1,6 @@
-﻿using System;
+﻿using OOPT4Project.Extension;
+using System;
 using System.Collections.Generic;
-using OOPT4Project.Extension;
 
 namespace OOPT4Project.Simulation.Creature
 {
@@ -30,7 +30,7 @@ namespace OOPT4Project.Simulation.Creature
 		public double Compare(Gene gene)
 		{
 			double variance = 0;
-			foreach(GeneType type in UseGenes)
+			foreach (GeneType type in UseGenes)
 			{
 				variance += Math.Abs(gene.GetGenom(type) - this.GetGenom(type));
 			}
@@ -40,7 +40,7 @@ namespace OOPT4Project.Simulation.Creature
 		public static Gene CreateChild(Gene father, Gene mother)
 		{
 			return new Gene(CrossGenoms(mother.Genom, father.Genom), DetermineMale);
-		}	
+		}
 
 		public static Gene RandomGene()
 		{
@@ -84,7 +84,7 @@ namespace OOPT4Project.Simulation.Creature
 
 		public double GetGenom(GeneType geneType) => Genom[(int)geneType];
 
-		public double MapGenom(double genom, double from, double to) => genom.Map(0,1,from,to);
+		public double MapGenom(double genom, double from, double to) => genom.Map(0, 1, from, to);
 
 		public double GetMapGenom(GeneType geneType, double from, double to)
 		{
@@ -95,11 +95,11 @@ namespace OOPT4Project.Simulation.Creature
 		private static double StepAdjFactor = 10;
 		public CreatureStats GetStats()
 		{
-			double size		= GetMapGenom(GeneType.Size, 0.25, 1);
-			double metabs	= GetMapGenom(GeneType.MetabolismSpeed, 0.35, 1);
-			double aware	= GetMapGenom(GeneType.Awareness, 0.35, 1);
-			double reprate	= GetMapGenom(GeneType.ReproduceRate, 0.3, 0.5);
-			double carniv	= GetMapGenom(GeneType.Carnivorousness, 0, 1);
+			double size = GetMapGenom(GeneType.Size, 0.25, 1);
+			double metabs = GetMapGenom(GeneType.MetabolismSpeed, 0.35, 1);
+			double aware = GetMapGenom(GeneType.Awareness, 0.35, 1);
+			double reprate = GetMapGenom(GeneType.ReproduceRate, 0.3, 0.5);
+			double carniv = GetMapGenom(GeneType.Carnivorousness, 0, 1);
 
 			return new CreatureStats()
 			{

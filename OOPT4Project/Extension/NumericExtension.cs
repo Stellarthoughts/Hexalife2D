@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOPT4Project.Extension
+﻿namespace OOPT4Project.Extension
 {
 	public static class NumericExtension
 	{

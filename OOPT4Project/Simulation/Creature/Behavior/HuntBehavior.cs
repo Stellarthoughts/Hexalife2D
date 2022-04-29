@@ -1,6 +1,4 @@
-﻿using OOPT4Project.Extension;
-using OOPT4Project.Simulation.Map;
-using System;
+﻿using OOPT4Project.Simulation.Map;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,14 +19,14 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 
 			if (tile.CreatureList.Count > 1)
 			{
-				CreatureEntity? prey = 
+				CreatureEntity? prey =
 					tile.CreatureList
-						.Except(new List<CreatureEntity>(){_creature})
+						.Except(new List<CreatureEntity>() { _creature })
 						.Where(x => x.Gene.GetGenom(GeneType.Carnivorousness) < _creature.Gene.GetGenom(GeneType.Carnivorousness)
 						&& x.Gene.GetGenom(GeneType.Carnivorousness) < 0.2)
 						.MaxBy(x => x.Gene.GetGenom(GeneType.Size));
 
-				if(prey != null)
+				if (prey != null)
 				{
 					Conflict conflict = new(_creature, prey);
 					bool hunterWon = conflict.Resolve();

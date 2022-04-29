@@ -1,5 +1,4 @@
-﻿using OOPT4Project.Extension;
-using OOPT4Project.Simulation.Map;
+﻿using OOPT4Project.Simulation.Map;
 using System.Linq;
 
 namespace OOPT4Project.Simulation.Creature.Behavior
@@ -18,7 +17,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 			Tile tile = _creature.CurrentTile;
 			var tileMates = tile.CreatureList.FindAll(x => x.Gene.IsMale != _creature.Gene.IsMale);
 
-			if(tileMates.Count > 0)
+			if (tileMates.Count > 0)
 			{
 				CreatureEntity mate = tileMates.MinBy(x => x.Gene.Compare(_creature.Gene))!;
 				if (!mate.Gene.IsMale)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace OOPT4Project.Simulation.Map
+﻿namespace OOPT4Project.Simulation.Map
 {
 	public class WeatherChangeArgs
 	{
@@ -21,7 +18,7 @@ namespace OOPT4Project.Simulation.Map
 		}
 		public void SimulateStep()
 		{
-			
+
 		}
 	}
 }

@@ -12,8 +12,10 @@ namespace OOPT4Project.Simulation
 		// Simulation params
 
 		private static int _randomSeed = 1;
-		public static int RandomSeed {
-			get {
+		public static int RandomSeed
+		{
+			get
+			{
 				return _randomSeed;
 			}
 			set
@@ -48,7 +50,7 @@ namespace OOPT4Project.Simulation
 			{
 				CreatureEntity ent = new CreatureEntity(this, Gene.RandomGene(),
 					MapController.GetRandomTile(MapController.TileList, TileType.Grass));
-				
+
 				if (!MapController.RegisterCreatureImmidiately(ent))
 					throw new Exception("Creature registration failed!");
 			}
@@ -57,7 +59,7 @@ namespace OOPT4Project.Simulation
 		public List<Tile> NeighboorTiles(CreatureEntity creature)
 		{
 			return MapController.GetTiles(
-				MapController.GetNeighboorTiles(MapController.TileList, creature.CurrentTile), 
+				MapController.GetNeighboorTiles(MapController.TileList, creature.CurrentTile),
 				TileType.Ocean, true);
 		}
 

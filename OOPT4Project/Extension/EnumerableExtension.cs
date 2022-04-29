@@ -47,11 +47,11 @@ namespace OOPT4Project.Extension
 			return list;
 		}
 
-		public static T? RandomElementByWeight<T>(this IEnumerable<T> sequence, Dictionary<T?, double> weightSelector , Random rnd)
+		public static T? RandomElementByWeight<T>(this IEnumerable<T> sequence, Dictionary<T?, double> weightSelector, Random rnd)
 		{
 			var values = weightSelector.Values.ToList();
 			double totalWeight = values.Sum(x => x);
-			
+
 			double itemWeightIndex = rnd.NextDouble() * totalWeight;
 			double currentWeightIndex = 0;
 

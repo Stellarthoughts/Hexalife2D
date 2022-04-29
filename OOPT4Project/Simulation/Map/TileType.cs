@@ -32,7 +32,8 @@ namespace OOPT4Project.Simulation.Map
 
 	public static class TileTypeLogic
 	{
-		public static readonly List<TileType> Types = new() {
+		public static readonly List<TileType> Types = new()
+		{
 			TileType.Grass,
 			TileType.Lake,
 			TileType.Hills,
@@ -44,13 +45,13 @@ namespace OOPT4Project.Simulation.Map
 
 		public static readonly Dictionary<TileType, double> ProbWeightsDefault = new()
 		{
-			{ TileType.Grass,	1 },
-			{ TileType.Lake,	0.2 },
-			{ TileType.Hills,	0.2 },
-			{ TileType.Desert,	0.2 },
+			{ TileType.Grass, 1 },
+			{ TileType.Lake, 0.2 },
+			{ TileType.Hills, 0.2 },
+			{ TileType.Desert, 0.2 },
 			{ TileType.Badland, 0.3 },
-			{ TileType.Marsh,	0.3 },
-			{ TileType.Ocean,	0 }
+			{ TileType.Marsh, 0.3 },
+			{ TileType.Ocean, 0 }
 		};
 
 		public static readonly Dictionary<TileType, bool> CanWalkTo = new()
@@ -66,13 +67,13 @@ namespace OOPT4Project.Simulation.Map
 
 		public static readonly Dictionary<TileType, TileTypeResources> Resources = new()
 		{
-			{ TileType.Grass,	new TileTypeResources(0, 0, 1.5, 1) },
-			{ TileType.Lake,    new TileTypeResources(0, 0, 0.5, 2) },
-			{ TileType.Hills,   new TileTypeResources(0, 0, 0.2, 0.3) },
-			{ TileType.Desert,  new TileTypeResources(0, 0, 0.1, 0.1) },
+			{ TileType.Grass, new TileTypeResources(0, 0, 1.5, 1) },
+			{ TileType.Lake, new TileTypeResources(0, 0, 0.5, 2) },
+			{ TileType.Hills, new TileTypeResources(0, 0, 0.2, 0.3) },
+			{ TileType.Desert, new TileTypeResources(0, 0, 0.1, 0.1) },
 			{ TileType.Badland, new TileTypeResources(0, 0, 0.2, 0.2) },
-			{ TileType.Marsh,   new TileTypeResources(0, 0, 0.1, 0.2) },
-			{ TileType.Ocean,   new TileTypeResources(0, 0, 0, 0) }
+			{ TileType.Marsh, new TileTypeResources(0, 0, 0.1, 0.2) },
+			{ TileType.Ocean, new TileTypeResources(0, 0, 0, 0) }
 		};
 	}
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOPT4Project.Simulation.Creature.Behavior
+﻿namespace OOPT4Project.Simulation.Creature.Behavior
 {
 	public class Conflict
 	{
@@ -21,10 +15,10 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 
 		public bool Resolve()
 		{
-			CreatureStats hSt = _hunter.Stats; 
+			CreatureStats hSt = _hunter.Stats;
 			CreatureStats pSt = _prey.Stats;
-			
-			if(CheckStat(hSt.Stealth) > CheckStat(pSt.Awareness))
+
+			if (CheckStat(hSt.Stealth) > CheckStat(pSt.Awareness))
 			{
 				bool pw = false;
 				bool hw = false;
@@ -34,7 +28,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 					hw = _prey.DealDamage(hSt.Strength);
 					pw = _hunter.DealDamage(pSt.Strength);
 				}
-				while(!(hw || pw));
+				while (!(hw || pw));
 
 				if (hw)
 					return true;

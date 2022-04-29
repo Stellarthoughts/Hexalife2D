@@ -62,8 +62,8 @@ namespace OOPT4Project.Render.Camera
 
 		public void SetTargetPosition(double x, double y)
 		{
-			_targetX = Math.Clamp(x,-_horizontalBorder,_horizontalBorder);
-			_targetY = Math.Clamp(y,-_verticalBorder, _verticalBorder);
+			_targetX = Math.Clamp(x, -_horizontalBorder, _horizontalBorder);
+			_targetY = Math.Clamp(y, -_verticalBorder, _verticalBorder);
 		}
 
 		public void SetTargetScale(double z)
@@ -84,17 +84,17 @@ namespace OOPT4Project.Render.Camera
 		public void Adjust(ref PathF adj)
 		{
 			Point avg = GetAverageCoordinate(adj);
-			adj.Move(-(float)avg.X,-(float)avg.Y);
+			adj.Move(-(float)avg.X, -(float)avg.Y);
 			adj = adj.AsScaledPath((float)_scale);
-			adj.Move((float) (avg.X * _scale), (float) (avg.Y * _scale));
-			adj.Move((float) (_offsetX - _centerX * _scale), (float) (_offsetY - _centerY * _scale));
+			adj.Move((float)(avg.X * _scale), (float)(avg.Y * _scale));
+			adj.Move((float)(_offsetX - _centerX * _scale), (float)(_offsetY - _centerY * _scale));
 		}
 
 		public void Adjust(ref Point tilePoint)
 		{
 			double x = tilePoint.X;
 			double y = tilePoint.Y;
-			tilePoint = new Point(x * _scale,y * _scale);
+			tilePoint = new Point(x * _scale, y * _scale);
 			tilePoint = tilePoint.Offset(_offsetX - _centerX * _scale, _offsetY - _centerY * _scale);
 		}
 

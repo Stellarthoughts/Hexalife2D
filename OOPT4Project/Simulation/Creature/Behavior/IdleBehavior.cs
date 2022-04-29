@@ -2,7 +2,7 @@
 {
 	public class IdleBehavior : AbstractBehavior
 	{
-		private CreatureEntity _creatureEntity;
+		private readonly CreatureEntity _creatureEntity;
 
 		public IdleBehavior(CreatureEntity creatureEntity)
 		{

@@ -33,11 +33,11 @@ namespace OOPT4Project.Render
 		private double _scale = 1;
 		private double _scaleTarget = 1;
 
-		private double _horizontalBorder;
-		private double _verticalBorder;
+		private readonly double _horizontalBorder;
+		private readonly double _verticalBorder;
 
-		private double _minScale;
-		private double _maxScale;
+		private readonly double _minScale;
+		private readonly double _maxScale;
 
 		public CanvasCamera(CameraSettings set)
 		{

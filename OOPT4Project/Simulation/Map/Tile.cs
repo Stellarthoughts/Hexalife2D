@@ -11,8 +11,8 @@ namespace OOPT4Project.Simulation.Map
 		public TileType Type { get; private set; }
 		public bool CanWalkTo { get; private set; }
 
-		private List<CreatureEntity> _toRegister = new();
-		private List<CreatureEntity> _toUnregister = new();
+		private readonly List<CreatureEntity> _toRegister = new();
+		private readonly List<CreatureEntity> _toUnregister = new();
 
 		private double _foodResource;
 		private double _waterResource;

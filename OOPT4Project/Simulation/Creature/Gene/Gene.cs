@@ -92,7 +92,7 @@ namespace OOPT4Project.Simulation.Creature
 			return MapGenom(val, from, to);
 		}
 
-		private static double StepAdjFactor = 10;
+		private static readonly double StepAdjFactor = 10;
 		public CreatureStats GetStats()
 		{
 			double size = GetMapGenom(GeneType.Size, 0.25, 1);

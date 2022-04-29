@@ -1,5 +1,4 @@
 ﻿using Microsoft.Maui.Graphics;
-using OOPT4Project.Render.Camera;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Creature;
 using OOPT4Project.Simulation.Map;
@@ -11,7 +10,7 @@ namespace OOPT4Project.Render
 {
 	public class SimulationDrawer
 	{
-		private SimulationModel _simulationModel;
+		private readonly SimulationModel _simulationModel;
 
 		private readonly double _tileSize;
 

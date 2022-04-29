@@ -11,7 +11,7 @@ namespace OOPT4Project.Simulation.Map
 		public List<Tile> TileList { get; private set; } = new();
 		public MapClimate MapClimate { get; private set; }
 
-		private SimulationModel _model;
+		private readonly SimulationModel _model;
 
 		public MapController(SimulationModel model)
 		{

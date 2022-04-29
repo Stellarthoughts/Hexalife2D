@@ -16,17 +16,17 @@ namespace OOPT4Project.Views
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		private SimulationModel _simulationModel;
-		private SimulationDrawer _simulationDrawer;
-		private CanvasCamera _camera;
-		private SKElement _view;
+		private readonly SimulationModel _simulationModel;
+		private readonly SimulationDrawer _simulationDrawer;
+		private readonly CanvasCamera _camera;
+		private readonly SKElement _view;
 
 		private readonly DispatcherTimer _simulationTimer = new();
 
-		private double _tileSize = 15;
+		private readonly double _tileSize = 15;
 
 		private double _timerInterval = 300;
-		private double _timerIncrement = 2;
+		private readonly double _timerIncrement = 2;
 		private int _seedValue;
 
 		public MainWindow()

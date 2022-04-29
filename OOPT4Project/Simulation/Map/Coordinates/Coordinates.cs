@@ -9,7 +9,7 @@ namespace OOPT4Project.Simulation.Map
 		public int r { get; private set; }
 		public int s { get; private set; }
 
-		private static Coordinates[] _directions = new Coordinates[6] {
+		private static readonly Coordinates[] _directions = new Coordinates[6] {
 				Cube(1, 0, -1), Cube(1, -1, 0), Cube(0, -1, +1),
 				Cube(-1, 0, 1), Cube(-1, 1, 0), Cube(0, 1, -1)
 		};

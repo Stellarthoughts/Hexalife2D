@@ -15,10 +15,10 @@ namespace OOPT4Project.Simulation.Creature
 		private static readonly double HungerMax = 1;
 		private static readonly double ThirstMax = 1;
 		private static readonly double ReproduceNeedMax = 1;
-		private static int BehaviorAttentionSpan = 2;
+		private static int BehaviorAttentionSpan = 4;
 		private static double HealthDamageThirst = 0.15;
 		private static double HealthDamageHunger = 0.10;
-		private static double HealthDamageReproduce = 0.05;
+		private static double HealthDamageReproduce = 0.03;
 
 		private readonly SimulationModel _model;
 
@@ -28,6 +28,7 @@ namespace OOPT4Project.Simulation.Creature
 		private double _reproduceNeed = ReproduceNeedMax;
 		private int _stepsCurrentTask = 0;
 		private int _age = 0;
+
 		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
 		public bool HungerSatisfied() => _hunger > HungerMax / 4;
 		public bool ReproduceSatisfied() => _reproduceNeed > ReproduceNeedMax / 5;

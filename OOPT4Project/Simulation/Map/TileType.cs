@@ -25,8 +25,8 @@ namespace OOPT4Project.Simulation.Map
 		{
 			InitialFood = initialFood;
 			InitialWater = initialWater;
-			ReplenishRateFood = replenishRateFood / 6;
-			ReplenishRateWater = replenishRateWater / 6;
+			ReplenishRateFood = replenishRateFood / 25;
+			ReplenishRateWater = replenishRateWater / 10;
 		}
 	}
 
@@ -45,11 +45,11 @@ namespace OOPT4Project.Simulation.Map
 
 		public static readonly Dictionary<TileType, double> ProbWeightsDefault = new()
 		{
-			{ TileType.Grass, 1 },
-			{ TileType.Lake, 0.2 },
-			{ TileType.Hills, 0.2 },
-			{ TileType.Desert, 0.2 },
-			{ TileType.Badland, 0.3 },
+			{ TileType.Grass, 1.2 },
+			{ TileType.Lake, 0.4 },
+			{ TileType.Hills, 0.3 },
+			{ TileType.Desert, 0.3 },
+			{ TileType.Badland, 0.2 },
 			{ TileType.Marsh, 0.3 },
 			{ TileType.Ocean, 0 }
 		};

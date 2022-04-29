@@ -103,17 +103,17 @@ namespace OOPT4Project.Simulation.Creature
 
 			return new CreatureStats()
 			{
-				EnergyResource = size / 2.7,
+				EnergyResource = size / 5,
 				HealthMax = (size * 2 + metabs * 1),
 				HealingRate = metabs / 5,
 				Carnivorousness = carniv > 0.5 ? 1 : 0,
 				HungerRate = (metabs * 3 + size * 2 + aware) / 6 / StepAdjFactor,
 				ThirstRate = (size * 2 + aware) / 6 / StepAdjFactor,
 				Stealth = (metabs),
-				Strength = (size * 1 + metabs * 4) / 5 / StepAdjFactor,
+				Strength = (size * 1 + carniv * 3) / 4 / StepAdjFactor,
 				Awareness = aware,
-				ReproduceRate = (reprate * 2.0 + metabs * 2.0) / 4 / 8.5,
-				Age = (1 - metabs + size) / 2 * 120,
+				ReproduceRate = (reprate * 2.1 + metabs * 1.9) / 4 / 8.5,
+				Age = ((1 - metabs) * 0.9 + size) / 1.9 * 140,
 			};
 		}
 	}

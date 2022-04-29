@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OOPT4Project.Extension;
 
 namespace OOPT4Project.Simulation.Creature
 {
@@ -71,27 +72,37 @@ namespace OOPT4Project.Simulation.Creature
 			return rnd.NextDouble();
 		}
 
+		public double GetGenom(GeneType geneType) => Genom[(int)geneType];
+
+		public double MapGenom(double genom, double from, double to) => genom.Map(0,1,from,to);
+
+		public double GetMapGenom(GeneType geneType, double from, double to)
+		{
+			double val = Genom[(int)geneType];
+			return MapGenom(val, from, to);
+		}
+
 		public CreatureStats GetStats()
 		{
-			double size		= Genom[(int) GeneType.Size];
-			double metabs	= Genom[(int) GeneType.MetabolismSpeed]; 
-			double aware	= Genom[(int) GeneType.Awareness];
-			double reprate	= Genom[(int) GeneType.ReproduceRate];
-			double carniv	= Genom[(int) GeneType.Carnivorousness];
+			double size		= GetMapGenom(GeneType.Size, 0.25, 0.75);
+			double metabs	= GetMapGenom(GeneType.MetabolismSpeed, 0.35, 0.75);
+			double aware	= GetMapGenom(GeneType.Awareness, 0.35, 0.75);
+			double reprate	= GetMapGenom(GeneType.ReproduceRate, 0.1, 0.5);
+			double carniv	= GetMapGenom(GeneType.Carnivorousness, 0.2, 0.8);
 
 			return new CreatureStats()
 			{
-				EnergyResource = size,
-				HealthMax = (size * 2.0 + metabs * 1.0) / 3,
-				HealingRate = metabs,
+				EnergyResource = size / 3,
+				HealthMax = (size * 2 + metabs * 1),
+				HealingRate = metabs / 10,
 				Carnivorousness = carniv,
-				HungerRate = (metabs * 2.5 + aware * 2.5) / 5,
-				ThirstRate = (metabs * 2.5 + aware * 2.5) / 5,
-				Stealth = (1 - size + aware) / 2,
-				Strength = (size * 1.0 + metabs * 9.0) / 10,
+				HungerRate = (metabs * 3 + size * 2) / 5 / 10,
+				ThirstRate = (metabs * 3 + size * 2) / 5 / 10,
+				Stealth = (1 - size + aware + metabs) / 3,
+				Strength = (size * 1.5 + metabs * 3.5) / 5,
 				Awareness = aware,
-				ReproduceRate = reprate / 10,
-				Age = (1 - metabs + size) / 2 * 100,
+				ReproduceRate = (reprate * 2.5 + metabs * 0.5) / 3 / 8.5,
+				Age = (2 - metabs * 2 + size) / 3 * 70,
 			};
 		}
 	}

@@ -17,7 +17,7 @@ namespace OOPT4Project.Render
 
 		private Point _offset;
 		private readonly List<Tile> _tiles;
-		private Dictionary<Tile, Color> _tileColors;
+		private Dictionary<Tile, Color> _tileColors = null!;
 
 		public SimulationDrawer(SimulationModel simulationModel, double tileSize)
 		{
@@ -49,6 +49,8 @@ namespace OOPT4Project.Render
 		// TODO: OPTIMIZE by storing single template of PathF, then move it and resize;
 		public void Draw(ICanvas canvas, CanvasCamera camera)
 		{
+			int hunterCount = 0;
+			int preyCount = 0;
 			foreach (Tile tile in _tiles)
 			{
 				PathF path = TileDrawer.PathTile(new Point(-_offset.X, -_offset.Y), tile.Coordinates, _tileSize);
@@ -65,7 +67,12 @@ namespace OOPT4Project.Render
 
 				foreach (CreatureEntity crt in creatureList)
 				{
-					canvas.FillColor = crt.Gene.Genom[1] > 0.5 ? Colors.Red : Colors.Green;
+					bool hunter = crt.Gene.Genom[1] > 0.5;
+					if (hunter)
+						hunterCount++;
+					else
+						preyCount++;
+					canvas.FillColor = hunter ? Colors.Red : Colors.Green;
 					
 					canvas.StrokeColor = Colors.Black;
 					canvas.StrokeSize = 0.7f;
@@ -94,6 +101,8 @@ namespace OOPT4Project.Render
 					canvas.FillRectangle(rect);
 				}
 			}
+			canvas.DrawString(hunterCount.ToString(), 300, 20, HorizontalAlignment.Center);
+			canvas.DrawString(preyCount.ToString(), 350, 20, HorizontalAlignment.Center);
 		}
 
 		public static Point AvgHexCoordinates(List<Tile> tiles, double tileSize)

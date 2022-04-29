@@ -13,6 +13,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 		public abstract bool DoBehavior();
 
 		protected static readonly double MoveRandomTileChance = 0.4;
+
 		protected static void MoveRandom(CreatureEntity creature)
 		{
 			if (SimulationModel.Generator.NextDouble() < MoveRandomTileChance)

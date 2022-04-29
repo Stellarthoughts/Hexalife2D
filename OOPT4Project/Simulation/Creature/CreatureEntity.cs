@@ -5,21 +5,6 @@ using System.Collections.Generic;
 
 namespace OOPT4Project.Simulation.Creature
 {
-	public struct CreatureStats
-	{
-		public double HealthMax { get; set; }
-		public double HungerRate { get; set; }
-		public double ThirstRate { get; set; }
-		public double Strength { get; set; }
-		public double ReproduceRate { get; set; }
-		public double Carnivorousness { get; set; }
-		public double Stealth { get; set; }
-		public double Awareness { get; set; }
-		public double EnergyResource { get; set; }
-		public double HealingRate { get; set; }
-		public double Age { get; set; }
-	}
-
 	public class CreatureEntity : ISimulated
 	{
 		public Gene Gene { get; private set; }
@@ -33,7 +18,7 @@ namespace OOPT4Project.Simulation.Creature
 		private static int BehaviorAttentionSpan = 4;
 		private static double HealthDamageThirst = 0.15;
 		private static double HealthDamageHunger = 0.10;
-		private static double HealthDamageReproduce = 0.5;
+		private static double HealthDamageReproduce = 0.05;
 
 		private readonly SimulationModel _model;
 
@@ -108,7 +93,7 @@ namespace OOPT4Project.Simulation.Creature
 				healthLost = true;
 			}
 
-			if (_health <= 0 && _age >= Stats.Age)
+			if (_health <= 0 || _age >= Stats.Age)
 			{
 				Die();
 			}

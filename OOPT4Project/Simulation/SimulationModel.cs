@@ -24,8 +24,8 @@ namespace OOPT4Project.Simulation
 		}
 
 		public static double CreatureChanceToBeMale { get; set; } = 0.5;
-		public static double MutationChance { get; set; } = 0.04;
-		public static double MutationRange { get; set; } = 0.02;
+		public static double MutationChance { get; set; } = 0.1;
+		public static double MutationRange { get; set; } = 0.3;
 
 		// Simaltion service entities
 
@@ -47,7 +47,7 @@ namespace OOPT4Project.Simulation
 			for (int i = 0; i < count; i++)
 			{
 				CreatureEntity ent = new CreatureEntity(this, Gene.RandomGene(),
-					MapController.GetRandomTile(MapController.TileList, TileType.Ocean, true));
+					MapController.GetRandomTile(MapController.TileList, TileType.Grass));
 				
 				if (!MapController.RegisterCreatureImmidiately(ent))
 					throw new Exception("Creature registration failed!");

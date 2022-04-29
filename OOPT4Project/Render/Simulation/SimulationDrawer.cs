@@ -13,10 +13,10 @@ namespace OOPT4Project.Render
 	{
 		private SimulationModel _simulationModel;
 
-		private double _tileSize;
+		private readonly double _tileSize;
 
 		private Point _offset;
-		private List<Tile> _tiles;
+		private readonly List<Tile> _tiles;
 		private Dictionary<Tile, Color> _tileColors;
 
 		public SimulationDrawer(SimulationModel simulationModel, double tileSize)
@@ -25,6 +25,11 @@ namespace OOPT4Project.Render
 			_tileSize = tileSize;
 			_tiles = _simulationModel.MapController.TileList;
 
+			Init();
+		}
+
+		public void Init()
+		{
 			_tileColors = AssignColors(_tiles);
 			_offset = AvgHexCoordinates(_tiles, _tileSize);
 		}
@@ -60,9 +65,10 @@ namespace OOPT4Project.Render
 
 				foreach (CreatureEntity crt in creatureList)
 				{
-					canvas.FillColor = Colors.Red;
+					canvas.FillColor = crt.Gene.Genom[1] > 0.5 ? Colors.Red : Colors.Green;
+					
 					canvas.StrokeColor = Colors.Black;
-					canvas.StrokeSize = 0.5f;
+					canvas.StrokeSize = 0.7f;
 
 					// Pos calculation
 					Point tilePoint = TileDrawer.HexToPixel(crt.CurrentTile.Coordinates, _tileSize);

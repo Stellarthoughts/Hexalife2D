@@ -145,7 +145,7 @@ namespace OOPT4Project.Views
 		{
 			SimulationModel.RandomSeed = _seedValue;
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
-			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
+			_simulationDrawer.Init();
 		}
 
 		

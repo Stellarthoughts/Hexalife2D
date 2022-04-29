@@ -27,13 +27,13 @@ namespace OOPT4Project.Simulation.Creature
 		public Tile CurrentTile { get; set; }
 		public CreatureStats Stats { get; private set; }
 
-		private static double HungerMax = 100;
-		private static double ThirstMax = 100;
-		private static double ReproduceNeedMax = 100;
+		private static double HungerMax = 1;
+		private static double ThirstMax = 1;
+		private static double ReproduceNeedMax = 1;
 		private static int BehaviorAttentionSpan = 4;
-		private static double HealthDamageThirst = 15;
-		private static double HealthDamageHunger = 10;
-		private static double HealthDamageReproduce = 5;
+		private static double HealthDamageThirst = 0.15;
+		private static double HealthDamageHunger = 0.10;
+		private static double HealthDamageReproduce = 0.5;
 
 		private readonly SimulationModel _model;
 

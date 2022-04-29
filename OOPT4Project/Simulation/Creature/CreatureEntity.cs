@@ -28,6 +28,7 @@ namespace OOPT4Project.Simulation.Creature
 		private double _reproduceNeed = ReproduceNeedMax;
 		private int _stepsCurrentTask = 0;
 		private int _age = 0;
+		private bool _healthLostStep = false;
 
 		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
 		public bool HungerSatisfied() => _hunger > HungerMax / 4;
@@ -51,11 +52,14 @@ namespace OOPT4Project.Simulation.Creature
 		}
 		public bool DealDamage(double amount)
 		{
+			_healthLostStep = true;
 			_health = Math.Clamp(_health - amount, 0, Stats.HealthMax);
 			if (_health == 0)
 				return true;
 			return false;
 		}
+
+		public void Heal(double amount) => _health = Math.Clamp(_health + amount, 0, Stats.HealthMax);
 
 		public List<Tile> NeighboorTiles()
 		{
@@ -72,35 +76,21 @@ namespace OOPT4Project.Simulation.Creature
 
 		public void SimulateStep()
 		{
-			_thirst = Math.Clamp(_thirst - Stats.ThirstRate, 0, ThirstMax);
-			_hunger = Math.Clamp(_hunger - Stats.HungerRate, 0, HungerMax);
-			_reproduceNeed = Math.Clamp(_reproduceNeed - Stats.ReproduceRate, 0, ReproduceNeedMax);
+			SatisfyThirst(-Stats.ThirstRate);
+			SatisfyHunger(-Stats.HungerRate);
+			SatisfyReproduce(-Stats.ReproduceRate);
 
-			bool healthLost = false;
 			if (_thirst == 0)
-			{
-				_health -= HealthDamageThirst;
-				healthLost = true;
-			}
+				DealDamage(HealthDamageThirst);
 			if (_hunger == 0)
-			{
-				_health -= HealthDamageHunger;
-				healthLost = true;
-			}
+				DealDamage(HealthDamageHunger);
 			if (_reproduceNeed == 0)
-			{
-				_health -= HealthDamageReproduce;
-				healthLost = true;
-			}
+				DealDamage(HealthDamageReproduce);
 
 			if (_health <= 0 || _age >= Stats.Age)
-			{
 				Die();
-			}
-			else if (!healthLost)
-			{
-				_health = Math.Clamp(_health + Stats.HealingRate, 0, Stats.HealthMax);
-			}
+			else if (!_healthLostStep)
+				Heal(Stats.HealingRate);
 
 			CurrentBehavior ??= SelectBehavior();
 			CurrentBehavior = CurrentBehavior.DoBehavior() ? null : CurrentBehavior;
@@ -112,6 +102,7 @@ namespace OOPT4Project.Simulation.Creature
 				_stepsCurrentTask = 0;
 			}
 			_age++;
+			_healthLostStep = false;
 		}
 
 		public IBehavior SelectBehavior()

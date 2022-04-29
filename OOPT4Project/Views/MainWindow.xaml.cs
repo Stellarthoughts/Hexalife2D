@@ -1,7 +1,6 @@
 ﻿using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Skia;
 using OOPT4Project.Render;
-using OOPT4Project.Render.Camera;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
 using SkiaSharp.Views.WPF;

@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace OOPT4Project.Render.Camera
+namespace OOPT4Project.Render
 {
 	public struct CameraSettings
 	{

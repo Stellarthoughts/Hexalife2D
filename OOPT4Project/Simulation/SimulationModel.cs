@@ -24,8 +24,8 @@ namespace OOPT4Project.Simulation
 		}
 
 		public static double CreatureChanceToBeMale { get; set; } = 0.5;
-		public static double MutationChance { get; set; } = 0.1;
-		public static double MutationRange { get; set; } = 0.3;
+		public static double MutationChance { get; set; } = 0.15;
+		public static double MutationRange { get; set; } = 0.2;
 
 		// Simaltion service entities
 

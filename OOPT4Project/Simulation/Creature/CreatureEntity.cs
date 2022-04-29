@@ -15,7 +15,7 @@ namespace OOPT4Project.Simulation.Creature
 		private static double HungerMax = 1;
 		private static double ThirstMax = 1;
 		private static double ReproduceNeedMax = 1;
-		private static int BehaviorAttentionSpan = 4;
+		private static int BehaviorAttentionSpan = 2;
 		private static double HealthDamageThirst = 0.15;
 		private static double HealthDamageHunger = 0.10;
 		private static double HealthDamageReproduce = 0.05;

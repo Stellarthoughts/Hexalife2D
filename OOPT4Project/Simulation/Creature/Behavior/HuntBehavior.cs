@@ -24,8 +24,8 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 				CreatureEntity? prey = 
 					tile.CreatureList
 						.Except(new List<CreatureEntity>(){_creature})
-						.Where(x => x.Gene.GetGenom(GeneType.MetabolismSpeed) < _creature.Gene.GetGenom(GeneType.MetabolismSpeed)
-						&& x.Gene.GetGenom(GeneType.MetabolismSpeed) < 0.5)
+						.Where(x => x.Gene.GetGenom(GeneType.Carnivorousness) < _creature.Gene.GetGenom(GeneType.Carnivorousness)
+						&& x.Gene.GetGenom(GeneType.Carnivorousness) < 0.2)
 						.MaxBy(x => x.Gene.GetGenom(GeneType.Size));
 
 				if(prey != null)
@@ -34,8 +34,6 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 					bool hunterWon = conflict.Resolve();
 					if (hunterWon)
 						_creature.SatisfyHunger(prey.Stats.EnergyResource);
-					else
-						prey.SatisfyHunger(_creature.Stats.EnergyResource);
 				}
 				else
 				{

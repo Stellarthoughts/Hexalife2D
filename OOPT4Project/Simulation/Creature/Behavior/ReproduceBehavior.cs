@@ -20,7 +20,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 
 			if(tileMates.Count > 0)
 			{
-				CreatureEntity mate = tileMates.PickRandom();
+				CreatureEntity mate = tileMates.MinBy(x => x.Gene.Compare(_creature.Gene))!;
 				if (!mate.Gene.IsMale)
 					mate.GiveBirth(_creature);
 				else

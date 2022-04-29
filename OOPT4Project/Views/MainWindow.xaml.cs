@@ -37,7 +37,7 @@ namespace OOPT4Project.Views
 
 			_simulationModel = new SimulationModel();
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
-			_simulationModel.PopulateSimulation(50);
+			_simulationModel.PopulateSimulation(400);
 
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			_camera = new(new CameraSettings(500,500,1,6));
@@ -145,7 +145,9 @@ namespace OOPT4Project.Views
 		{
 			SimulationModel.RandomSeed = _seedValue;
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
+			_simulationModel.PopulateSimulation(400);
 			_simulationDrawer.Init();
+			_view.InvalidateVisual();
 		}
 
 		

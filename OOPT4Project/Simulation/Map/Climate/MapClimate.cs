@@ -10,7 +10,7 @@
 		private readonly MapController _controller;
 
 		public delegate void WeatherChangeDelegate(object sender, WeatherChangeArgs e);
-		public event WeatherChangeDelegate? WeatherChange;
+		//public event WeatherChangeDelegate? WeatherChange;
 
 		public MapClimate(MapController controller)
 		{

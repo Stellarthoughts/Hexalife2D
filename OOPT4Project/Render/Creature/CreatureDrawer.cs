@@ -18,11 +18,17 @@ namespace OOPT4Project.Render
 			_tileSize = tileSize;
 		}
 
-		private static SKPaint DefaultCreaturePaint = new()
+		private static readonly SKPaint DefaultCreaturePaintFill = new()
 		{
-			Style = SKPaintStyle.StrokeAndFill,
+			Style = SKPaintStyle.Fill,
 			Color = SKColors.Red,
-			StrokeWidth = 0.5f,
+		};
+
+		private static readonly SKPaint DefaultCreaturePaintStroke = new()
+		{
+			Style = SKPaintStyle.Stroke,
+			Color = SKColors.Black,
+			StrokeWidth = 1f
 		};
 
 		public void Draw(SKCanvas canvas, CanvasCamera camera)
@@ -41,15 +47,16 @@ namespace OOPT4Project.Render
 
 					float sizeVal = _tileSize / creatureList.Count / 2;
 					SKSize size = new(sizeVal, sizeVal);
-					tilePoint.Offset(size.Width / 2, size.Height / 2);
+					tilePoint.Offset(-size.Width / 2, -size.Height / 2);
 
 					// Adjusting
 					camera.Adjust(ref tilePoint);
 					camera.Adjust(ref size);
 
-					SKRect rect = new(tilePoint.X,tilePoint.Y, tilePoint.X + size.Width, tilePoint.Y + size.Height);
+					SKRect rect = new(tilePoint.X, tilePoint.Y, tilePoint.X + size.Width, tilePoint.Y + size.Height);
 
-					canvas.DrawRect(rect, DefaultCreaturePaint);
+					canvas.DrawRect(rect, DefaultCreaturePaintFill);
+					canvas.DrawRect(rect, DefaultCreaturePaintStroke);
 				}
 			}
 		}

@@ -1,6 +1,6 @@
-﻿using Microsoft.Maui.Graphics;
-using OOPT4Project.Simulation.Creature;
+﻿using OOPT4Project.Simulation.Creature;
 using OOPT4Project.Simulation.Map;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +9,23 @@ namespace OOPT4Project.Render
 {
 	public class CreatureDrawer : IDrawer
 	{
-		private readonly double _tileSize;
+		private readonly float _tileSize;
 		private readonly List<Tile> _tiles;
 
-		public CreatureDrawer(List<Tile> tiles, double tileSize)
+		public CreatureDrawer(List<Tile> tiles, float tileSize)
 		{
 			_tiles = tiles;
 			_tileSize = tileSize;
 		}
 
-		public void Draw(ICanvas canvas, CanvasCamera camera)
+		private static SKPaint DefaultCreaturePaint = new()
+		{
+			Style = SKPaintStyle.StrokeAndFill,
+			Color = SKColors.Red,
+			StrokeWidth = 0.5f,
+		};
+
+		public void Draw(SKCanvas canvas, CanvasCamera camera)
 		{
 			var tilesWithCreatures = _tiles.Where(x => x.CreatureList.Count > 0).ToList();
 
@@ -28,35 +35,32 @@ namespace OOPT4Project.Render
 
 				foreach (CreatureEntity creature in creatureList)
 				{
-					Point tilePoint = TileDrawer.HexToPixel(creature.CurrentTile.Coordinates, _tileSize);
+					SKPoint tilePoint = TileDrawer.HexToPixel(creature.CurrentTile.Coordinates, _tileSize);
 
 					OffsetRadial(ref tilePoint, creatureList.IndexOf(creature), creatureList.Count);
 
-					Size size = new(_tileSize / creatureList.Count / 2);
-					tilePoint -= size / 2;
+					float sizeVal = _tileSize / creatureList.Count / 2;
+					SKSize size = new(sizeVal, sizeVal);
+					tilePoint.Offset(size.Width / 2, size.Height / 2);
 
 					// Adjusting
 					camera.Adjust(ref tilePoint);
 					camera.Adjust(ref size);
 
-					Rect rect = new Rect(tilePoint, size);
+					SKRect rect = new(tilePoint.X,tilePoint.Y, tilePoint.X + size.Width, tilePoint.Y + size.Height);
 
-					canvas.FillColor = Colors.Red;
-					canvas.StrokeColor = Colors.Black;
-					canvas.StrokeSize = 0.5f;
-					canvas.FillRectangle(rect);
-					canvas.DrawRectangle(rect);
+					canvas.DrawRect(rect, DefaultCreaturePaint);
 				}
 			}
 		}
 
-		private void OffsetRadial(ref Point point, int position, int count)
+		private void OffsetRadial(ref SKPoint point, int position, int count)
 		{
-			double circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5;
+			float circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5f;
 			if (count != 1)
-				point = point.Offset(
-						Math.Cos(Math.PI * 2 * position / count) * circle,
-						Math.Sin(Math.PI * 2 * position / count) * circle);
+				point.Offset(
+						MathF.Cos(MathF.PI * 2 * position / count) * circle,
+						MathF.Sin(MathF.PI * 2 * position / count) * circle);
 		}
 	}
 }

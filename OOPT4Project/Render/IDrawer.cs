@@ -1,9 +1,9 @@
-﻿using Microsoft.Maui.Graphics;
+﻿using SkiaSharp;
 
 namespace OOPT4Project.Render
 {
 	public interface IDrawer
 	{
-		void Draw(ICanvas canvas, CanvasCamera camera);
+		void Draw(SKCanvas canvas, CanvasCamera camera);
 	}
 }

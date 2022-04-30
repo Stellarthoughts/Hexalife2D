@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Graphics;
+﻿using SkiaSharp;
 using System;
 using System.Linq;
 
@@ -6,12 +6,12 @@ namespace OOPT4Project.Render
 {
 	public struct CameraSettings
 	{
-		public double HorizontalBorder { get; private set; }
-		public double VerticalBorder { get; private set; }
-		public double MinScale { get; private set; }
-		public double MaxScale { get; private set; }
+		public float HorizontalBorder { get; private set; }
+		public float VerticalBorder { get; private set; }
+		public float MinScale { get; private set; }
+		public float MaxScale { get; private set; }
 
-		public CameraSettings(double horizontalBorder, double verticalBorder, double minScale, double maxScale)
+		public CameraSettings(float horizontalBorder, float verticalBorder, float minScale, float maxScale)
 		{
 			HorizontalBorder = horizontalBorder;
 			VerticalBorder = verticalBorder;
@@ -21,23 +21,23 @@ namespace OOPT4Project.Render
 	}
 	public class CanvasCamera
 	{
-		private double _positionX = 0;
-		private double _positionY = 0;
+		private float _positionX = 0;
+		private float _positionY = 0;
 
-		private double _targetPositionX = 0;
-		private double _targetPositionY = 0;
+		private float _targetPositionX = 0;
+		private float _targetPositionY = 0;
 
-		private double _globalOffsetX = 0;
-		private double _globalOffsetY = 0;
+		private float _globalOffsetX = 0;
+		private float _globalOffsetY = 0;
 
-		private double _scale = 1;
-		private double _scaleTarget = 1;
+		private float _scale = 1;
+		private float _scaleTarget = 1;
 
-		private readonly double _horizontalBorder;
-		private readonly double _verticalBorder;
+		private readonly float _horizontalBorder;
+		private readonly float _verticalBorder;
 
-		private readonly double _minScale;
-		private readonly double _maxScale;
+		private readonly float _minScale;
+		private readonly float _maxScale;
 
 		public CanvasCamera(CameraSettings set)
 		{
@@ -54,59 +54,59 @@ namespace OOPT4Project.Render
 			_scale = _scaleTarget;
 		}
 
-		public void SetGlobalOffset(double x, double y)
+		public void SetGlobalOffset(float x, float y)
 		{
 			_globalOffsetX = x;
 			_globalOffsetY = y;
 		}
 
-		public void OffsetGlobalOffset(double x, double y)
+		public void OffsetGlobalOffset(float x, float y)
 		{
 			_globalOffsetX += x;
 			_globalOffsetY += y;
 		}
 
-		public void SetTargetPosition(double x, double y)
+		public void SetTargetPosition(float x, float y)
 		{
 			_targetPositionX = Math.Clamp(x, -_horizontalBorder, _horizontalBorder);
 			_targetPositionY = Math.Clamp(y, -_verticalBorder, _verticalBorder);
 		}
 
-		public void SetTargetScale(double z)
+		public void SetTargetScale(float z)
 		{
 			_scaleTarget = Math.Clamp(z, _minScale, _maxScale);
 		}
 
-		public void OffsetTargetPosition(double x, double y)
+		public void OffsetTargetPosition(float x, float y)
 		{
 			SetTargetPosition(_targetPositionX + x, _targetPositionY + y);
 		}
 
-		public void OffsetTargetScale(double z)
+		public void OffsetTargetScale(float z)
 		{
 			SetTargetScale(_scaleTarget + z);
 		}
 
-		public void Adjust(ref PathF adj)
+		public void Adjust(ref SKPath adj)
 		{
-			Point avg = GetAverageCoordinate(adj);
-			adj.Move(-(float)avg.X, -(float)avg.Y);
-			adj = adj.AsScaledPath((float)_scale);
-			adj.Move((float)(avg.X * _scale), (float)(avg.Y * _scale));
-			adj.Move((float)(_globalOffsetX - _positionX * _scale), (float)(_globalOffsetY - _positionY * _scale));
+			SKPoint avg = GetAverageCoordinate(adj);
+			adj.Offset(-avg.X, -avg.Y);
+			adj.Transform(SKMatrix.CreateScale(_scale, _scale));
+			adj.Offset(avg.X * _scale, avg.Y * _scale);
+			adj.Offset(_globalOffsetX - _positionX * _scale, _globalOffsetY - _positionY * _scale);
 		}
 
-		public void Adjust(ref Point tilePoint)
+		public void Adjust(ref SKPoint tilePoint)
 		{
-			double x = tilePoint.X;
-			double y = tilePoint.Y;
-			tilePoint = new Point(x * _scale, y * _scale);
-			tilePoint = tilePoint.Offset(_globalOffsetX - _positionX * _scale, _globalOffsetY - _positionY * _scale);
+			float x = tilePoint.X;
+			float y = tilePoint.Y;
+			tilePoint = new SKPoint(x * _scale, y * _scale);
+			tilePoint.Offset(_globalOffsetX - _positionX * _scale, _globalOffsetY - _positionY * _scale);
 		}
 
-		public void Adjust(ref Size size)
+		public void Adjust(ref SKSize size)
 		{
-			size = new Size(size.Width * _scale, size.Height * _scale);
+			size = new SKSize(size.Width * _scale, size.Height * _scale);
 		}
 
 		public void Adjust(ref double size)
@@ -114,10 +114,10 @@ namespace OOPT4Project.Render
 			size *= _scale;
 		}
 
-		public static Point GetAverageCoordinate(PathF path)
+		public static SKPoint GetAverageCoordinate(SKPath path)
 		{
-			double avgX = 0;
-			double avgY = 0;
+			float avgX = 0;
+			float avgY = 0;
 
 			path.Points.Select(x => x.X).ToList().ForEach(x => avgX += x);
 			path.Points.Select(x => x.Y).ToList().ForEach(x => avgY += x);
@@ -125,7 +125,7 @@ namespace OOPT4Project.Render
 			avgX /= path.Points.Count();
 			avgY /= path.Points.Count();
 
-			return new Point(avgX, avgY);
+			return new SKPoint(avgX, avgY);
 		}
 	}
 }

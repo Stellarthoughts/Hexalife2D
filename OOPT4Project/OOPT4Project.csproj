@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.300-rc.2.1310" />
-    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="6.0.300-rc.2.1310" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="SkiaSharp" Version="2.80.3" />
+    <PackageReference Include="SkiaSharp.Views.Desktop.Common" Version="2.80.3" />
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
   </ItemGroup>
 

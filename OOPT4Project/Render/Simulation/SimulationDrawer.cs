@@ -1,6 +1,6 @@
-﻿using Microsoft.Maui.Graphics;
-using OOPT4Project.Simulation;
+﻿using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
+using SkiaSharp;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,16 +9,16 @@ namespace OOPT4Project.Render
 	public class SimulationDrawer
 	{
 		private readonly SimulationModel _simulationModel;
-		private readonly double _tileSize;
+		private readonly float _tileSize;
 		private List<Tile> _tiles;
 
 		private readonly TileDrawer _tileDrawer;
 		private readonly CreatureDrawer _creatureDrawer;
 
-		private Point _offset;
+		private SKPoint _offset;
 		private bool _snapCamera;
 
-		public SimulationDrawer(SimulationModel simulationModel, double tileSize)
+		public SimulationDrawer(SimulationModel simulationModel, float tileSize)
 		{
 			_simulationModel = simulationModel;
 			_tileSize = tileSize;
@@ -36,7 +36,7 @@ namespace OOPT4Project.Render
 			_snapCamera = true;
 		}
 
-		public void Draw(ICanvas canvas, CanvasCamera camera)
+		public void Draw(SKCanvas canvas, CanvasCamera camera)
 		{
 			if (_snapCamera)
 			{

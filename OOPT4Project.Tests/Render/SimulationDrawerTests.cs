@@ -1,5 +1,4 @@
-﻿using Microsoft.Maui.Graphics.Skia;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
 using OOPT4Project.Render;
 using OOPT4Project.Simulation;

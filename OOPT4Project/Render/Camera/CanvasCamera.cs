@@ -103,6 +103,11 @@ namespace OOPT4Project.Render
 			size = new Size(size.Width * _scale, size.Height * _scale);
 		}
 
+		public void Adjust(ref double size)
+		{
+			size *= _scale;
+		}
+
 		public static Point GetAverageCoordinate(PathF path)
 		{
 			double avgX = 0;

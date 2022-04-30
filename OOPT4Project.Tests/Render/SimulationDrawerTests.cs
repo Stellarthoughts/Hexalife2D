@@ -3,12 +3,13 @@ using NUnit.Framework;
 using OOPT4Project.Render;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
+using SkiaSharp;
 
 namespace OOPT4Project.Tests
 {
 	public class SimulationDrawerTests
 	{
-		private Mock<SkiaCanvas>? _canvas;
+		private Mock<SKCanvas>? _canvas;
 
 		[SetUp]
 		public void Setup()

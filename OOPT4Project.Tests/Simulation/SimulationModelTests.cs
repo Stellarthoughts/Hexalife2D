@@ -1,5 +1,4 @@
-﻿using Moq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
 

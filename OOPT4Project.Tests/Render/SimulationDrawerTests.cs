@@ -24,7 +24,7 @@ namespace OOPT4Project.Tests
 			model.CreateMapRandom(10, TileTypeLogic.ProbWeightsDefault, 0.1);
 			model.PopulateSimulation(10);
 			SimulationDrawer drawer = new(model, 10);
-			drawer.Draw(_canvas!.Object, new CanvasCamera(new CameraSettings(0,0,0,0)));
+			drawer.Draw(_canvas!.Object, new CanvasCamera(new CameraSettings(0, 0, 0, 0)));
 			Assert.Positive(_canvas.Invocations.Count);
 		}
 	}

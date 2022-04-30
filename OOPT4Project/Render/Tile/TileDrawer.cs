@@ -16,11 +16,12 @@ namespace OOPT4Project.Render
 			_tileSize = tileSize;
 		}
 
-		private static SKPaint TileBorderPaint = new()
+		private static SKPaint TilePaintStroke = new()
 		{
 			Style = SKPaintStyle.Stroke,
 			Color = SKColors.Black,
 			StrokeWidth = 1f,
+			IsAntialias = true,
 		};
 
 		public void Draw(SKCanvas canvas, CanvasCamera camera)
@@ -33,13 +34,12 @@ namespace OOPT4Project.Render
 
 				SKPaint paint = new()
 				{
-					Style = SKPaintStyle.StrokeAndFill,
+					Style = SKPaintStyle.Fill,
 					Color = color,
-					StrokeWidth = 0.5f,
 				};
 
 				canvas.DrawPath(path, paint);
-				canvas.DrawPath(path, TileBorderPaint);
+				canvas.DrawPath(path, TilePaintStroke);
 			}
 		}
 

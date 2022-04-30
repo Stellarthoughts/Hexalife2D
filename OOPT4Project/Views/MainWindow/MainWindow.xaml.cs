@@ -66,8 +66,9 @@ namespace OOPT4Project.Views
 		private static readonly SKPaint CrosshairPaint = new()
 		{
 			Style = SKPaintStyle.Stroke,
-			Color = SKColor.Parse("44AEB5"),
-			StrokeWidth = 0.5f
+			Color = SKColors.Black,
+			StrokeWidth = 1f,
+			IsAntialias = true,
 		};
 
 		private static readonly SKPaint BorderPaint = new()

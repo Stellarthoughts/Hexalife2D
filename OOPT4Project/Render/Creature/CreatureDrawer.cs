@@ -28,7 +28,8 @@ namespace OOPT4Project.Render
 		{
 			Style = SKPaintStyle.Stroke,
 			Color = SKColors.Black,
-			StrokeWidth = 1f
+			StrokeWidth = 0.5f,
+			IsAntialias = true,
 		};
 
 		public void Draw(SKCanvas canvas, CanvasCamera camera)

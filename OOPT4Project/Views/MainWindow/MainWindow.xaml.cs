@@ -136,11 +136,11 @@ namespace OOPT4Project.Views
 			{
 				_seedValue = Convert.ToInt32((sender as TextBox)!.Text);
 			}
-			catch(FormatException)
+			catch (FormatException)
 			{
 				return;
 			}
-			catch(OverflowException)
+			catch (OverflowException)
 			{
 				return;
 			}

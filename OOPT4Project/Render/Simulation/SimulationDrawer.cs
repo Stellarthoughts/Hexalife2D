@@ -11,9 +11,7 @@ namespace OOPT4Project.Render
 	public class SimulationDrawer
 	{
 		private readonly SimulationModel _simulationModel;
-
 		private readonly double _tileSize;
-
 		private Point _offset;
 		private readonly List<Tile> _tiles;
 		private Dictionary<Tile, Color> _tileColors = null!;
@@ -33,7 +31,7 @@ namespace OOPT4Project.Render
 			_offset = AvgHexCoordinates(_tiles, _tileSize);
 		}
 
-		public static Dictionary<Tile, Color> AssignColors(List<Tile> tiles)
+		private static Dictionary<Tile, Color> AssignColors(List<Tile> tiles)
 		{
 			Dictionary<Tile, Color> dictionary = new();
 			foreach (Tile tile in tiles)

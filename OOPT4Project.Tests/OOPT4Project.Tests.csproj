@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extension\" />
     <Folder Include="Simulation\Creature\Behavior\Conflict\" />
     <Folder Include="Simulation\Creature\Gene\" />
   </ItemGroup>

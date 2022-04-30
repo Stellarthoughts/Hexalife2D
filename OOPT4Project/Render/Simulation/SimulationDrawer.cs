@@ -1,10 +1,13 @@
 ﻿using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Graphics.Platform;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Creature;
 using OOPT4Project.Simulation.Map;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace OOPT4Project.Render
 {
@@ -13,48 +16,42 @@ namespace OOPT4Project.Render
 		private readonly SimulationModel _simulationModel;
 		private readonly double _tileSize;
 		private Point _offset;
-		private readonly List<Tile> _tiles;
-		private Dictionary<Tile, Color> _tileColors = null!;
+		private List<Tile> _tiles;
+
+		private TileDrawer _tileDrawer;
+		private CreatureDrawer _creatureDrawer;
 
 		public SimulationDrawer(SimulationModel simulationModel, double tileSize)
 		{
 			_simulationModel = simulationModel;
 			_tileSize = tileSize;
 			_tiles = _simulationModel.MapController.TileList;
+			_tileDrawer = new(_tiles, tileSize);
+			_creatureDrawer = new(_tiles, tileSize);
 
 			Init();
 		}
 
 		public void Init()
 		{
-			_tileColors = AssignColors(_tiles);
-			_offset = AvgHexCoordinates(_tiles, _tileSize);
-		}
-
-		private static Dictionary<Tile, Color> AssignColors(List<Tile> tiles)
-		{
-			Dictionary<Tile, Color> dictionary = new();
-			foreach (Tile tile in tiles)
-			{
-				TileColors.TileTypeToColor.TryGetValue(tile.Type, out Color? color);
-				color ??= Colors.Black;
-				dictionary.Add(tile, color!);
-			}
-			return dictionary;
+			_tiles = _simulationModel.MapController.TileList;
+			_tileDrawer.RecalculateOffset();
 		}
 
 		// TODO: OPTIMIZE by storing single template of PathF, then move it and resize;
 		public void Draw(ICanvas canvas, CanvasCamera camera)
 		{
+			_tileDrawer.Draw(canvas, camera);
+			_creatureDrawer.Draw(canvas, camera);
 			foreach (Tile tile in _tiles)
 			{
-				PathF path = TileDrawer.PathTile(new Point(-_offset.X, -_offset.Y), tile.Coordinates, _tileSize);
+				PathF path = _tileDrawer.PathTile(new Point(-_offset.X, -_offset.Y), tile.Coordinates);
 				camera.Adjust(ref path);
-				_tileColors.TryGetValue(tile, out Color? color);
+				TileColors.TileTypeToColor.TryGetValue(tile.Type, out Color? color);
 
-				canvas.FillColor = color;
+				canvas.FillColor = color ?? Colors.Black;
 				canvas.StrokeColor = Colors.Black;
-				canvas.StrokeSize = 1f;
+				canvas.StrokeSize = 0.5f;
 				canvas.FillPath(path);
 				canvas.DrawPath(path);
 
@@ -62,11 +59,6 @@ namespace OOPT4Project.Render
 
 				foreach (CreatureEntity crt in creatureList)
 				{
-					canvas.FillColor = Colors.Red;
-
-					canvas.StrokeColor = Colors.Black;
-					canvas.StrokeSize = 0.7f;
-
 					// Pos calculation
 					Point tilePoint = TileDrawer.HexToPixel(crt.CurrentTile.Coordinates, _tileSize);
 					tilePoint = tilePoint.Offset(-_offset.X, -_offset.Y);
@@ -87,25 +79,13 @@ namespace OOPT4Project.Render
 
 					Rect rect = new Rect(tilePoint, size);
 
-					canvas.DrawRectangle(rect);
+					canvas.FillColor = Colors.Red;
+					canvas.StrokeColor = Colors.Black;
+					canvas.StrokeSize = 0.5f;
 					canvas.FillRectangle(rect);
+					canvas.DrawRectangle(rect);
 				}
 			}
-		}
-
-		public static Point AvgHexCoordinates(List<Tile> tiles, double tileSize)
-		{
-			double avgQ = 0;
-			double avgR = 0;
-			tiles.Select(x => x.Coordinates).ToList().ForEach(x =>
-			{
-				avgQ += x.q;
-				avgR += x.r;
-			});
-			avgQ /= tiles.Count;
-			avgR /= tiles.Count;
-
-			return TileDrawer.HexToPixel(avgQ, avgR, tileSize);
 		}
 	}
 }

@@ -12,12 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
     <PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.200-preview.14.1092" />
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="6.0.200-preview.14.1092" />
     <PackageReference Include="NLog" Version="4.7.15" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-    <PackageReference Include="Prism.Unity" Version="8.1.97" />
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
   </ItemGroup>
 

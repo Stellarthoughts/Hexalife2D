@@ -1,9 +1,9 @@
-﻿<prism:PrismApplication 
+﻿<Application 
 	x:Class="OOPT4Project.App"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:local="clr-namespace:OOPT4Project"
-	xmlns:prism="http://prismlibrary.com/">
+    StartupUri="Views/MainWindow/MainWindow.xaml">
 	<Application.Resources>
         <FontFamily x:Key="InriaSerifRegular">pack://application:,,,/Resources/Fonts/#Inria Serif Regular</FontFamily>
         <FontFamily x:Key="InriaSerifBold">pack://application:,,,/Resources/Fonts/#Inria Serif Bold</FontFamily>
@@ -38,4 +38,4 @@
 			<Setter Property="FontSize" Value="30"/>
 		</Style>
 	</Application.Resources>
-</prism:PrismApplication>
+</Application>

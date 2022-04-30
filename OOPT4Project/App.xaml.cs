@@ -1,23 +1,11 @@
-﻿using Prism.Ioc;
-using Prism.Unity;
-using System.Windows;
+﻿using System.Windows;
 
 namespace OOPT4Project
 {
 	/// <summary>
 	/// Interaction logic for App.xaml
 	/// </summary>
-	public partial class App : PrismApplication
+	public partial class App : Application
 	{
-		protected override Window CreateShell()
-		{
-			var w = Container.Resolve<Views.MainWindow>();
-			return w;
-		}
-
-		protected override void RegisterTypes(IContainerRegistry containerRegistry)
-		{
-			return;
-		}
 	}
 }

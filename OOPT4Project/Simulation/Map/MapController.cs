@@ -53,8 +53,8 @@ namespace OOPT4Project.Simulation.Map
 
 				TileList.Add(add);
 
-				if(GetEmptyNeighboors(TileList, add).Count != 0)
-					borderTiles.Add(add);	
+				if (GetEmptyNeighboors(TileList, add).Count != 0)
+					borderTiles.Add(add);
 
 				foreach (Tile tile in GetNeighboorTiles(TileList, add))
 				{

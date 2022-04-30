@@ -21,14 +21,14 @@ namespace OOPT4Project.Render
 	}
 	public class CanvasCamera
 	{
-		private double _centerX = 0;
-		private double _centerY = 0;
+		private double _positionX = 0;
+		private double _positionY = 0;
 
-		private double _targetX = 0;
-		private double _targetY = 0;
+		private double _targetPositionX = 0;
+		private double _targetPositionY = 0;
 
-		private double _offsetX = 0;
-		private double _offsetY = 0;
+		private double _globalOffsetX = 0;
+		private double _globalOffsetY = 0;
 
 		private double _scale = 1;
 		private double _scaleTarget = 1;
@@ -49,21 +49,27 @@ namespace OOPT4Project.Render
 
 		public void Update()
 		{
-			_centerX = _targetX;
-			_centerY = _targetY;
+			_positionX = _targetPositionX;
+			_positionY = _targetPositionY;
 			_scale = _scaleTarget;
 		}
 
 		public void SetGlobalOffset(double x, double y)
 		{
-			_offsetX = x;
-			_offsetY = y;
+			_globalOffsetX = x;
+			_globalOffsetY = y;
+		}
+
+		public void OffsetGlobalOffset(double x, double y)
+		{
+			_globalOffsetX += x;
+			_globalOffsetY += y;
 		}
 
 		public void SetTargetPosition(double x, double y)
 		{
-			_targetX = Math.Clamp(x, -_horizontalBorder, _horizontalBorder);
-			_targetY = Math.Clamp(y, -_verticalBorder, _verticalBorder);
+			_targetPositionX = Math.Clamp(x, -_horizontalBorder, _horizontalBorder);
+			_targetPositionY = Math.Clamp(y, -_verticalBorder, _verticalBorder);
 		}
 
 		public void SetTargetScale(double z)
@@ -73,7 +79,7 @@ namespace OOPT4Project.Render
 
 		public void OffsetTargetPosition(double x, double y)
 		{
-			SetTargetPosition(_targetX + x, _targetY + y);
+			SetTargetPosition(_targetPositionX + x, _targetPositionY + y);
 		}
 
 		public void OffsetTargetScale(double z)
@@ -87,7 +93,7 @@ namespace OOPT4Project.Render
 			adj.Move(-(float)avg.X, -(float)avg.Y);
 			adj = adj.AsScaledPath((float)_scale);
 			adj.Move((float)(avg.X * _scale), (float)(avg.Y * _scale));
-			adj.Move((float)(_offsetX - _centerX * _scale), (float)(_offsetY - _centerY * _scale));
+			adj.Move((float)(_globalOffsetX - _positionX * _scale), (float)(_globalOffsetY - _positionY * _scale));
 		}
 
 		public void Adjust(ref Point tilePoint)
@@ -95,7 +101,7 @@ namespace OOPT4Project.Render
 			double x = tilePoint.X;
 			double y = tilePoint.Y;
 			tilePoint = new Point(x * _scale, y * _scale);
-			tilePoint = tilePoint.Offset(_offsetX - _centerX * _scale, _offsetY - _centerY * _scale);
+			tilePoint = tilePoint.Offset(_globalOffsetX - _positionX * _scale, _globalOffsetY - _positionY * _scale);
 		}
 
 		public void Adjust(ref Size size)

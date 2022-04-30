@@ -46,6 +46,8 @@ namespace OOPT4Project.Views
 
 			_simulationTimer.Interval = System.TimeSpan.FromMilliseconds(_timerInterval);
 			_simulationTimer.Tick += SimulationTimer_Tick;
+
+			_view.InvalidateVisual();
 		}
 
 		private void SimulationTimer_Tick(object? sender, EventArgs e)
@@ -156,11 +158,9 @@ namespace OOPT4Project.Views
 			SimulationModel.RandomSeed = _seedValue;
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
 			_simulationModel.PopulateSimulation(400);
-			_simulationDrawer.Init();
+			_simulationDrawer.Recalculate();
+
 			_view.InvalidateVisual();
 		}
-
-
-
 	}
 }

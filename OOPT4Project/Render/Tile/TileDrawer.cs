@@ -7,30 +7,38 @@ namespace OOPT4Project.Render
 {
 	public class TileDrawer : IDrawer
 	{
-		private double _tileSize;
+		private readonly double _tileSize;
+		private readonly List<Tile> _tiles;
 
-		public TileDrawer(List<Tile> _tiles, double tileSize)
+		public TileDrawer(List<Tile> tiles, double tileSize)
 		{
+			_tiles = tiles;
 			_tileSize = tileSize;
 		}
 
 		public void Draw(ICanvas canvas, CanvasCamera camera)
 		{
-			//throw new NotImplementedException();
+			foreach (Tile tile in _tiles)
+			{
+				PathF path = PathTile(tile.Coordinates);
+				camera.Adjust(ref path);
+				TileColors.TileTypeToColor.TryGetValue(tile.Type, out Color? color);
+
+				canvas.FillColor = color ?? Colors.Black;
+				canvas.StrokeColor = Colors.Black;
+				canvas.StrokeSize = 0.5f;
+				canvas.FillPath(path);
+				canvas.DrawPath(path);
+			}
 		}
 
-		public void RecalculateOffset()
-		{
-			//throw new NotImplementedException();
-		}
+		public PathF PathTile(Coordinates coor) => PathTile(coor, _tileSize);
 
-		public PathF PathTile(Point centerGlobal, Coordinates coor) => PathTile(centerGlobal, coor, _tileSize);
-
-		public static PathF PathTile(Point centerGlobal, Coordinates coor, double tileSize)
+		public static PathF PathTile(Coordinates coor, double tileSize)
 		{
 			PathF path = new PathF();
 			Point hexToPixel = HexToPixel(coor, tileSize);
-			Point centerTile = new Point(hexToPixel.X + centerGlobal.X, hexToPixel.Y + centerGlobal.Y);
+			Point centerTile = new Point(hexToPixel.X, hexToPixel.Y);
 
 			path.MoveTo(AnglePoint(centerTile, 0, tileSize));
 			for (int i = 1; i <= 5; i++)
@@ -64,6 +72,7 @@ namespace OOPT4Project.Render
 			double y = tileSize * (Math.Sqrt(3) / 2 * coor.q + Math.Sqrt(3) * coor.r);
 			return new Point(x, y);
 		}
+
 		public static Point HexToPixel(double q, double r, double tileSize)
 		{
 			double x = tileSize * (3.0 / 2 * q);
@@ -99,7 +108,7 @@ namespace OOPT4Project.Render
 			avgQ /= coor.Count;
 			avgR /= coor.Count;
 
-			return TileDrawer.HexToPixel(avgQ, avgR, tileSize);
+			return HexToPixel(avgQ, avgR, tileSize);
 		}
 	}
 }

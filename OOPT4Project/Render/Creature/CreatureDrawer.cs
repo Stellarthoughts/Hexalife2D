@@ -21,6 +21,7 @@ namespace OOPT4Project.Render
 		public void Draw(ICanvas canvas, CanvasCamera camera)
 		{
 			var tilesWithCreatures = _tiles.Where(x => x.CreatureList.Count > 0).ToList();
+
 			foreach (Tile tile in tilesWithCreatures)
 			{
 				List<CreatureEntity> creatureList = tile.CreatureList;
@@ -29,16 +30,9 @@ namespace OOPT4Project.Render
 				{
 					Point tilePoint = TileDrawer.HexToPixel(creature.CurrentTile.Coordinates, _tileSize);
 
-					double position = creatureList.IndexOf(creature);
-					double count = creatureList.Count;
-					double circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5;
+					OffsetRadial(ref tilePoint, creatureList.IndexOf(creature), creatureList.Count);
 
-					if (count != 1)
-						tilePoint = tilePoint.Offset(
-								Math.Cos(Math.PI * 2 * position / count) * circle,
-								Math.Sin(Math.PI * 2 * position / count) * circle);
-
-					Size size = new(_tileSize / count / 2);
+					Size size = new(_tileSize / creatureList.Count / 2);
 					tilePoint -= size / 2;
 
 					// Adjusting
@@ -54,6 +48,15 @@ namespace OOPT4Project.Render
 					canvas.DrawRectangle(rect);
 				}
 			}
+		}
+
+		private void OffsetRadial(ref Point point, int position, int count)
+		{
+			double circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5;
+			if (count != 1)
+				point = point.Offset(
+						Math.Cos(Math.PI * 2 * position / count) * circle,
+						Math.Sin(Math.PI * 2 * position / count) * circle);
 		}
 	}
 }

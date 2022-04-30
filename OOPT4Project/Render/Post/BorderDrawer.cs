@@ -21,7 +21,7 @@ namespace OOPT4Project.Render
 			for (double i = 0; i <= bottom.Y + sizeIncrement; i += sizeIncrement)
 			{
 				PathF path = TileDrawer.PathTile(new Coordinates(0, j), size);
-				path.Move(top.X,top.Y);
+				path.Move(top.X, top.Y);
 				canvas.FillPath(path);
 				canvas.DrawPath(path);
 				j++;

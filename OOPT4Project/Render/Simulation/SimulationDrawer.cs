@@ -12,8 +12,8 @@ namespace OOPT4Project.Render
 		private readonly double _tileSize;
 		private List<Tile> _tiles;
 
-		private TileDrawer _tileDrawer;
-		private CreatureDrawer _creatureDrawer;
+		private readonly TileDrawer _tileDrawer;
+		private readonly CreatureDrawer _creatureDrawer;
 
 		private Point _offset;
 		private bool _snapCamera;
@@ -38,7 +38,7 @@ namespace OOPT4Project.Render
 
 		public void Draw(ICanvas canvas, CanvasCamera camera)
 		{
-			if(_snapCamera)
+			if (_snapCamera)
 			{
 				camera.SetTargetPosition(_offset.X, _offset.Y);
 				camera.Update();

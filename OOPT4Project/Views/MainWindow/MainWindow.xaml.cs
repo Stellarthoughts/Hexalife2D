@@ -22,7 +22,6 @@ namespace OOPT4Project.Views
 		private readonly SKElement _view;
 
 		private readonly DispatcherTimer _simulationTimer = new();
-
 		private readonly double _tileSize = 15;
 
 		private double _timerInterval = 300;
@@ -46,8 +45,6 @@ namespace OOPT4Project.Views
 
 			_simulationTimer.Interval = System.TimeSpan.FromMilliseconds(_timerInterval);
 			_simulationTimer.Tick += SimulationTimer_Tick;
-
-			_view.InvalidateVisual();
 		}
 
 		private void SimulationTimer_Tick(object? sender, EventArgs e)

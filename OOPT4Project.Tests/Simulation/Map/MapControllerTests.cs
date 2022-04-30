@@ -21,7 +21,7 @@ namespace OOPT4Project.Tests
 		public void Test_MapController_CreatesMap()
 		{
 			int resource = 100;
-			mapController.CreateMapRandom(resource, TileTypeLogic.ProbWeightsDefault, 0.1);
+			Assert.DoesNotThrow(() => mapController.CreateMapRandom(resource, TileTypeLogic.ProbWeightsDefault, 0.1));
 			Assert.That(mapController.TileList.Count > resource);
 		}
 	}

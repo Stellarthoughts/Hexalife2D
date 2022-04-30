@@ -8,13 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\bear.png" />
+    <None Remove="Resources\Images\berd.png" />
+    <None Remove="Resources\Images\mice.png" />
+    <None Remove="Resources\Images\sheep.png" />
+    <None Remove="Resources\Images\snake.png" />
+    <None Remove="Resources\Images\spritesheet.png" />
+    <None Remove="Resources\Images\wolf.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.200-preview.14.1092" />
-    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="6.0.200-preview.14.1092" />
-    <PackageReference Include="NLog" Version="4.7.15" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.300-rc.2.1310" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="6.0.300-rc.2.1310" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
   </ItemGroup>
@@ -26,6 +35,27 @@
     <Resource Include="Resources\Fonts\InriaSerif-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <EmbeddedResource Include="Resources\Images\bear.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\berd.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\mice.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\sheep.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\snake.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\spritesheet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\wolf.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

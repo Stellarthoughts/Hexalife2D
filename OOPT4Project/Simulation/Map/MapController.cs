@@ -19,7 +19,6 @@ namespace OOPT4Project.Simulation.Map
 			MapClimate = new MapClimate(this);
 		}
 
-		// TODO: OPTIMIZE by storing a curated list of border tiles
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
 		{
 			TileList.Clear();
@@ -29,42 +28,45 @@ namespace OOPT4Project.Simulation.Map
 
 			var currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
 			var initTile = new Tile(new Coordinates(0, 0), currentType);
+			var borderTiles = new List<Tile>();
 
 			TileList.Add(initTile);
+			borderTiles.Add(initTile);
 
 			while (resource > 0)
 			{
 				Tile rndTile;
-				if (GetTiles(GetBorderTiles(TileList), currentType).Count == 0 || rnd.NextDouble() < suddenSwitch)
+				List<Tile> typedBorders = GetTiles(borderTiles, currentType);
+
+				if (typedBorders.Count == 0 || rnd.NextDouble() < suddenSwitch)
 				{
-					rndTile = GetRandomTile(GetBorderTiles(TileList));
+					rndTile = GetRandomTile(borderTiles);
 				}
 				else
 				{
-					List<Tile> typedBorders = GetTiles(GetBorderTiles(TileList), currentType);
-					if (typedBorders.Count == 0)
-					{
-						rndTile = GetRandomTile(GetBorderTiles(TileList));
-					}
-					else
-						rndTile = GetRandomTile(GetBorderTiles(typedBorders));
+					rndTile = GetRandomTile(typedBorders);
 				}
 
 				var emptyNeighboors = GetEmptyNeighboors(TileList, rndTile);
-
-				if (emptyNeighboors.Count == 0)
-				{
-					continue;
-				}
-
 				Coordinates crd = emptyNeighboors.PickRandom(rnd);
+				Tile add = new Tile(crd, currentType);
 
-				TileList.Add(new Tile(crd, currentType));
+				TileList.Add(add);
+
+				if(GetEmptyNeighboors(TileList, add).Count != 0)
+					borderTiles.Add(add);	
+
+				foreach (Tile tile in GetNeighboorTiles(TileList, add))
+				{
+					if (GetEmptyNeighboors(TileList, tile).Count == 0)
+						borderTiles.Remove(tile);
+				}
 
 				currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
 				resource--;
 			}
 
+			// Ocean!
 			List<Coordinates> borders = GetEmptyBorders(TileList);
 			borders.ForEach(x => TileList.Add(new Tile(x, TileType.Ocean)));
 
@@ -160,7 +162,7 @@ namespace OOPT4Project.Simulation.Map
 
 		public static List<Tile> GetNeighboorTiles(List<Tile> tiles, Tile tile)
 		{
-			if (tiles.IndexOf(tile) == -1)
+			if (!tiles.Contains(tile))
 				throw new Exception();
 			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
 			return tiles.Where(x => neighboors.Contains(x.Coordinates)).ToList();
@@ -168,10 +170,12 @@ namespace OOPT4Project.Simulation.Map
 
 		public static List<Coordinates> GetEmptyNeighboors(List<Tile> tiles, Tile tile)
 		{
-			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
-			var neighboorTiles = GetNeighboorTiles(tiles, tile);
-			var neighboorCoordinates = neighboorTiles.Select(x => x.Coordinates).ToList();
-			var empty = neighboors.Except(neighboorCoordinates).ToList();
+			var neighboorCoordinates = GetNeighboorTiles(tiles, tile)
+				.Select(x => x.Coordinates)
+				.ToList();
+			var empty = Coordinates.GetNeighboors(tile.Coordinates)
+				.Except(neighboorCoordinates)
+				.ToList();
 
 			return empty;
 		}

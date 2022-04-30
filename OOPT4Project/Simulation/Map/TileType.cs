@@ -45,12 +45,12 @@ namespace OOPT4Project.Simulation.Map
 
 		public static readonly Dictionary<TileType, double> ProbWeightsDefault = new()
 		{
-			{ TileType.Grass, 1.2 },
-			{ TileType.Lake, 0.4 },
-			{ TileType.Hills, 0.3 },
-			{ TileType.Desert, 0.3 },
+			{ TileType.Grass, 1.0 },
+			{ TileType.Lake, 0.3 },
+			{ TileType.Hills, 0.2 },
+			{ TileType.Desert, 0.2 },
 			{ TileType.Badland, 0.2 },
-			{ TileType.Marsh, 0.3 },
+			{ TileType.Marsh, 0.2 },
 			{ TileType.Ocean, 0 }
 		};
 

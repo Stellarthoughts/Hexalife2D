@@ -132,7 +132,18 @@ namespace OOPT4Project.Views
 
 		private void SeedTB_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
 		{
-			_seedValue = Convert.ToInt32((sender as TextBox)!.Text);
+			try
+			{
+				_seedValue = Convert.ToInt32((sender as TextBox)!.Text);
+			}
+			catch(FormatException)
+			{
+				return;
+			}
+			catch(OverflowException)
+			{
+				return;
+			}
 		}
 
 		private void PopSimButton_Click(object sender, System.Windows.RoutedEventArgs e)

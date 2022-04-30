@@ -93,7 +93,7 @@ namespace OOPT4Project.Simulation.Creature
 		}
 
 		private static readonly double StepAdjFactor = 10;
-		public CreatureStats GetStats()
+		public CreatureStats GetCreatureStats()
 		{
 			double size = GetMapGenom(GeneType.Size, 0.25, 1);
 			double metabs = GetMapGenom(GeneType.MetabolismSpeed, 0.35, 1);
@@ -115,6 +115,40 @@ namespace OOPT4Project.Simulation.Creature
 				ReproduceRate = (reprate * 2.1 + metabs * 1.9) / 4 / 8.5,
 				Age = ((1 - metabs) * 0.9 + size) / 1.9 * 140,
 			};
+		}
+		public CreatureType GetCreatureType()
+		{
+			double size = GetGenom(GeneType.Size);
+			double aware = GetGenom(GeneType.Awareness);
+			double carniv = GetGenom(GeneType.Carnivorousness);
+
+			if (size > 0.6)
+			{
+				if (carniv < 0.5)
+					return CreatureType.Sheep;
+				else
+					return CreatureType.Bear;
+			}
+			else if (size > 0.3)
+			{
+				if (carniv > 0.7)
+					return CreatureType.Wolf;
+				else if (aware > 0.5)
+					return CreatureType.Bird;
+				else if (carniv > 0.5)
+					return CreatureType.Snake;
+				else
+					return CreatureType.Sheep;
+			}
+			else
+			{
+				if (carniv > 0.5 && aware > 0.5)
+					return CreatureType.Bird;
+				else if (carniv > 0.3)
+					return CreatureType.Snake;
+				else
+					return CreatureType.Mice;
+			}
 		}
 	}
 }

@@ -11,6 +11,7 @@ namespace OOPT4Project.Simulation.Creature
 		public IBehavior? CurrentBehavior { get; private set; }
 		public Tile CurrentTile { get; set; }
 		public CreatureStats Stats { get; private set; }
+		public CreatureType Type { get; private set; }
 
 		private static readonly double HungerMax = 1;
 		private static readonly double ThirstMax = 1;
@@ -46,7 +47,8 @@ namespace OOPT4Project.Simulation.Creature
 			CurrentTile = tile;
 			_model = model;
 
-			Stats = gene.GetStats();
+			Stats = gene.GetCreatureStats();
+			Type = gene.GetCreatureType();
 
 			_health = Stats.HealthMax;
 		}

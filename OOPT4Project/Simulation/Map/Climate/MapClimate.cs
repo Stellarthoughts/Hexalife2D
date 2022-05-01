@@ -6,18 +6,23 @@ namespace OOPT4Project.Simulation.Map
 	{
 		public ClimateType ClimateType { get; private set; }
 
-		private double _climateChangeChance = 0.001;
-		private double _strangeCycleChance = 0.1;
+		private readonly double _strangeCycleChance = 0.1;
 
 		private int _currentCycleLength = 0;
 
-		private static readonly int CycleMaxLength = 75;
+		private static readonly int CycleMaxLength = 225;
 
 		public event EventHandler<WeatherChangeEventArgs> WeatherChange = null!;
 
 		public MapClimate()
 		{
 			ClimateType = ClimateType.Summer;
+		}
+
+		public void Reset()
+		{
+			ClimateType = ClimateType.Summer;
+			UpdateFactors();
 		}
 
 		public void UpdateFactors()
@@ -30,7 +35,7 @@ namespace OOPT4Project.Simulation.Map
 		{
 			_currentCycleLength++;
 			Random gen = SimulationModel.Generator;
-			if (gen.NextDouble() < _climateChangeChance || _currentCycleLength >= CycleMaxLength)
+			if (_currentCycleLength >= CycleMaxLength)
 			{
 				if (gen.NextDouble() < _strangeCycleChance)
 					ClimateType = ClimateTypeLogic.StrangeCycle(ClimateType);

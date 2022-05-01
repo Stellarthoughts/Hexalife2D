@@ -26,7 +26,7 @@
 				do
 				{
 					hw = _prey.DealDamage(hSt.Strength);
-					pw = _hunter.DealDamage(pSt.Strength);
+					pw = _hunter.DealDamage(pSt.Strength / 5);
 				}
 				while (!(hw || pw));
 

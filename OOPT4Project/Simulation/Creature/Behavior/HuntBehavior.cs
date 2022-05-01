@@ -22,8 +22,8 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 				CreatureEntity? prey =
 					tile.CreatureList
 						.Except(new List<CreatureEntity>() { _creature })
-						.Where(x => x.Gene.GetGenom(GeneType.Carnivorousness) < _creature.Gene.GetGenom(GeneType.Carnivorousness)
-						&& x.Gene.GetGenom(GeneType.Carnivorousness) < 0.2)
+						.Where(x => x.Gene.GetGenom(GeneType.Carnivorousness) * 1.5 < _creature.Gene.GetGenom(GeneType.Carnivorousness)
+						&& x.Gene.GetGenom(GeneType.Carnivorousness) < 0.4)
 						.MaxBy(x => x.Gene.GetGenom(GeneType.Size));
 
 				if (prey != null)

@@ -103,49 +103,41 @@ namespace OOPT4Project.Simulation.Creature
 
 			return new CreatureStats()
 			{
-				EnergyResource = size / 5,
-				HealthMax = (size * 2 + metabs * 1),
-				HealingRate = metabs / 5,
+				EnergyResource = size / 4,
+				HealthMax = (size * 4 + metabs * 2),
+				HealingRate = metabs / 3,
 				Carnivorousness = carniv > 0.5 ? 1 : 0,
 				HungerRate = (metabs * 3 + size * 2 + aware) / 6 / StepAdjFactor,
-				ThirstRate = (size * 2 + aware) / 6 / StepAdjFactor,
+				ThirstRate = ((1-carniv) * 2 + aware) / 3 / StepAdjFactor,
 				Stealth = (metabs),
 				Strength = (size * 1 + carniv * 3) / 4 / StepAdjFactor,
 				Awareness = aware,
-				ReproduceRate = (reprate * 2.1 + metabs * 1.9) / 4 / 8.5,
-				Age = ((1 - metabs) * 0.9 + size) / 1.9 * 140,
+				ReproduceRate = (reprate * 2 + metabs * 2) / 4 / 8.5,
+				Age = ((1 - metabs) * 0.9 + size * 1.4) / 2.3 * 140,
 			};
 		}
 		public CreatureType GetCreatureType()
 		{
 			double size = GetGenom(GeneType.Size);
-			double aware = GetGenom(GeneType.Awareness);
 			double carniv = GetGenom(GeneType.Carnivorousness);
 
-			if (size > 0.6)
+			if(carniv > 0.5)
 			{
-				if (carniv < 0.5)
-					return CreatureType.Sheep;
-				else
+				if (size > 0.6)
 					return CreatureType.Bear;
-			}
-			else if (size > 0.3)
-			{
-				if (carniv > 0.7)
+				else if (size > 0.4)
 					return CreatureType.Wolf;
-				else if (aware > 0.5)
-					return CreatureType.Bird;
-				else if (carniv > 0.5)
+				else if (size > 0.3)
 					return CreatureType.Snake;
 				else
-					return CreatureType.Sheep;
+					return CreatureType.Bird;
 			}
 			else
 			{
-				if (carniv > 0.5 && aware > 0.5)
+				if (size > 0.4)
+					return CreatureType.Sheep;
+				else if (size > 0.3)
 					return CreatureType.Bird;
-				else if (carniv > 0.3)
-					return CreatureType.Snake;
 				else
 					return CreatureType.Mice;
 			}

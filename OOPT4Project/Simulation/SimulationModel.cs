@@ -84,7 +84,7 @@ namespace OOPT4Project.Simulation
 		public bool NotifyDeath(CreatureEntity creature)
 		{
 			bool death = MapController.UnregisterCreature(creature);
-			if (death)
+			if (death && CreatureDeath != null)
 				CreatureDeath.Invoke(this, new CreatureEventArgs(creature));
 			return death;
 		}
@@ -92,7 +92,7 @@ namespace OOPT4Project.Simulation
 		public bool NotifyBorn(CreatureEntity creature)
 		{
 			bool born = MapController.RegisterCreature(creature);
-			if (born)
+			if (born && CreatureBorn != null)
 				CreatureBorn.Invoke(this, new CreatureEventArgs(creature));
 			return born;
 		}

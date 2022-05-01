@@ -3,6 +3,7 @@ using OOPT4Project.Simulation.Map;
 using SkiaSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace OOPT4Project.Render
 {
@@ -47,6 +48,11 @@ namespace OOPT4Project.Render
 
 			_tileDrawer.Draw(canvas, camera);
 			_creatureDrawer.Draw(canvas, camera);
+		}
+
+		public Tile? GetTileFromPixel(Point point)
+		{
+			return _tileDrawer.GetTileFromPixel(point);
 		}
 	}
 }

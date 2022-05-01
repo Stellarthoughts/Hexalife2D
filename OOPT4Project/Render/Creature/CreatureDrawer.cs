@@ -32,6 +32,13 @@ namespace OOPT4Project.Render
 			IsAntialias = true,
 		};
 
+		private static readonly SKPaint DefaultTextFill = new()
+		{
+			Style = SKPaintStyle.Fill,
+			Color = SKColors.Black,
+			TextAlign = SKTextAlign.Center,
+		};
+
 		public void Draw(SKCanvas canvas, CanvasCamera camera)
 		{
 			var tilesWithCreatures = _tiles.Where(x => x.CreatureList.Count > 0).ToList();
@@ -39,25 +46,35 @@ namespace OOPT4Project.Render
 			foreach (Tile tile in tilesWithCreatures)
 			{
 				List<CreatureEntity> creatureList = tile.CreatureList;
+				SKPoint tilePoint = TileDrawer.HexToPixel(tile.Coordinates, _tileSize);
 
-				foreach (CreatureEntity creature in creatureList)
+				if (creatureList.Count < 10)
 				{
-					SKPoint tilePoint = TileDrawer.HexToPixel(creature.CurrentTile.Coordinates, _tileSize);
-					CreatureImages.CreatureTypeToImage.TryGetValue(creature.Type, out var bitmap);
-					var image = SKImage.FromBitmap(bitmap);
-
-					if (bitmap != null)
+					foreach (CreatureEntity creature in creatureList)
 					{
-						// Positioning
-						OffsetRadial(ref tilePoint, creatureList.IndexOf(creature), creatureList.Count);
-						AdjustBySize(ref tilePoint, ref bitmap, 1f / creatureList.Count);
+						SKPoint creaturePoint = new(tilePoint.X,tilePoint.Y);
+						CreatureImages.CreatureTypeToImage.TryGetValue(creature.Type, out var bitmap);
+						var image = SKImage.FromBitmap(bitmap);
 
-						// Adjusting
-						camera.Adjust(ref tilePoint);
-						camera.Adjust(ref bitmap);
+						if (bitmap != null)
+						{
+							// Positioning
+							OffsetRadial(ref creaturePoint, creatureList.IndexOf(creature), creatureList.Count);
+							AdjustBySize(ref creaturePoint, ref bitmap, 1f / creatureList.Count);
 
-						canvas.DrawBitmap(bitmap, tilePoint);
+							// Adjusting
+							camera.Adjust(ref creaturePoint);
+							camera.Adjust(ref bitmap);
+
+							canvas.DrawBitmap(bitmap, creaturePoint);
+						}
 					}
+				}
+				else
+				{
+					SKPoint textPoint = new(tilePoint.X,tilePoint.Y);
+					camera.Adjust(ref textPoint);
+					canvas.DrawText(creatureList.Count.ToString(), textPoint, DefaultTextFill);
 				}
 			}
 		}

@@ -2,6 +2,7 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace OOPT4Project.Render
 {
@@ -9,6 +10,7 @@ namespace OOPT4Project.Render
 	{
 		private readonly float _tileSize;
 		private readonly List<Tile> _tiles;
+		private CanvasCamera _lastCamera = null!;
 
 		public TileDrawer(List<Tile> tiles, float tileSize)
 		{
@@ -26,6 +28,8 @@ namespace OOPT4Project.Render
 
 		public void Draw(SKCanvas canvas, CanvasCamera camera)
 		{
+			_lastCamera = camera;
+
 			foreach (Tile tile in _tiles)
 			{
 				SKPath path = PathTile(tile.Coordinates);
@@ -43,9 +47,9 @@ namespace OOPT4Project.Render
 			}
 		}
 
-		public SKPath PathTile(Coordinates coor) => PathTile(coor, _tileSize);
+		public SKPath PathTile(Coordinate coor) => PathTile(coor, _tileSize);
 
-		public static SKPath PathTile(Coordinates coor, float tileSize)
+		public static SKPath PathTile(Coordinate coor, float tileSize)
 		{
 			SKPath path = new SKPath();
 			SKPoint hexToPixel = HexToPixel(coor, tileSize);
@@ -60,7 +64,7 @@ namespace OOPT4Project.Render
 			return path;
 		}
 
-		public SKPath PathTile(SKPath path, Coordinates coor)
+		public SKPath PathTile(SKPath path, Coordinate coor)
 		{
 			SKPoint hexToPixel = HexToPixel(coor, _tileSize);
 			SKPath res = new SKPath(path);
@@ -77,7 +81,7 @@ namespace OOPT4Project.Render
 							 centerTile.Y + tileSize * MathF.Sin(angle_rad));
 		}
 
-		public static SKPoint HexToPixel(Coordinates coor, float tileSize)
+		public static SKPoint HexToPixel(Coordinate coor, float tileSize)
 		{
 			float x = tileSize * (3f / 2 * coor.q);
 			float y = tileSize * (MathF.Sqrt(3) / 2 * coor.q + MathF.Sqrt(3) * coor.r);
@@ -91,15 +95,27 @@ namespace OOPT4Project.Render
 			return new SKPoint(x, y);
 		}
 
-		public static Coordinates PixelToHex(SKPoint point, float tileSize)
+		public Tile? GetTileFromPixel(Point point)
 		{
-			float q = (2.0f / 3 * point.X) / tileSize;
-			float r = (-1.0f / 3 * point.X + MathF.Sqrt(3) / 3 * point.Y) / tileSize;
+			if (_lastCamera == null)
+				return null;
+
+			_lastCamera.AdjustReverse(ref point);
+
+			Coordinate coor = PixelToHex(point, _tileSize);
+			var tile = _tiles.Find(x => x.Coordinates.Equals(coor));
+			return tile;
+		}
+
+		public static Coordinate PixelToHex(Point point, float tileSize)
+		{
+			double q = (2.0f / 3 * point.X) / tileSize;
+			double r = (-1.0f / 3 * point.X + MathF.Sqrt(3) / 3 * point.Y) / tileSize;
 
 			int q_r = (int)Math.Round(q);
 			int r_r = (int)Math.Round(r);
 
-			return new Coordinates(0, 0);
+			return new Coordinate(q_r, r_r);
 		}
 
 		public static float InscribedCircleRadius(float tileSize)
@@ -107,7 +123,7 @@ namespace OOPT4Project.Render
 			return tileSize * MathF.Sqrt(3) / 2;
 		}
 
-		public static SKPoint AvgHexCoordinates(List<Coordinates> coor, float tileSize)
+		public static SKPoint AvgHexCoordinates(List<Coordinate> coor, float tileSize)
 		{
 			float avgQ = 0;
 			float avgR = 0;

@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 using System.Linq;
+using System.Windows;
 
 namespace OOPT4Project.Render
 {
@@ -102,6 +103,14 @@ namespace OOPT4Project.Render
 			float y = tilePoint.Y;
 			tilePoint = new SKPoint(x * _scale, y * _scale);
 			tilePoint.Offset(_globalOffsetX - _positionX * _scale, _globalOffsetY - _positionY * _scale);
+		}
+
+		public void AdjustReverse(ref Point point)
+		{
+			point.Offset(-_globalOffsetX + _positionX * _scale, -_globalOffsetY + _positionY * _scale);
+			double x = point.X;
+			double y = point.Y;
+			point = new Point(x / _scale, y / _scale);	
 		}
 
 		public void Adjust(ref SKSize size)

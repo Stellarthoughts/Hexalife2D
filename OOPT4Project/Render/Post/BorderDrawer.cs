@@ -16,7 +16,7 @@ namespace OOPT4Project.Render
 
 			for (double i = 0; i <= bottom.Y + sizeIncrement; i += sizeIncrement)
 			{
-				SKPath path = TileDrawer.PathTile(new Coordinates(0, j), size);
+				SKPath path = TileDrawer.PathTile(new Coordinate(0, j), size);
 				path.Offset(top.X, top.Y);
 				canvas.DrawPath(path, paint);
 				j++;

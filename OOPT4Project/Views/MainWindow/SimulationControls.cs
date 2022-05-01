@@ -1,4 +1,6 @@
-﻿namespace OOPT4Project.Views.Main
+﻿using System.Windows.Input;
+
+namespace OOPT4Project.Views.Main
 {
 	public partial class MainWindow : System.Windows.Window
 	{

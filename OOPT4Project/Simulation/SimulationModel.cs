@@ -42,6 +42,11 @@ namespace OOPT4Project.Simulation
 			Generator = new Random(RandomSeed);
 		}
 
+		public void Init()
+		{
+			MapController.Init();
+		}
+
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
 		{
 			MapController.CreateMapRandom(resource, probs, suddenSwitch);

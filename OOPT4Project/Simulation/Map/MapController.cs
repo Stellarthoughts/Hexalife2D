@@ -19,8 +19,9 @@ namespace OOPT4Project.Simulation.Map
 			MapClimate = new MapClimate();
 		}
 
-		public void InitClimate()
+		public void Init()
 		{
+			MapClimate.Reset();
 			MapClimate.UpdateFactors();
 		}
 

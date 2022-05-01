@@ -25,7 +25,7 @@ namespace OOPT4Project.Views.Main
 
 		private void PopSimButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
-			_simulationModel.PopulateSimulation(50);
+			_simulationModel.PopulateSimulation(200);
 		}
 
 		private void NewMapButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -33,6 +33,8 @@ namespace OOPT4Project.Views.Main
 			SimulationModel.RandomSeed = _seedValue;
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
 			_simulationModel.PopulateSimulation(400);
+			_simulationModel.Init();
+
 			_simulationDrawer.Recalculate();
 
 			_view.InvalidateVisual();

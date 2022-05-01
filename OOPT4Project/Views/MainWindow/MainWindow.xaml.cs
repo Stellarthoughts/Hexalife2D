@@ -30,14 +30,8 @@ namespace OOPT4Project.Views.Main
 
 		private Tile SelectedTile
 		{
-			get
-			{
-				return _selectedTile;
-			}
-			set
-			{
-				_selectedTile = value;
-			}
+			get => _selectedTile;
+			set => _selectedTile = value;
 		}
 
 		public MainWindow()
@@ -48,9 +42,9 @@ namespace OOPT4Project.Views.Main
 			_simulationModel = new SimulationModel();
 			_simulationModel.CreatureBorn += CreatureBornNotification;
 			_simulationModel.CreatureDeath += CreatureDeathNotification;
-
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
 			_simulationModel.PopulateSimulation(400);
+			_simulationModel.Init();
 
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			_camera = new(new CameraSettings(500, 500, 1, 6));

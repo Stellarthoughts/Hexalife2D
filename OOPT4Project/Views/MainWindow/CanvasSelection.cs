@@ -20,6 +20,7 @@ namespace OOPT4Project.Views.Main
 			var tile = _simulationDrawer.GetTileFromPixel(scaledPixelPosition);
 			if(tile != null)
 			{
+				SelectedTile = tile;
 				_simulationDrawer.SelectTile(tile);
 				_view.InvalidateVisual();
 			}

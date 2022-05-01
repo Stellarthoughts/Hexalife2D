@@ -18,11 +18,24 @@ namespace OOPT4Project.Views.Main
 		private readonly SimulationDrawer _simulationDrawer;
 		private readonly CanvasCamera _camera;
 		private readonly SKElement _view;
+		private Tile _selectedTile = null!;
 		private readonly float _tileSize = 15;
 
 		private readonly DispatcherTimer _simulationTimer = new();
 		private double _timerInterval = 300;
 		private readonly double _timerIncrement = 2;
+
+		private Tile SelectedTile
+		{
+			get
+			{
+				return _selectedTile;
+			}
+			set
+			{
+				_selectedTile = value;
+			}
+		}
 
 		public MainWindow()
 		{

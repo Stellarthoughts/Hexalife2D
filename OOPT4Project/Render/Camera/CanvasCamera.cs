@@ -109,6 +109,14 @@ namespace OOPT4Project.Render
 			size = new SKSize(size.Width * _scale, size.Height * _scale);
 		}
 
+		internal void Adjust(ref SKBitmap bitmap)
+		{
+			var scaled = new SKBitmap((int)(bitmap.Width * _scale), (int)(bitmap.Height * _scale));
+			bitmap.ScalePixels(scaled,SKFilterQuality.High);
+			bitmap = scaled;
+		}
+
+
 		public void Adjust(ref double size)
 		{
 			size *= _scale;

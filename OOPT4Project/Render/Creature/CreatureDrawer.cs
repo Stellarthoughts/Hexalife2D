@@ -43,32 +43,42 @@ namespace OOPT4Project.Render
 				foreach (CreatureEntity creature in creatureList)
 				{
 					SKPoint tilePoint = TileDrawer.HexToPixel(creature.CurrentTile.Coordinates, _tileSize);
+					CreatureImages.CreatureTypeToImage.TryGetValue(creature.Type, out var bitmap);
+					var image = SKImage.FromBitmap(bitmap);
 
-					OffsetRadial(ref tilePoint, creatureList.IndexOf(creature), creatureList.Count);
+					if (bitmap != null)
+					{
+						// Positioning
+						OffsetRadial(ref tilePoint, creatureList.IndexOf(creature), creatureList.Count);
+						AdjustBySize(ref tilePoint, ref bitmap, 1f / creatureList.Count);
 
-					float sizeVal = _tileSize / creatureList.Count / 2;
-					SKSize size = new(sizeVal, sizeVal);
-					tilePoint.Offset(-size.Width / 2, -size.Height / 2);
+						// Adjusting
+						camera.Adjust(ref tilePoint);
+						camera.Adjust(ref bitmap);
 
-					// Adjusting
-					camera.Adjust(ref tilePoint);
-					camera.Adjust(ref size);
-
-					SKRect rect = new(tilePoint.X, tilePoint.Y, tilePoint.X + size.Width, tilePoint.Y + size.Height);
-
-					canvas.DrawRect(rect, DefaultCreaturePaintFill);
-					canvas.DrawRect(rect, DefaultCreaturePaintStroke);
+						canvas.DrawBitmap(bitmap, tilePoint);
+					}
 				}
 			}
 		}
 
 		private void OffsetRadial(ref SKPoint point, int position, int count)
 		{
-			float circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.5f;
+			float circle = TileDrawer.InscribedCircleRadius(_tileSize) / 1.7f;
 			if (count != 1)
 				point.Offset(
 						MathF.Cos(MathF.PI * 2 * position / count) * circle,
 						MathF.Sin(MathF.PI * 2 * position / count) * circle);
+		}
+
+		private void AdjustBySize(ref SKPoint point, ref SKBitmap bitmap, float factor)
+		{
+			float sizeX = bitmap.Width * factor;
+			float sizeY = bitmap.Height * factor;
+			SKBitmap scaled = new((int)sizeX, (int)sizeY);
+			bitmap.ScalePixels(scaled, SKFilterQuality.High);
+			bitmap = scaled;
+			point.Offset(-sizeX / 2, -sizeY / 2);
 		}
 	}
 }

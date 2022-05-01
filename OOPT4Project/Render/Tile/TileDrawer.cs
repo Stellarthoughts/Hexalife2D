@@ -16,7 +16,7 @@ namespace OOPT4Project.Render
 			_tileSize = tileSize;
 		}
 
-		private static SKPaint TilePaintStroke = new()
+		private static readonly SKPaint TilePaintStroke = new()
 		{
 			Style = SKPaintStyle.Stroke,
 			Color = SKColors.Black,

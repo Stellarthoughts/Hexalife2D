@@ -22,6 +22,7 @@ namespace OOPT4Project.Simulation.Map
 		public void Reset()
 		{
 			ClimateType = ClimateType.Summer;
+			_currentCycleLength = 0;
 			UpdateFactors();
 		}
 

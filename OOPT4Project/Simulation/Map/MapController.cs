@@ -22,7 +22,6 @@ namespace OOPT4Project.Simulation.Map
 		public void Init()
 		{
 			MapClimate.Reset();
-			MapClimate.UpdateFactors();
 		}
 
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)

@@ -24,6 +24,7 @@ namespace OOPT4Project.Views.Main
 
 			canvas.DrawCircle(width / 2, height / 2, 3, CrosshairPaint);
 
+			ClimateDrawer.DrawClimate(canvas, _simulationModel.MapController.MapClimate.ClimateType, width, height);
 			BorderDrawer.DrawHexagonalBorder(canvas, BorderPaint, new SKPoint(0, 0), new SKPoint(0, height), 40);
 			BorderDrawer.DrawHexagonalBorder(canvas, BorderPaint, new SKPoint(width, 0), new SKPoint(width, height), 40);
 		}

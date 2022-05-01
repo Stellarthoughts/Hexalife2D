@@ -1,4 +1,5 @@
-﻿using OOPT4Project.Simulation.Creature.Behavior;
+﻿using OOPT4Project.Extension;
+using OOPT4Project.Simulation.Creature.Behavior;
 using OOPT4Project.Simulation.Map;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,12 @@ namespace OOPT4Project.Simulation.Creature
 		public Tile CurrentTile { get; set; }
 		public CreatureStats Stats { get; private set; }
 		public CreatureType Type { get; private set; }
+		public string UniqueName { get; private set; }
 
 		private static readonly double HungerMax = 1;
 		private static readonly double ThirstMax = 1;
 		private static readonly double ReproduceNeedMax = 1;
-		private static readonly int BehaviorAttentionSpan = 4;
+		private static readonly int BehaviorAttentionSpan = 3;
 		private static readonly double HealthDamageThirst = 0.15;
 		private static readonly double HealthDamageHunger = 0.10;
 		private static readonly double HealthDamageReproduce = 0.03;
@@ -30,6 +32,11 @@ namespace OOPT4Project.Simulation.Creature
 		private int _stepsCurrentTask = 0;
 		private int _age = 0;
 		private bool _healthLostStep = false;
+
+		public event EventHandler? Death = null!;
+		public event EventHandler? Born = null!;
+
+		public delegate void DeathEvent(object sender, CreatureEventArgs e);
 
 		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
 		public bool HungerSatisfied() => _hunger > HungerMax / 4;
@@ -51,6 +58,8 @@ namespace OOPT4Project.Simulation.Creature
 			Type = gene.GetCreatureType();
 
 			_health = Stats.HealthMax;
+
+			UniqueName = Type.ToString() + " " + NameGenerator.Generate(SimulationModel.Generator.Next(5,10));
 		}
 		public bool DealDamage(double amount)
 		{
@@ -98,7 +107,7 @@ namespace OOPT4Project.Simulation.Creature
 			CurrentBehavior = CurrentBehavior.DoBehavior() ? null : CurrentBehavior;
 
 			_stepsCurrentTask++;
-			if (_stepsCurrentTask > BehaviorAttentionSpan)
+			if (_stepsCurrentTask >= BehaviorAttentionSpan)
 			{
 				CurrentBehavior = null;
 				_stepsCurrentTask = 0;

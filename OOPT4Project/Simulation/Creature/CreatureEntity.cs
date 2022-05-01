@@ -19,7 +19,7 @@ namespace OOPT4Project.Simulation.Creature
 		private static readonly double ThirstMax = 1;
 		private static readonly double ReproduceNeedMax = 1;
 		private static readonly int BehaviorAttentionSpan = 3;
-		private static readonly double HealthDamageThirst = 0.15;
+		private static readonly double HealthDamageThirst = 0.12;
 		private static readonly double HealthDamageHunger = 0.10;
 		private static readonly double HealthDamageReproduce = 0.03;
 
@@ -32,11 +32,6 @@ namespace OOPT4Project.Simulation.Creature
 		private int _stepsCurrentTask = 0;
 		private int _age = 0;
 		private bool _healthLostStep = false;
-
-		public event EventHandler? Death = null!;
-		public event EventHandler? Born = null!;
-
-		public delegate void CreatureEvent(object sender, CreatureEventArgs e);
 
 		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
 		public bool HungerSatisfied() => _hunger > HungerMax / 4;
@@ -59,7 +54,7 @@ namespace OOPT4Project.Simulation.Creature
 
 			_health = Stats.HealthMax;
 
-			UniqueName = Type.ToString() + " " + NameGenerator.Generate(SimulationModel.Generator.Next(5, 10));
+			UniqueName = NameGenerator.Generate(SimulationModel.Generator, SimulationModel.Generator.Next(5, 10));
 		}
 		public bool DealDamage(double amount)
 		{

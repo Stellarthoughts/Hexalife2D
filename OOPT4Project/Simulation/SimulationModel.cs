@@ -33,6 +33,9 @@ namespace OOPT4Project.Simulation
 
 		public static Random Generator { get; set; } = null!;
 
+		public event EventHandler<CreatureEventArgs> CreatureDeath = null!;
+		public event EventHandler<CreatureEventArgs> CreatureBorn = null!;
+
 		public SimulationModel()
 		{
 			MapController = new MapController(this);
@@ -75,12 +78,18 @@ namespace OOPT4Project.Simulation
 
 		public bool NotifyDeath(CreatureEntity creature)
 		{
-			return MapController.UnregisterCreature(creature);
+			bool death = MapController.UnregisterCreature(creature);
+			if (death)
+				CreatureDeath.Invoke(this, new CreatureEventArgs(creature));
+			return death;
 		}
 
 		public bool NotifyBorn(CreatureEntity creature)
 		{
-			return MapController.RegisterCreature(creature);
+			bool born = MapController.RegisterCreature(creature);
+			if (born)
+				CreatureBorn.Invoke(this, new CreatureEventArgs(creature));
+			return born;
 		}
 	}
 }

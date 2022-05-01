@@ -41,11 +41,11 @@ namespace OOPT4Project.Render
 
 			foreach (Tile tile in _tiles)
 			{
-				if (tile == _selectedTile) 
+				if (tile == _selectedTile)
 					continue;
 				DrawTile(tile, TilePaintStroke, canvas, camera);
 			}
-			if(_selectedTile != null)
+			if (_selectedTile != null)
 			{
 				DrawTile(_selectedTile, TilePaintSelectedStroke, canvas, camera);
 			}

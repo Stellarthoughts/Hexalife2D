@@ -21,7 +21,7 @@ namespace OOPT4Project.Simulation.Map
 
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)
 		{
-			TileList.Clear();
+			ClearTiles();
 
 			Random rnd = SimulationModel.Generator;
 			resource -= 1;
@@ -30,7 +30,7 @@ namespace OOPT4Project.Simulation.Map
 			var initTile = new Tile(new Coordinate(0, 0), currentType);
 			var borderTiles = new List<Tile>();
 
-			TileList.Add(initTile);
+			RegisterTile(initTile);
 			borderTiles.Add(initTile);
 
 			while (resource > 0)
@@ -51,7 +51,7 @@ namespace OOPT4Project.Simulation.Map
 				Coordinate crd = emptyNeighboors.PickRandom(rnd);
 				Tile add = new Tile(crd, currentType);
 
-				TileList.Add(add);
+				RegisterTile(add);
 
 				if (GetEmptyNeighboors(TileList, add).Count != 0)
 					borderTiles.Add(add);
@@ -71,6 +71,14 @@ namespace OOPT4Project.Simulation.Map
 			borders.ForEach(x => TileList.Add(new Tile(x, TileType.Ocean)));
 
 			return;
+		}
+
+		private void ClearTiles() => TileList.Clear();
+
+		private void RegisterTile(Tile tile)
+		{
+			TileList.Add(tile);
+			tile.TileClimate.SetMapClimate(MapClimate);
 		}
 
 		public bool RegisterCreatureImmidiately(CreatureEntity creature)

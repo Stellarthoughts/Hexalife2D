@@ -1,24 +1,28 @@
-﻿namespace OOPT4Project.Simulation.Map
+﻿using System;
+
+namespace OOPT4Project.Simulation.Map
 {
-	public class WeatherChangeArgs
-	{
-
-	}
-
 	public class MapClimate : ISimulated
 	{
+		public ClimateType ClimateType { get; private set; }
+
 		private readonly MapController _controller;
 
-		public delegate void WeatherChangeDelegate(object sender, WeatherChangeArgs e);
-		//public event WeatherChangeDelegate? WeatherChange;
+		private double _climateChangeChance = 0.03;
+		
+		public event EventHandler<WeatherChangeEventArgs> WeatherChange = null!;
 
 		public MapClimate(MapController controller)
 		{
 			_controller = controller;
+			ClimateType = ClimateType.Summer;
 		}
 		public void SimulateStep()
 		{
+			if(SimulationModel.Generator.NextDouble() < _climateChangeChance)
+			{
 
+			}
 		}
 	}
 }

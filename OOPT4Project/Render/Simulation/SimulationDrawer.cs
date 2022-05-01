@@ -1,6 +1,7 @@
 ﻿using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
 using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -28,6 +29,11 @@ namespace OOPT4Project.Render
 			_creatureDrawer = new(_tiles, tileSize);
 
 			Recalculate();
+		}
+
+		public void SelectTile(Tile tile)
+		{
+			_tileDrawer.SelectTile(tile);
 		}
 
 		public void Recalculate()

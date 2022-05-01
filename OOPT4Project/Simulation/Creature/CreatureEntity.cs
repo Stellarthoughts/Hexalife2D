@@ -36,7 +36,7 @@ namespace OOPT4Project.Simulation.Creature
 		public event EventHandler? Death = null!;
 		public event EventHandler? Born = null!;
 
-		public delegate void DeathEvent(object sender, CreatureEventArgs e);
+		public delegate void CreatureEvent(object sender, CreatureEventArgs e);
 
 		public bool ThirstSatisfied() => _thirst > ThirstMax / 3;
 		public bool HungerSatisfied() => _hunger > HungerMax / 4;

@@ -10,6 +10,7 @@ namespace OOPT4Project.Render
 	{
 		private readonly float _tileSize;
 		private readonly List<Tile> _tiles;
+		private Tile _selectedTile = null!;
 		private CanvasCamera _lastCamera = null!;
 
 		public TileDrawer(List<Tile> tiles, float tileSize)
@@ -26,25 +27,48 @@ namespace OOPT4Project.Render
 			IsAntialias = true,
 		};
 
+		private static readonly SKPaint TilePaintSelectedStroke = new()
+		{
+			Style = SKPaintStyle.Stroke,
+			Color = SKColors.Red,
+			StrokeWidth = 2f,
+			IsAntialias = true,
+		};
+
 		public void Draw(SKCanvas canvas, CanvasCamera camera)
 		{
 			_lastCamera = camera;
 
 			foreach (Tile tile in _tiles)
 			{
-				SKPath path = PathTile(tile.Coordinates);
-				camera.Adjust(ref path);
-				TileColors.TileTypeToColor.TryGetValue(tile.Type, out SKColor color);
-
-				SKPaint paint = new()
-				{
-					Style = SKPaintStyle.Fill,
-					Color = color,
-				};
-
-				canvas.DrawPath(path, paint);
-				canvas.DrawPath(path, TilePaintStroke);
+				if (tile == _selectedTile) 
+					continue;
+				DrawTile(tile, TilePaintStroke, canvas, camera);
 			}
+			if(_selectedTile != null)
+			{
+				DrawTile(_selectedTile, TilePaintSelectedStroke, canvas, camera);
+			}
+		}
+		private void DrawTile(Tile tile, SKPaint stroke, SKCanvas canvas, CanvasCamera camera)
+		{
+			SKPath path = PathTile(tile.Coordinates);
+			camera.Adjust(ref path);
+			TileColors.TileTypeToColor.TryGetValue(tile.Type, out SKColor color);
+
+			SKPaint paint = new()
+			{
+				Style = SKPaintStyle.Fill,
+				Color = color,
+			};
+
+			canvas.DrawPath(path, paint);
+			canvas.DrawPath(path, stroke);
+		}
+
+		public void SelectTile(Tile tile)
+		{
+			_selectedTile = tile;
 		}
 
 		public SKPath PathTile(Coordinate coor) => PathTile(coor, _tileSize);

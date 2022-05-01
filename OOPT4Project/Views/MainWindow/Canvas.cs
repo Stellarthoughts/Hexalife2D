@@ -28,57 +28,27 @@ namespace OOPT4Project.Views.Main
 			BorderDrawer.DrawHexagonalBorder(canvas, BorderPaint, new SKPoint(width, 0), new SKPoint(width, height), 40);
 		}
 
-		private void SpeedUpButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		private void SkElement1_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			_timerInterval /= _timerIncrement;
-			UpdateTimer();
-		}
+			var mainWindow = Application.Current.MainWindow;
+			var dpiScale = VisualTreeHelper.GetDpi(mainWindow);
 
-		private void PlayButton_Click(object sender, System.Windows.RoutedEventArgs e)
-		{
-			if (_simulationTimer.IsEnabled)
-				_simulationTimer.Stop();
-			else
-				_simulationTimer.Start();
-		}
+			var dpiScaleX = dpiScale.DpiScaleX;
+			var dpiScaleY = dpiScale.DpiScaleY;
 
-		private void SpeedDownButton_Click(object sender, System.Windows.RoutedEventArgs e)
-		{
-			_timerInterval *= _timerIncrement;
-			UpdateTimer();
-		}
+			var pixelPosition = e.GetPosition(sender as IInputElement);
+			var scaledPixelPosition = new System.Windows.Point(pixelPosition.X * dpiScaleX, pixelPosition.Y * dpiScaleY);
 
-		private void StepButton_Click(object sender, System.Windows.RoutedEventArgs e)
-		{
-			_simulationModel.SimulateStep();
-			_view.InvalidateVisual();
-		}
-
-		private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
-		{
-			float delta = e.Delta / 1000f;
-			_camera.OffsetTargetScale(delta);
-			_camera.Update();
-			_view.InvalidateVisual();
-		}
-
-		private void Window_KeyDown(object sender, KeyEventArgs e)
-		{
-			float x = 0;
-			float y = 0;
-
-			if (Keyboard.IsKeyDown(Key.A))
-				x = -1;
-			else if (Keyboard.IsKeyDown(Key.D))
-				x = 1;
-			if (Keyboard.IsKeyDown(Key.W))
-				y = -1;
-			else if (Keyboard.IsKeyDown(Key.S))
-				y = 1;
-
-			_camera.OffsetTargetPosition(x * 5, y * 5);
-			_camera.Update();
-			_view.InvalidateVisual();
+			var tile = _simulationDrawer.GetTileFromPixel(scaledPixelPosition);
+			if (tile != null)
+			{
+				if (SelectedTile == tile)
+					SelectedTile = null!;
+				else
+					SelectedTile = tile;
+				_simulationDrawer.SelectTile(SelectedTile);
+				_view.InvalidateVisual();
+			}
 		}
 	}
 }

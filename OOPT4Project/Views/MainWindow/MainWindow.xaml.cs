@@ -25,6 +25,9 @@ namespace OOPT4Project.Views.Main
 		private double _timerInterval = 300;
 		private readonly double _timerIncrement = 2;
 
+		private int _bornCounter = 0;
+		private int _deathCounter = 0;
+
 		private Tile SelectedTile
 		{
 			get
@@ -43,6 +46,9 @@ namespace OOPT4Project.Views.Main
 			UpdateLayout();
 
 			_simulationModel = new SimulationModel();
+			_simulationModel.CreatureBorn += CreatureBornNotification;
+			_simulationModel.CreatureDeath += CreatureDeathNotification;
+
 			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
 			_simulationModel.PopulateSimulation(400);
 

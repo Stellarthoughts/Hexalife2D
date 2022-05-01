@@ -18,20 +18,6 @@ namespace OOPT4Project.Render
 			_tileSize = tileSize;
 		}
 
-		private static readonly SKPaint DefaultCreaturePaintFill = new()
-		{
-			Style = SKPaintStyle.Fill,
-			Color = SKColors.Red,
-		};
-
-		private static readonly SKPaint DefaultCreaturePaintStroke = new()
-		{
-			Style = SKPaintStyle.Stroke,
-			Color = SKColors.Black,
-			StrokeWidth = 0.5f,
-			IsAntialias = true,
-		};
-
 		private static readonly SKPaint DefaultTextFill = new()
 		{
 			Style = SKPaintStyle.Fill,

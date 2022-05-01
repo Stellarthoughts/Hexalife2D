@@ -5,7 +5,7 @@ namespace OOPT4Project.Simulation.Map
 {
 	public class Tile : ISimulated
 	{
-		public Coordinates Coordinates { get; private set; }
+		public Coordinate Coordinates { get; private set; }
 		public TileClimate TileClimate { get; private set; }
 		public List<CreatureEntity> CreatureList { get; private set; } = new();
 		public TileType Type { get; private set; }
@@ -19,7 +19,7 @@ namespace OOPT4Project.Simulation.Map
 
 		private TileTypeResources _resources;
 
-		public Tile(Coordinates coor, TileType type)
+		public Tile(Coordinate coor, TileType type)
 		{
 			TileClimate = new TileClimate();
 

@@ -27,7 +27,7 @@ namespace OOPT4Project.Simulation.Map
 			resource -= 1;
 
 			var currentType = TileTypeLogic.Types.RandomElementByWeight(probs, rnd);
-			var initTile = new Tile(new Coordinates(0, 0), currentType);
+			var initTile = new Tile(new Coordinate(0, 0), currentType);
 			var borderTiles = new List<Tile>();
 
 			TileList.Add(initTile);
@@ -48,7 +48,7 @@ namespace OOPT4Project.Simulation.Map
 				}
 
 				var emptyNeighboors = GetEmptyNeighboors(TileList, rndTile);
-				Coordinates crd = emptyNeighboors.PickRandom(rnd);
+				Coordinate crd = emptyNeighboors.PickRandom(rnd);
 				Tile add = new Tile(crd, currentType);
 
 				TileList.Add(add);
@@ -67,7 +67,7 @@ namespace OOPT4Project.Simulation.Map
 			}
 
 			// Ocean!
-			List<Coordinates> borders = GetEmptyBorders(TileList);
+			List<Coordinate> borders = GetEmptyBorders(TileList);
 			borders.ForEach(x => TileList.Add(new Tile(x, TileType.Ocean)));
 
 			return;
@@ -148,7 +148,7 @@ namespace OOPT4Project.Simulation.Map
 		public static List<Tile> GetBorderTiles(List<Tile> tiles)
 		{
 			return tiles.Where(x =>
-			Coordinates.GetNeighboors(x.Coordinates)
+			Coordinate.GetNeighboors(x.Coordinates)
 					   .Except(tiles.Select(x => x.Coordinates)).ToList().Count != 0).ToList();
 		}
 
@@ -164,33 +164,33 @@ namespace OOPT4Project.Simulation.Map
 		{
 			if (!tiles.Contains(tile))
 				throw new Exception();
-			var neighboors = Coordinates.GetNeighboors(tile.Coordinates);
+			var neighboors = Coordinate.GetNeighboors(tile.Coordinates);
 			return tiles.Where(x => neighboors.Contains(x.Coordinates)).ToList();
 		}
 
-		public static List<Coordinates> GetEmptyNeighboors(List<Tile> tiles, Tile tile)
+		public static List<Coordinate> GetEmptyNeighboors(List<Tile> tiles, Tile tile)
 		{
 			var neighboorCoordinates = GetNeighboorTiles(tiles, tile)
 				.Select(x => x.Coordinates)
 				.ToList();
-			var empty = Coordinates.GetNeighboors(tile.Coordinates)
+			var empty = Coordinate.GetNeighboors(tile.Coordinates)
 				.Except(neighboorCoordinates)
 				.ToList();
 
 			return empty;
 		}
 
-		public static List<Coordinates> GetEmptyBorders(List<Tile> tiles)
+		public static List<Coordinate> GetEmptyBorders(List<Tile> tiles)
 		{
-			List<Coordinates> allValid = tiles.Select(x => x.Coordinates).ToList();
-			List<Coordinates> withEmptyNeightboors =
+			List<Coordinate> allValid = tiles.Select(x => x.Coordinates).ToList();
+			List<Coordinate> withEmptyNeightboors =
 				GetBorderTiles(tiles).Select(x => x.Coordinates).ToList();
 
-			HashSet<Coordinates> emptyBorders = new();
+			HashSet<Coordinate> emptyBorders = new();
 
-			foreach (Coordinates coor in withEmptyNeightboors)
+			foreach (Coordinate coor in withEmptyNeightboors)
 			{
-				foreach (Coordinates empty in Coordinates.GetNeighboors(coor))
+				foreach (Coordinate empty in Coordinate.GetNeighboors(coor))
 				{
 					if (!allValid.Contains(empty))
 					{

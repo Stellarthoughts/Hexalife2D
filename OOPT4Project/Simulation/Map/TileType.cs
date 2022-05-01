@@ -25,7 +25,7 @@ namespace OOPT4Project.Simulation.Map
 		{
 			InitialFood = initialFood;
 			InitialWater = initialWater;
-			ReplenishRateFood = replenishRateFood / 25;
+			ReplenishRateFood = replenishRateFood / 20;
 			ReplenishRateWater = replenishRateWater / 10;
 		}
 	}

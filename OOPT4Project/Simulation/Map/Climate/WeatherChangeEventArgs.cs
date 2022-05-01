@@ -8,12 +8,12 @@ namespace OOPT4Project.Simulation.Map
 {
 	public class WeatherChangeEventArgs
 	{
-		public WeatherChangeEventArgs(double foodFactor, double waterFactor, bool randomBirth, double randomBirthFactor)
+		public WeatherChangeEventArgs(ClimateFactors factors)
 		{
-			FoodFactor = foodFactor;
-			WaterFactor = waterFactor;
-			RandomBirth = randomBirth;
-			RandomBirthFactor = randomBirthFactor;
+			FoodFactor = factors.FoodFactor;
+			WaterFactor = factors.WaterFactor;
+			RandomBirth = factors.RandomBirth;
+			RandomBirthFactor = factors.RandomBirthFactor;
 		}
 
 		public double FoodFactor { get; private set; }

@@ -47,11 +47,17 @@ namespace OOPT4Project.Simulation.Map
 
 		public void SimulateStep()
 		{
-			_foodResource += _resources.ReplenishRateFood;
-			_waterResource += _resources.ReplenishRateWater;
+			TileClimate.SimulateStep();
+
+			_foodResource += _resources.ReplenishRateFood * TileClimate.FoodFactor;
+			_waterResource += _resources.ReplenishRateWater * TileClimate.WaterFactor;
 
 			foreach (CreatureEntity creature in CreatureList)
+			{
 				creature.SimulateStep();
+				if (TileClimate.RandomBirth && SimulationModel.Generator.NextDouble() < TileClimate.BirthFactor)
+					creature.GiveStrangeBirth();
+			}
 		}
 		public double GetFoodCount() => _foodResource;
 		public double GetWaterCount() => _waterResource;

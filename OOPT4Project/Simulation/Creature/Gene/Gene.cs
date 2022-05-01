@@ -42,6 +42,11 @@ namespace OOPT4Project.Simulation.Creature
 			return new Gene(CrossGenoms(mother.Genom, father.Genom), DetermineMale);
 		}
 
+		public static Gene CreateChild(Gene only)
+		{
+			return new Gene(CrossGenoms(only.Genom, only.Genom), DetermineMale);
+		}
+
 		public static Gene RandomGene()
 		{
 			return new Gene(RandomGenom(), DetermineMale);

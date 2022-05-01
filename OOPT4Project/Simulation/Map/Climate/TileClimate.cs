@@ -6,29 +6,39 @@ namespace OOPT4Project.Simulation.Map
 	{
 		private MapClimate _mapClimate = null!;
 
-		private double _waterFactor;
-		private double _foodFactor;
-		private double _birthFactor;
-		private bool _randomBirth;
+		public double WaterFactor { get; private set;  }
+		public double FoodFactor { get; private set; }
+		public double BirthFactor { get; private set; }
+		public bool RandomBirth { get; private set; }
+
+		private static double _factorVarience = 0.01;
 
 		public TileClimate() {}
 
 		public void SimulateStep()
 		{
-			
-		}
+			Random gen = SimulationModel.Generator;
+			WaterFactor +=	(gen.NextDouble() * 2 - 1) * _factorVarience;
+			FoodFactor +=	(gen.NextDouble() * 2 - 1) * _factorVarience;
+			if(RandomBirth)
+				BirthFactor +=	(gen.NextDouble() * 2 - 1) * _factorVarience;
+		}	
 
 		public void SetMapClimate(MapClimate mapClimate)
 		{
+			if(_mapClimate != null)
+				mapClimate.WeatherChange -= MapClimate_WeatherChange;
+
+			_mapClimate = mapClimate;
 			mapClimate.WeatherChange += MapClimate_WeatherChange;
 		}
 
 		private void MapClimate_WeatherChange(object? sender, WeatherChangeEventArgs e)
 		{
-			_waterFactor = e.WaterFactor;
-			_foodFactor = e.FoodFactor;
-			_birthFactor = e.RandomBirthFactor;
-			_randomBirth = e.RandomBirth;
+			WaterFactor = e.WaterFactor;
+			FoodFactor = e.FoodFactor;
+			BirthFactor = e.RandomBirthFactor;
+			RandomBirth = e.RandomBirth;
 		}
 	}
 }

@@ -140,6 +140,14 @@ namespace OOPT4Project.Simulation.Creature
 				throw new Exception("Tried to give birth, but didn't");
 		}
 
+		public void GiveStrangeBirth()
+		{
+			CreatureEntity baby = new(_model, Gene.CreateChild(Gene, Gene), CurrentTile);
+			bool givenBirth = _model.NotifyBorn(baby);
+			if (!givenBirth)
+				throw new Exception("Tried to give birth, but didn't");
+		}
+
 		private void Die()
 		{
 			bool died = _model.NotifyDeath(this);

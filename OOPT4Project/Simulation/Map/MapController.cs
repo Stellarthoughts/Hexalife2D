@@ -16,7 +16,12 @@ namespace OOPT4Project.Simulation.Map
 		public MapController(SimulationModel model)
 		{
 			_model = model;
-			MapClimate = new MapClimate(this);
+			MapClimate = new MapClimate();
+		}
+
+		public void InitClimate()
+		{
+			MapClimate.UpdateFactors();
 		}
 
 		public void CreateMapRandom(int resource, Dictionary<TileType, double> probs, double suddenSwitch)

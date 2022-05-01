@@ -108,7 +108,7 @@ namespace OOPT4Project.Simulation.Creature
 				HealingRate = metabs / 3,
 				Carnivorousness = carniv > 0.5 ? 1 : 0,
 				HungerRate = (metabs * 3 + size * 2 + aware) / 6 / StepAdjFactor,
-				ThirstRate = ((1-carniv) * 2 + aware) / 3 / StepAdjFactor,
+				ThirstRate = ((1 - carniv) * 2 + aware) / 3 / StepAdjFactor,
 				Stealth = (metabs),
 				Strength = (size * 1 + carniv * 3) / 4 / StepAdjFactor,
 				Awareness = aware,
@@ -121,7 +121,7 @@ namespace OOPT4Project.Simulation.Creature
 			double size = GetGenom(GeneType.Size);
 			double carniv = GetGenom(GeneType.Carnivorousness);
 
-			if(carniv > 0.5)
+			if (carniv > 0.5)
 			{
 				if (size > 0.6)
 					return CreatureType.Bear;

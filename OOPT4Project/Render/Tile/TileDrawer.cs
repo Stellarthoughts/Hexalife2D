@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace OOPT4Project.Render
 {
-	public class TileDrawer : IDrawer
+	public class TileDrawer : ISimulationDrawer
 	{
 		private readonly float _tileSize;
 		private readonly List<Tile> _tiles;

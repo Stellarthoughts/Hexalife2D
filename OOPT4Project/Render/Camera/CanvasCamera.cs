@@ -110,7 +110,7 @@ namespace OOPT4Project.Render
 			point.Offset(-_globalOffsetX + _positionX * _scale, -_globalOffsetY + _positionY * _scale);
 			double x = point.X;
 			double y = point.Y;
-			point = new Point(x / _scale, y / _scale);	
+			point = new Point(x / _scale, y / _scale);
 		}
 
 		public void Adjust(ref SKSize size)
@@ -121,7 +121,7 @@ namespace OOPT4Project.Render
 		internal void Adjust(ref SKBitmap bitmap)
 		{
 			var scaled = new SKBitmap((int)(bitmap.Width * _scale), (int)(bitmap.Height * _scale));
-			bitmap.ScalePixels(scaled,SKFilterQuality.High);
+			bitmap.ScalePixels(scaled, SKFilterQuality.High);
 			bitmap = scaled;
 		}
 

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OOPT4Project.Render
 {
-	public class CreatureDrawer : IDrawer
+	public class CreatureDrawer : ISimulationDrawer
 	{
 		private readonly float _tileSize;
 		private readonly List<Tile> _tiles;
@@ -52,7 +52,7 @@ namespace OOPT4Project.Render
 				{
 					foreach (CreatureEntity creature in creatureList)
 					{
-						SKPoint creaturePoint = new(tilePoint.X,tilePoint.Y);
+						SKPoint creaturePoint = new(tilePoint.X, tilePoint.Y);
 						CreatureImages.CreatureTypeToImage.TryGetValue(creature.Type, out var bitmap);
 						var image = SKImage.FromBitmap(bitmap);
 
@@ -72,7 +72,7 @@ namespace OOPT4Project.Render
 				}
 				else
 				{
-					SKPoint textPoint = new(tilePoint.X,tilePoint.Y);
+					SKPoint textPoint = new(tilePoint.X, tilePoint.Y);
 					camera.Adjust(ref textPoint);
 					canvas.DrawText(creatureList.Count.ToString(), textPoint, DefaultTextFill);
 				}

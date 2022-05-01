@@ -1,13 +1,8 @@
 ﻿using OOPT4Project.Render;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
-using SkiaSharp;
 using SkiaSharp.Views.WPF;
 using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace OOPT4Project.Views.Main
@@ -58,6 +53,6 @@ namespace OOPT4Project.Views.Main
 		{
 			_simulationTimer.Interval = TimeSpan.FromMilliseconds(_timerInterval);
 		}
-		
+
 	}
 }

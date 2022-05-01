@@ -59,7 +59,7 @@ namespace OOPT4Project.Simulation.Creature
 
 			_health = Stats.HealthMax;
 
-			UniqueName = Type.ToString() + " " + NameGenerator.Generate(SimulationModel.Generator.Next(5,10));
+			UniqueName = Type.ToString() + " " + NameGenerator.Generate(SimulationModel.Generator.Next(5, 10));
 		}
 		public bool DealDamage(double amount)
 		{

@@ -67,6 +67,7 @@ namespace OOPT4Project.Views.Main
 		private void SimulationTimer_Tick(object? sender, EventArgs e)
 		{
 			_simulationModel.SimulateStep();
+			FetchDataFromTile();
 			_view.InvalidateVisual();
 		}
 

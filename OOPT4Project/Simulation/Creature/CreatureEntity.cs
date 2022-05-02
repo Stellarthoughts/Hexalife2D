@@ -65,6 +65,8 @@ namespace OOPT4Project.Simulation.Creature
 			return false;
 		}
 
+		public int GetCurrentAge() => _age;
+
 		public void Heal(double amount) => _health = Math.Clamp(_health + amount, 0, Stats.HealthMax);
 
 		public List<Tile> NeighboorTiles()

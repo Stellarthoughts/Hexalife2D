@@ -1,7 +1,9 @@
 ﻿using OOPT4Project.Render;
 using OOPT4Project.Simulation.Map;
+using OOPT4Project.Views.MainWindow.Data;
 using SkiaSharp;
 using SkiaSharp.Views.WPF;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -57,12 +59,43 @@ namespace OOPT4Project.Views.Main
 			if (tile != null)
 			{
 				if (SelectedTile == tile)
+				{
 					SelectedTile = null!;
+					TileType = 0;
+					TileFood = 0;
+					TileWater = 0;
+					TargetData = new();
+				}
 				else
+				{
 					SelectedTile = tile;
+				}
+				FetchDataFromTile();
+
 				_simulationDrawer.SelectTile(SelectedTile);
 				_view.InvalidateVisual();
 			}
+		}
+
+		private void FetchDataFromTile()
+		{
+			if (SelectedTile == null)
+				return;
+
+			var newData = new List<TargetData>();
+			SelectedTile.CreatureList.ForEach(x => newData.Add(new()
+			{
+				Name = x.UniqueName,
+				Type = x.Type,
+				Age = x.GetCurrentAge(),
+				Hungry = x.HungerSatisfied(),
+				Thirsty = x.ThirstSatisfied(),
+				Needy = x.ReproduceSatisfied()
+			}));
+			TargetData = newData;
+			TileType = SelectedTile.Type;
+			TileFood = SelectedTile.GetFoodCount();
+			TileWater = SelectedTile.GetWaterCount();
 		}
 	}
 }

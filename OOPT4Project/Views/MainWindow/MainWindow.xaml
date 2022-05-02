@@ -9,7 +9,7 @@
 		xmlns:local="clr-namespace:OOPT4Project.Views.Main"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-		Title="Hexalife" Height="900" Width="1600"
+		Title="Hexalife" Height="900" Width="1600" MinWidth="1250" MinHeight="900"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
 		Background="{DynamicResource MaterialDesignPaper}"
 		TextElement.FontWeight="Medium"
@@ -40,7 +40,7 @@
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="5"/>
@@ -60,7 +60,7 @@
             <Button x:Name="StepButton" Grid.Column="1" Content="Step" HorizontalAlignment="Left" Margin="231,0,0,0" Grid.Row="4" VerticalAlignment="Center" Click="StepButton_Click"/>
             <Grid x:Name="SimulationSettingsGrid" Grid.Column="1" Grid.Row="9">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="320"/>
+                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -78,58 +78,58 @@
                     materialDesign:HintAssist.Hint="Simulation Seed"
                     materialDesign:HintAssist.FloatingScale="1.2"
                     
-				x:Name="SeedTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Seed}" VerticalAlignment="Center" Width="130" Foreground="Black" Height="50"/>
+				x:Name="SeedTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Seed}" VerticalAlignment="Center" Width="130" Foreground="White" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Map Size"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="MapSizeTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding MapSize}" VerticalAlignment="Center" Width="130" Foreground="Black" Margin="190,0,0,0" Height="50"/>
+                    x:Name="MapSizeTB" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding MapSize}" VerticalAlignment="Center" Width="130" Foreground="White" Margin="170,0,0,0" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Grass Chance"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="GrassChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding GrassChance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="130" Foreground="Black" Grid.Row="1" Height="50"/>
+                    x:Name="GrassChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding GrassChance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="130" Foreground="White" Grid.Row="1" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Lake Chance"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="LakeChanceTB" TextWrapping="Wrap" Text="{Binding LakeChance}" VerticalAlignment="Center" Foreground="Black" Margin="190,0,0,0" Grid.Row="1" Height="50" Width="130" HorizontalAlignment="Left"/>
+                    x:Name="LakeChanceTB" TextWrapping="Wrap" Text="{Binding LakeChance}" VerticalAlignment="Center" Foreground="White" Margin="170,0,0,0" Grid.Row="1" Height="50" Width="130" HorizontalAlignment="Right"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Desert Chance"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="DesertChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding DesertChance}" VerticalAlignment="Center" Width="130" Foreground="Black" Grid.Row="2" Height="50"/>
+                    x:Name="DesertChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding DesertChance}" VerticalAlignment="Center" Width="130" Foreground="White" Grid.Row="2" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Badland Chance"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="BadlandChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding BadlandChance}" VerticalAlignment="Center" Width="130" Foreground="Black" Margin="190,0,0,0" Grid.Row="2" Height="50"/>
+                    x:Name="BadlandChanceTB" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding BadlandChance}" VerticalAlignment="Center" Width="130" Foreground="White" Margin="170,0,0,0" Grid.Row="2" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Hills Chance"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="HillsChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding HillsChance}" VerticalAlignment="Center" Width="130" Foreground="Black" Grid.Row="3" Height="50"/>
+                    x:Name="HillsChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding HillsChance}" VerticalAlignment="Center" Width="130" Foreground="White" Grid.Row="3" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Marsh Chance"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="MarshChanceTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding MarshChance}" VerticalAlignment="Center" Width="130" Foreground="Black" Margin="190,0,0,0" Grid.Row="3" Height="50"
+                    x:Name="MarshChanceTB" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding MarshChance}" VerticalAlignment="Center" Width="130" Foreground="White" Margin="170,0,0,0" Grid.Row="3" Height="50"
                  />
                 <TextBox 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                 materialDesign:HintAssist.Hint="Start Population"
                 materialDesign:HintAssist.FloatingScale="1.2"
-                x:Name="PopStartAmountTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding StartPopulation}" VerticalAlignment="Center" Width="130" Foreground="Black" Grid.Row="4" Height="50"/>
+                x:Name="PopStartAmountTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding StartPopulation}" VerticalAlignment="Center" Width="130" Foreground="White" Grid.Row="4" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Add Population"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="PopAmountTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding AddPopulation}" VerticalAlignment="Top" Width="130" Foreground="Black" Grid.Row="6" Height="50"/>
+                    x:Name="PopAmountTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding AddPopulation}" VerticalAlignment="Top" Width="130" Foreground="White" Grid.Row="6" Height="50"/>
                 <TextBox 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                     materialDesign:HintAssist.Hint="Sudden Switch"
                     materialDesign:HintAssist.FloatingScale="1.2"
-                    x:Name="SuddenSwitchTB" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SuddenSwitch}" VerticalAlignment="Center" Width="130" Foreground="Black" Margin="190,0,0,0" Grid.Row="4" Height="50"/>
+                    x:Name="SuddenSwitchTB" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding SuddenSwitch}" VerticalAlignment="Center" Width="130" Foreground="White" Margin="170,0,0,0" Grid.Row="4" Height="50"/>
                 <Grid x:Name="SettingsButtonsGrid" Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -150,7 +150,7 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition Height="8*"/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="5"/>
@@ -162,13 +162,64 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Label Style="{StaticResource LabelHexalifeBig}" Content="Inspector" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1" Height="84" Width="280" />
-            <Label x:Name="TargetLabel" Style="{StaticResource LabelHexalifeSmall}" Content="Target" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Height="46" Width="100" Margin="271,0,0,0" />
-            <Label Style="{StaticResource LabelHexalifeSmall}" Content="Notifications" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="7" Grid.Column="1" Height="47" Width="189" Margin="182,0,0,0"/>
+            <Label x:Name="TargetLabel" Style="{StaticResource LabelHexalifeSmall}" Content="Target" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Height="46" Margin="0,0,0,0" />
+            <Label Style="{StaticResource LabelHexalifeSmall}" Content="Notifications" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="7" Grid.Column="1" Height="47" Width="189" Margin="0,0,0,0"/>
             <Rectangle Width="300" VerticalAlignment="Bottom" Style="{StaticResource SeparatorThick}" HorizontalAlignment="Right" Grid.Column="1" Height="10"/>
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Row="2" Grid.Column="1" Height="4"/>
-            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,0,0,2" VerticalAlignment="Bottom" Width="300" Grid.Row="7" Grid.Column="1" Height="4"/>
-            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Row="6" Grid.Column="1" Height="4" Margin="71,0,0,0"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Row="7" Grid.Column="1" Height="4"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="300" Grid.Row="6" Grid.Column="1" Height="4" Margin="0,0,0,0"/>
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Row="11" Grid.Column="1" Height="4" Margin="71,0,0,0"/>
+            <Grid x:Name="TargetGrid" Grid.Column="1" Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid
+                    BorderThickness="5"
+                    BorderBrush="#FF488686"
+                    materialDesign:DataGridAssist.CellPadding="3"
+                    materialDesign:DataGridAssist.ColumnHeaderPadding="5"
+                    ColumnWidth="Auto"
+                    x:Name="TargetDataGrid" ItemsSource="{Binding TargetData}" Margin="0,0,0,0" FontSize="12" Grid.Row="1" Grid.Column="1" Background="#FFBDF7FB" Foreground="#DD000000" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="170"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Type:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#DDFFFFFF" Grid.Column="1" Height="28"/>
+                    <Label Content="Food:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="#DDFFFFFF" Grid.Column="1" Height="28" Grid.Row="1"/>
+                    <Label Content="Water:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#DDFFFFFF" Grid.Column="1" Grid.Row="2" Height="28"/>
+                    <TextBlock x:Name="TileFoodTextBlock" HorizontalAlignment="Right" Margin="85,0,0,0" TextWrapping="Wrap" Text="{Binding TileFood}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Height="20" Width="85" Foreground="White"/>
+                    <TextBlock x:Name="TileTypeTextBlock" HorizontalAlignment="Right" Margin="85,0,0,0" TextWrapping="Wrap" Text="{Binding TileType}" VerticalAlignment="Center" Grid.Column="1" Height="20" Width="85" Foreground="White"/>
+                    <TextBlock x:Name="TileWaterTextBlock" HorizontalAlignment="Right" Margin="85,0,0,0" TextWrapping="Wrap" Text="{Binding TileWater}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Height="20" Width="85" Foreground="White"/>
+                    <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Bottom" Grid.Column="1" Height="4" Width="Auto"/>
+                    <Rectangle Style="{StaticResource SeparatorSlim}" Margin="0,0,0,0" VerticalAlignment="Bottom" Grid.Column="1" Height="4" Width="Auto" Grid.Row="1"/>
+                    <Rectangle Style="{StaticResource SeparatorSlim}" Margin="0,0,0,0" VerticalAlignment="Bottom" Grid.Column="1" Height="4" Width="Auto" Grid.Row="2"/>
+                    <Label Content="Creature List" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#DDFFFFFF" Grid.Column="1" Height="28" Margin="0,0,0,0" Grid.Row="3" FontStyle="Normal" FontWeight="Regular" FontStretch="Expanded" FontSize="20"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="NotificationsGrid" Grid.Column="1" Grid.Row="9">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFBDF7FB" Margin="71,0,0,0" FontSize="12" BorderBrush="#FF488686" BorderThickness="5,5,5,5" Grid.ColumnSpan="2" Height="Auto"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

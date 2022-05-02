@@ -9,7 +9,7 @@
 		xmlns:local="clr-namespace:OOPT4Project.Views.Main"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-		Title="Hexalife" Height="900" Width="1600" MinWidth="1250" MinHeight="900"
+		Title="Hexalife" Height="900" Width="1600" MinWidth="1350" MinHeight="900"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
 		Background="{DynamicResource MaterialDesignPaper}"
 		TextElement.FontWeight="Medium"

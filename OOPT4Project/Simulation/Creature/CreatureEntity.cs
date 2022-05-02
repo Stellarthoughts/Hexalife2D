@@ -98,7 +98,10 @@ namespace OOPT4Project.Simulation.Creature
 				DealDamage(HealthDamageReproduce);
 
 			if (_health <= 0 || _age >= Stats.Age)
+			{
 				Die();
+				return;
+			}			
 			else if (!_healthLostStep)
 				Heal(Stats.HealingRate);
 

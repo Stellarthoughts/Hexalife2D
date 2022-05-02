@@ -103,6 +103,12 @@ namespace OOPT4Project.Views.Main
 		private void NewMapButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
 			SimulationModel.RandomSeed = Seed;
+			BirthCounter = 0;
+			DeathCounter = 0;
+			_notifications.Clear();
+			OnPropertyChanged("Notifications");
+			SelectedTile = null!;
+
 			var chances = new Dictionary<TileType, double>()
 			{
 				{ TileType.Grass, GrassChance },

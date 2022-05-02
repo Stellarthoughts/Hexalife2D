@@ -90,7 +90,7 @@ namespace OOPT4Project.Views.Main
 				Age = x.GetCurrentAge(),
 				Hungry = x.HungerSatisfied(),
 				Thirsty = x.ThirstSatisfied(),
-				Needy = x.ReproduceSatisfied()
+				Lonely = x.ReproduceSatisfied()
 			}));
 			TargetData = newData;
 			TileType = SelectedTile.Type;

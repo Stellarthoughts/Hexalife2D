@@ -13,6 +13,7 @@ namespace OOPT4Project.Simulation.Creature
 		public Tile CurrentTile { get; set; }
 		public CreatureStats Stats { get; private set; }
 		public CreatureType Type { get; private set; }
+		public CreatureStatus Status { get; private set; }
 		public string UniqueName { get; private set; }
 
 		private static readonly double HungerMax = 1;
@@ -42,6 +43,7 @@ namespace OOPT4Project.Simulation.Creature
 		public double ThirstValue() => ThirstMax - _thirst;
 		public double HungerValue() => HungerMax - _hunger;
 		public double ReproduceValue() => ReproduceNeedMax - _reproduceNeed;
+		public void SetStatus(CreatureStatus status) => Status = status;
 
 		public CreatureEntity(SimulationModel model, Gene gene, Tile tile)
 		{
@@ -53,7 +55,7 @@ namespace OOPT4Project.Simulation.Creature
 			Type = gene.GetCreatureType();
 
 			_health = Stats.HealthMax;
-
+			Status = CreatureStatus.Alive;
 			UniqueName = NameGenerator.Generate(SimulationModel.Generator, SimulationModel.Generator.Next(5, 10));
 		}
 		public bool DealDamage(double amount)
@@ -152,6 +154,7 @@ namespace OOPT4Project.Simulation.Creature
 
 		private void Die()
 		{
+			Status = CreatureStatus.Death;
 			bool died = _model.NotifyDeath(this);
 			if (!died)
 				throw new Exception("Tried to die, but didn't");

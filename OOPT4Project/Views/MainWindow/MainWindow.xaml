@@ -211,14 +211,27 @@
             </Grid>
             <Grid x:Name="NotificationsGrid" Grid.Column="1" Grid.Row="9">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
                     <RowDefinition/>
-                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="300"/>
                 </Grid.ColumnDefinitions>
-                <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFBDF7FB" Margin="71,0,0,0" FontSize="12" BorderBrush="#FF488686" BorderThickness="5,5,5,5" Grid.ColumnSpan="2" Height="Auto"/>
+                <ListBox ItemsSource="{Binding Notifications}" Background="#FFBDF7FB" Margin="0,0,0,0" FontSize="12" BorderBrush="#FF488686" BorderThickness="5,5,5,5" Height="Auto" Grid.Row="1" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <Grid x:Name="CounterGrid" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Births:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#DDFFFFFF" Height="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Label Content="Deaths:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#DDFFFFFF" Height="28" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="3"/>
+                    <TextBlock x:Name="BirthsTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding BirthCounter}" VerticalAlignment="Center" Height="20" Width="70" Foreground="White" Grid.Column="1"/>
+                    <TextBlock x:Name="DeathsTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding DeathCounter}" VerticalAlignment="Center" Height="20" Width="70" Foreground="White" Grid.Column="4"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

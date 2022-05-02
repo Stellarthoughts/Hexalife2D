@@ -20,21 +20,29 @@ namespace OOPT4Project.Views.Main
 			}
 		}
 
-		public TileType TileType { get => _tileType; set
+		public TileType TileType
+		{
+			get => _tileType; set
 			{
 				_tileType = value;
 				OnPropertyChanged("TileType");
 			}
 		}
-		public double TileWater { get => _tileWater; set { 
+		public double TileWater
+		{
+			get => _tileWater; set
+			{
 				_tileWater = value;
 				OnPropertyChanged("TileWater");
-			} 
+			}
 		}
-		public double TileFood { get => _tileFood; set { 
+		public double TileFood
+		{
+			get => _tileFood; set
+			{
 				_tileFood = value;
 				OnPropertyChanged("TileFood");
-			} 
+			}
 		}
 	}
 }

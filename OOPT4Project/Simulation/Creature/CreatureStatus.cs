@@ -1,4 +1,6 @@
-﻿namespace OOPT4Project.Simulation.Creature
+﻿using System.Collections.Generic;
+
+namespace OOPT4Project.Simulation.Creature
 {
 	public enum CreatureStatus
 	{
@@ -7,6 +9,7 @@
 		DeathBotchedHunt,
 		DeathHunger,
 		DeathThirst,
+		DeathReproduce,
 		Death
 	}
 }

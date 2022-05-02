@@ -9,6 +9,6 @@ namespace OOPT4Project.Views.MainWindow.Data
 		public int Age { get; set; }
 		public bool Hungry { get; set; }
 		public bool Thirsty { get; set; }
-		public bool Needy { get; set; }
+		public bool Lonely { get; set; }
 	}
 }

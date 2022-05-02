@@ -1,5 +1,7 @@
 ﻿using OOPT4Project.Render;
+using OOPT4Project.Simulation.Map;
 using SkiaSharp;
+using SkiaSharp.Views.WPF;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -8,6 +10,17 @@ namespace OOPT4Project.Views.Main
 {
 	public partial class MainWindow : System.Windows.Window
 	{
+		// Canvas
+		private readonly CanvasCamera _camera;
+		private readonly SKElement _view;
+
+		// Drawer
+		private readonly SimulationDrawer _simulationDrawer;
+		private readonly float _tileSize = 15;
+
+		// Selection
+		private Tile _selectedTile = null!;
+
 		private void SKElement_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
 		{
 			SKCanvas canvas = e.Surface.Canvas;

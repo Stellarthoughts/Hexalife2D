@@ -35,17 +35,22 @@ namespace OOPT4Project.Simulation.Map
 		public void SimulateStep()
 		{
 			_currentCycleLength++;
-			Random gen = SimulationModel.Generator;
 			if (_currentCycleLength >= CycleMaxLength)
 			{
-				if (gen.NextDouble() < _strangeCycleChance)
-					ClimateType = ClimateTypeLogic.StrangeCycle(ClimateType);
-				else
-					ClimateType = ClimateTypeLogic.Cycle(ClimateType);
-
-				_currentCycleLength = 0;
-				UpdateFactors();
+				ChangeCycle();
 			}
+		}
+
+		public void ChangeCycle()
+		{
+			Random gen = SimulationModel.Generator;
+			if (gen.NextDouble() < _strangeCycleChance)
+				ClimateType = ClimateTypeLogic.StrangeCycle(ClimateType);
+			else
+				ClimateType = ClimateTypeLogic.Cycle(ClimateType);
+
+			_currentCycleLength = 0;
+			UpdateFactors();
 		}
 	}
 }

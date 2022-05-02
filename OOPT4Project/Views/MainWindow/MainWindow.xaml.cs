@@ -1,8 +1,9 @@
 ﻿using OOPT4Project.Render;
 using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
-using SkiaSharp.Views.WPF;
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 
 namespace OOPT4Project.Views.Main
@@ -10,23 +11,22 @@ namespace OOPT4Project.Views.Main
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : System.Windows.Window
+	public partial class MainWindow : System.Windows.Window, INotifyPropertyChanged
 	{
+		// Model
 		private readonly SimulationModel _simulationModel;
-		private int _seedValue;
 
-		private readonly SimulationDrawer _simulationDrawer;
-		private readonly CanvasCamera _camera;
-		private readonly SKElement _view;
-		private Tile _selectedTile = null!;
-		private readonly float _tileSize = 15;
-
+		// Timer
 		private readonly DispatcherTimer _simulationTimer = new();
 		private double _timerInterval = 300;
 		private readonly double _timerIncrement = 2;
 
-		private int _bornCounter = 0;
-		private int _deathCounter = 0;
+		// Property changed
+		public event PropertyChangedEventHandler? PropertyChanged;
+		protected void OnPropertyChanged([CallerMemberName] string name = null!)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
 		private Tile SelectedTile
 		{
@@ -36,22 +36,30 @@ namespace OOPT4Project.Views.Main
 
 		public MainWindow()
 		{
+			// Defaults
+			AssignDefaultChances();
+
+			// Window init
 			InitializeComponent();
 			UpdateLayout();
 
+			// Model init
 			_simulationModel = new SimulationModel();
 			_simulationModel.CreatureBorn += CreatureBornNotification;
 			_simulationModel.CreatureDeath += CreatureDeathNotification;
-			_simulationModel.CreateMapRandom(200, TileTypeLogic.ProbWeightsDefault, 0.1);
-			_simulationModel.PopulateSimulation(400);
+			_simulationModel.CreateMapRandom(MapSize, TileTypeLogic.ProbWeightsDefault, SuddenSwitch);
+			_simulationModel.PopulateSimulation(StartPopulation);
 			_simulationModel.Init();
 
+			// Drawing
 			_simulationDrawer = new SimulationDrawer(_simulationModel, _tileSize);
 			_camera = new(new CameraSettings(500, 500, 1, 6));
 
-			_view = SkElement1;
+			// View
+			_view = SKElement;
 			_view.IgnorePixelScaling = true;
 
+			// Timer
 			_simulationTimer.Interval = System.TimeSpan.FromMilliseconds(_timerInterval);
 			_simulationTimer.Tick += SimulationTimer_Tick;
 		}
@@ -66,6 +74,5 @@ namespace OOPT4Project.Views.Main
 		{
 			_simulationTimer.Interval = TimeSpan.FromMilliseconds(_timerInterval);
 		}
-
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace OOPT4Project.Simulation.Creature
+﻿namespace OOPT4Project.Simulation.Creature
 {
 	public enum CreatureStatus
 	{

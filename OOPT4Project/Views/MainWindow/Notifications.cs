@@ -6,7 +6,7 @@ namespace OOPT4Project.Views.Main
 {
 	public partial class MainWindow : System.Windows.Window
 	{
-		private Queue<string> _notifications = new();
+		private readonly Queue<string> _notifications = new();
 		public List<string> Notifications
 		{
 			get => _notifications.ToList();
@@ -18,8 +18,9 @@ namespace OOPT4Project.Views.Main
 		private int _birthCounter = 0;
 		private int _deathCounter = 0;
 
-		public int BirthCounter { 
-			get => _birthCounter; 
+		public int BirthCounter
+		{
+			get => _birthCounter;
 			set
 			{
 				_birthCounter = value;
@@ -29,7 +30,7 @@ namespace OOPT4Project.Views.Main
 
 		public int DeathCounter
 		{
-			get => _deathCounter; 
+			get => _deathCounter;
 			set
 			{
 				_deathCounter = value;
@@ -43,8 +44,8 @@ namespace OOPT4Project.Views.Main
 			var creature = e.Creature;
 			CreatureStatusLogic.StatusToString.TryGetValue(creature.Status, out var status);
 			AddNotification(
-				creature.Type.ToString() + " " 
-				+ creature.UniqueName + " " 
+				creature.Type.ToString() + " "
+				+ creature.UniqueName + " "
 				+ status + ".");
 		}
 
@@ -60,7 +61,7 @@ namespace OOPT4Project.Views.Main
 
 		private void AddNotification(string str)
 		{
-			if(Notifications.Count >= MaxNotifications)
+			if (Notifications.Count >= MaxNotifications)
 			{
 				_notifications.Dequeue();
 			}

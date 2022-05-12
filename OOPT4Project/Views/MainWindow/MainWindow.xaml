@@ -64,12 +64,12 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="45"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button x:Name="PopSimButton" Content="Populate Simulation" HorizontalAlignment="Left" VerticalAlignment="Top" Click="PopSimButton_Click" Margin="156,18,0,0" Grid.Row="6"/>

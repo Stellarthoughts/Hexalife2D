@@ -46,16 +46,9 @@ namespace OOPT4Project.Views.Main
 
 		private void SkElement1_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			var mainWindow = Application.Current.MainWindow;
-			var dpiScale = VisualTreeHelper.GetDpi(mainWindow);
-
-			var dpiScaleX = dpiScale.DpiScaleX;
-			var dpiScaleY = dpiScale.DpiScaleY;
-
 			var pixelPosition = e.GetPosition(sender as IInputElement);
-			var scaledPixelPosition = new System.Windows.Point(pixelPosition.X * dpiScaleX, pixelPosition.Y * dpiScaleY);
 
-			var tile = _simulationDrawer.GetTileFromPixel(scaledPixelPosition);
+			var tile = _simulationDrawer.GetTileFromPixel(pixelPosition);
 			if (tile != null)
 			{
 				if (SelectedTile == tile)

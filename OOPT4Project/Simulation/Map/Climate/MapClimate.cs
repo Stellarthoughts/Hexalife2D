@@ -10,7 +10,7 @@ namespace OOPT4Project.Simulation.Map
 
 		private int _currentCycleLength = 0;
 
-		private static readonly int CycleMaxLength = 225;
+		public static readonly int CycleMaxLength = 225;
 
 		public event EventHandler<WeatherChangeEventArgs> WeatherChange = null!;
 

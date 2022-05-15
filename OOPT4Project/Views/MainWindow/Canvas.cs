@@ -6,7 +6,6 @@ using SkiaSharp.Views.WPF;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace OOPT4Project.Views.Main
 {

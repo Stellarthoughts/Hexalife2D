@@ -24,11 +24,11 @@ namespace OOPT4Project.Tests
 				for (int i = 0; i < MapClimate.CycleMaxLength + 1; i++)
 				{
 					model.SimulateStep();
-					if(start != mapClimate.ClimateType)
+					if (start != mapClimate.ClimateType)
 					{
 						Assert.IsTrue(true);
 					}
-				}	
+				}
 			});
 		}
 	}

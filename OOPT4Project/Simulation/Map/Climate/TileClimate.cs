@@ -18,8 +18,8 @@ namespace OOPT4Project.Simulation.Map
 		public void SimulateStep()
 		{
 			Random gen = SimulationModel.Generator;
-			WaterFactor = Math.Clamp(WaterFactor + (gen.NextDouble() * 2 - 1) * _factorVarience,0,1);
-			FoodFactor = Math.Clamp(FoodFactor + (gen.NextDouble() * 2 - 1) * _factorVarience,0,1);
+			WaterFactor = Math.Clamp(WaterFactor + (gen.NextDouble() * 2 - 1) * _factorVarience, 0, 1);
+			FoodFactor = Math.Clamp(FoodFactor + (gen.NextDouble() * 2 - 1) * _factorVarience, 0, 1);
 		}
 
 		public void SetMapClimate(MapClimate mapClimate)

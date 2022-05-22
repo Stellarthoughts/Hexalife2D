@@ -113,7 +113,7 @@ namespace OOPT4Project.Simulation.Creature
 				HealingRate = metabs / 3,
 				Carnivorousness = carniv > 0.5 ? 1 : 0,
 				HungerRate = (metabs * 3 + size * 2 + aware) / 6 / StepAdjFactor,
-				ThirstRate = ((1 - carniv) * 2 + aware) / 3 / StepAdjFactor,
+				ThirstRate = ((1 - carniv) * 3 + aware * 2 + size) / 6 / StepAdjFactor,
 				Stealth = (metabs),
 				Strength = (size * 1 + carniv * 3) / 4 / StepAdjFactor,
 				Awareness = aware,

@@ -9,7 +9,7 @@
 		xmlns:local="clr-namespace:OOPT4Project.Views.Main"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-		Title="Hexalife" MinWidth="1200" MinHeight="670" Width="1200" Height="670"
+		Title="Hexalife" MinWidth="1200" MinHeight="700" Width="1200" Height="700"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"
 		Background="{DynamicResource MaterialDesignPaper}"
 		TextElement.FontWeight="Medium"
@@ -27,8 +27,8 @@
         <skia:SKElement Grid.Column="1" PaintSurface="SKElement_PaintSurface" x:Name="SKElement" Margin="-1,0,-1,0" MouseDown="SkElement1_MouseDown"/>
         <Grid x:Name="HexalifeGrid" Background="#FF0C91A4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="331.534"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -143,8 +143,8 @@
         <Grid x:Name="InspectorGrid" Grid.Column="2" Background="#FF0C91A4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="331.534"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -168,7 +168,7 @@
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Row="2" Grid.Column="1" Height="4"/>
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="300" Grid.Row="7" Grid.Column="1" Height="4"/>
             <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="300" Grid.Row="6" Grid.Column="1" Height="4" Margin="0,0,0,0"/>
-            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" Grid.Row="11" Grid.Column="1" Height="4" Margin="71,0,0,0"/>
+            <Rectangle Style="{StaticResource SeparatorSlim}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="300" Grid.Row="11" Grid.Column="1" Height="4" Margin="0,0,0,0"/>
             <Grid x:Name="TargetGrid" Grid.Column="1" Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="130"/>

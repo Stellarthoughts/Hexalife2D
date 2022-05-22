@@ -81,9 +81,9 @@ namespace OOPT4Project.Views.Main
 				Name = x.UniqueName,
 				Type = x.Type,
 				Age = x.GetCurrentAge(),
-				Hungry = x.HungerSatisfied(),
-				Thirsty = x.ThirstSatisfied(),
-				Lonely = x.ReproduceSatisfied()
+				Hungry = !x.HungerSatisfied(),
+				Thirsty = !x.ThirstSatisfied(),
+				Lonely = !x.ReproduceSatisfied()
 			}));
 			TargetData = newData;
 			TileType = SelectedTile.Type;

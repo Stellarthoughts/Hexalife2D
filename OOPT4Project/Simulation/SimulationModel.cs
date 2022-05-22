@@ -57,7 +57,7 @@ namespace OOPT4Project.Simulation
 			for (int i = 0; i < count; i++)
 			{
 				CreatureEntity ent = new CreatureEntity(this, Gene.RandomGene(),
-					MapController.GetRandomTile(MapController.TileList, TileType.Grass));
+					MapController.GetRandomTile(MapController.TileList, TileType.Ocean, true));
 
 				if (!MapController.RegisterCreatureImmidiately(ent))
 					throw new Exception("Creature registration failed!");

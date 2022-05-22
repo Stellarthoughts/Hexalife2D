@@ -1,5 +1,6 @@
 ﻿using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Map;
+using System;
 using System.Collections.Generic;
 
 namespace OOPT4Project.Views.Main
@@ -25,6 +26,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _mapSize; set
 			{
+				if (value <= 0)
+					return;
 				_mapSize = value;
 				OnPropertyChanged("MapSize");
 			}
@@ -33,6 +36,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _grassChance; set
 			{
+				if (value < 0)
+					return;
 				_grassChance = value;
 				OnPropertyChanged("GrassChance");
 			}
@@ -41,6 +46,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _lakeChance; set
 			{
+				if (value < 0)
+					return;
 				_lakeChance = value;
 				OnPropertyChanged("LakeChance");
 			}
@@ -49,6 +56,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _desertChance; set
 			{
+				if (value < 0)
+					return;
 				_desertChance = value;
 				OnPropertyChanged("DesertChance");
 			}
@@ -57,6 +66,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _badlandChance; set
 			{
+				if (value < 0)
+					return;
 				_badlandChance = value;
 				OnPropertyChanged("BadlandChance");
 			}
@@ -65,6 +76,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _hillsChance; set
 			{
+				if (value < 0)
+					return;
 				_hillsChance = value;
 				OnPropertyChanged("HillsChance");
 			}
@@ -73,6 +86,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _marshChance; set
 			{
+				if (value < 0)
+					return;
 				_marshChance = value;
 				OnPropertyChanged("MarshChance");
 			}
@@ -81,6 +96,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _suddenSwitch; set
 			{
+				if (value < 0 || value > 1)
+					return;
 				_suddenSwitch = value;
 				OnPropertyChanged("SuddenSwitch");
 			}
@@ -89,6 +106,8 @@ namespace OOPT4Project.Views.Main
 		{
 			get => _startPopulation; set
 			{
+				if (value < 0)
+					return;
 				_startPopulation = value;
 				OnPropertyChanged("StartPopulation");
 			}

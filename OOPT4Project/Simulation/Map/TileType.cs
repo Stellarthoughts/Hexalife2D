@@ -10,7 +10,7 @@ namespace OOPT4Project.Simulation.Map
 		Marsh,
 		Desert,
 		Badland,
-		Ocean
+		Ocean,
 	}
 
 	public struct TileTypeResources

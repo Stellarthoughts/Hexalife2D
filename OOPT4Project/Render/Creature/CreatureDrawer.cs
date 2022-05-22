@@ -40,7 +40,6 @@ namespace OOPT4Project.Render
 					{
 						SKPoint creaturePoint = new(tilePoint.X, tilePoint.Y);
 						CreatureImages.CreatureTypeToImage.TryGetValue(creature.Type, out var bitmap);
-						var image = SKImage.FromBitmap(bitmap);
 
 						if (bitmap != null)
 						{

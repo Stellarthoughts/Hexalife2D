@@ -101,7 +101,7 @@ namespace OOPT4Project.Simulation.Creature
 			{
 				Die();
 				return;
-			}			
+			}
 			else if (!_healthLostStep)
 				Heal(Stats.HealingRate);
 

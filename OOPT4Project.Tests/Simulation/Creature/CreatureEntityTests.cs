@@ -3,7 +3,6 @@ using OOPT4Project.Simulation;
 using OOPT4Project.Simulation.Creature;
 using OOPT4Project.Simulation.Creature.Behavior;
 using OOPT4Project.Simulation.Map;
-using System.Linq;
 
 namespace OOPT4Project.Tests
 {

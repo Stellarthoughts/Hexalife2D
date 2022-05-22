@@ -32,10 +32,10 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 		protected static void MoveToNeighboorMaxBy(CreatureEntity creature, Func<Tile, object> p)
 		{
 			var neighboors = creature.NeighboorTiles();
-			var neighboorMaxFood = neighboors.MaxBy(p);
-			if (neighboorMaxFood != null)
+			var neighboorMax = neighboors.MaxBy(p);
+			if (neighboorMax != null)
 			{
-				creature.MoveTo(neighboorMaxFood);
+				creature.MoveTo(neighboorMax);
 			}
 			else
 			{

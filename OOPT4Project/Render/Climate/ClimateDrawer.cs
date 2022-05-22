@@ -38,14 +38,14 @@ namespace OOPT4Project.Render
 				ClimateTypeLogic.ClimateTypeToNames.TryGetValue(type, out var name);
 				var blob = SKTextBlob.Create(name, new SKFont(SKTypeface.FromFamilyName("Inria Serif"), 24), offset);
 				canvas.DrawRoundRect(new SKRoundRect(
-					new SKRect(	blob.Bounds.Left - blob.Bounds.Width / 2 - 5, 
+					new SKRect(blob.Bounds.Left - blob.Bounds.Width / 2 - 5,
 								blob.Bounds.Top - 30,
 								blob.Bounds.Right - blob.Bounds.Width / 2 + 3 + 5,
 								blob.Bounds.Bottom + 10
-								),10),
+								), 10),
 					rectPaint);
 
-				canvas.DrawText(blob, - blob.Bounds.Width / 2 + 7 , 0, CenteredTextPaint);
+				canvas.DrawText(blob, -blob.Bounds.Width / 2 + 7, 0, CenteredTextPaint);
 			}
 		}
 	}

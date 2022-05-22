@@ -12,7 +12,7 @@ namespace OOPT4Project.Tests
 		private readonly int _width = 500;
 		private readonly int _height = 500;
 
-		private SKPaint _paint = new()
+		private readonly SKPaint _paint = new()
 		{
 			Style = SKPaintStyle.Fill,
 			Color = SKColor.Parse("44AEB5")

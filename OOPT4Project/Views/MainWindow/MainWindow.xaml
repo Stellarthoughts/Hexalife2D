@@ -28,8 +28,8 @@
         <Grid x:Name="HexalifeGrid" Background="#FF0C91A4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="331.534"/>
-                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -142,8 +142,8 @@
         </Grid>
         <Grid x:Name="InspectorGrid" Grid.Column="2" Background="#FF0C91A4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="331.534"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>

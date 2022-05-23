@@ -26,7 +26,7 @@ namespace OOPT4Project.Simulation.Map
 			UpdateFactors();
 		}
 
-		public void UpdateFactors()
+		private void UpdateFactors()
 		{
 			ClimateTypeLogic.ClimateTypeToFactors.TryGetValue(ClimateType, out var factors);
 			WeatherChange.Invoke(this, new WeatherChangeEventArgs(factors));
@@ -41,7 +41,7 @@ namespace OOPT4Project.Simulation.Map
 			}
 		}
 
-		public void ChangeCycle()
+		private void ChangeCycle()
 		{
 			Random gen = SimulationModel.Generator;
 			if (gen.NextDouble() < _strangeCycleChance)

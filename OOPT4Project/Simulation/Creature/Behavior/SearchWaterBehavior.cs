@@ -18,7 +18,7 @@ namespace OOPT4Project.Simulation.Creature.Behavior
 
 			if (tile.GetWaterCount() > 0)
 			{
-				double amount = tile.EatAmount(thisrt);
+				double amount = tile.DrinkAmount(thisrt);
 				_creature.SatisfyThirst(amount);
 			}
 			else
